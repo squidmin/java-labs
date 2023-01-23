@@ -246,7 +246,7 @@ public interface AnInterface {
 public class AnInstance implements AnInterface {
     public static void main(String[] args) {
         AnInstance anInstance = new AnInstance();
-        AnInstance.staticMethod(); // This will compile.
+        AnInterface.staticMethod(); // This will compile.
     }
 }
 ```
@@ -256,5 +256,20 @@ public class AnInstance implements AnInterface {
 ```
 This is a static method...
 ```
+
+</details>
+
+<details>
+<summary>Functional Interfaces in Java</summary>
+
+## Functional Interfaces in Java
+
+Explains the concept of functional interfaces which were introduced in Java 8.
+
+The following topics are covered:
+- What are functional interfaces?
+- What is the `@FunctionalInterface` annotation?
+
+
 
 </details>
