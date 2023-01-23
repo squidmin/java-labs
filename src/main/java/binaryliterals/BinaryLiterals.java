@@ -61,7 +61,7 @@ public class BinaryLiterals {
 
     // Subtract binary numbers
     public Integer substractBinaryNumber(Integer firstNum, Integer secondNum) {
-        int onesComplement = Integer.valueOf(getOnesComplement(secondNum));
+        int onesComplement = getOnesComplement(secondNum);
         StringBuilder output = new StringBuilder();
         int carry = 0;
         int temp;
