@@ -35,18 +35,18 @@ Now create a class which implements the `AnInterface` interface.
 
 ```java
 public class AnInstance implements AnInterface {
-    
+
     @Override
     public void abstractMethod() {
         System.out.println("Executing abstractMethod...");
     }
 
-    public static void main(String args[]){
+    public static void main(String[] args) {
         AnInstance anInstance = new AnInstance();
         anInstance.abstractMethod();
         anInstance.defaultMethod();
     }
-    
+
 }
 ```
 
@@ -109,7 +109,7 @@ To resolve the compilation issue, we will have to implement the `printSomething(
 
 ```java
 public class Main implements InterfaceA, InterfaceB {
-    
+
     @Override
     public void printSomething() {
 
@@ -121,7 +121,7 @@ public class Main implements InterfaceA, InterfaceB {
         InterfaceB.super.printSomething();
     }
 
-    public static void main(String args[]){
+    public static void main(String[] args) {
         Main main = new Main();
         main.printSomething();
     }
