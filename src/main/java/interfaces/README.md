@@ -97,7 +97,7 @@ public class Main implements InterfaceA, InterfaceB {
 
 The above class will not compile because of the "**Diamond problem**" in Java.
 
-#### Compilation output
+#### Terminal output
 
 ```
 Main.java:1: error: class Main inherits unrelated defaults for printSomething() from types InterfaceA and InterfaceB
@@ -116,10 +116,10 @@ public class Main implements InterfaceA, InterfaceB {
     @Override
     public void printSomething() {
 
-        //Option 1 -> Provide our own implementation.
+        // Option 1 -> Provide our own implementation.
         System.out.println("I am inside Main class");
 
-        //Option 2 -> Use existing implementation from InterfaceA or InterfaceB or both.
+        // Option 2 -> Use existing implementation from InterfaceA or InterfaceB or both.
         InterfaceA.super.printSomething();
         InterfaceB.super.printSomething();
     }
@@ -131,12 +131,130 @@ public class Main implements InterfaceA, InterfaceB {
 }
 ```
 
-#### Compilation output
+#### Terminal output
 
 ```
 I am inside Main class
 I am inside `InterfaceA`
 I am inside `InterfaceB`
+```
+
+</details>
+
+<details>
+<summary>Static methods in interfaces</summary>
+
+## Static methods in interfaces
+
+Explains static methods in interfaces and why they were introduced in Java 8.
+
+The following topics are covered:
+- What are static methods in interfaces?
+
+### What are static methods in interfaces?
+
+The static methods in interfaces are similar to default methods but the only difference is that you can't override them. Now, why do we need static methods in interfaces if we already have default methods?
+
+Suppose you want to provide some implementation in your interface and you don't want this implementation to be overridden in the implementing class, then you can declare the method as static.
+
+In the below example, we'll define a `AnInterface` interface with a static method called staticMethod().
+
+```java
+public interface AnInterface {
+    static void staticMethod(){
+        System.out.println("This is a static method...");
+    }
+}
+```
+
+Declare a class `AnInstance` which implements the `AnInterface` interface.
+
+```java
+public class AnInstance implements AnInterface {
+
+    @Override
+    public void staticMethod() {
+        System.out.println("This is a static method...");
+    }
+
+    public static void main(String[] args) {
+        AnInstance anInstance = new AnInstance();
+        anInstance.staticMethod();
+    }
+
+}
+```
+
+In the above interface, we get a compilation error in the `AnInstance` class because a static method cannot be overridden.
+
+```
+AnInstance.java:3: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+1 error
+```
+
+Also, since a static method is hidden, we can’t call it from the object of the implementing class. The below code will also not compile:
+
+#### AnInterface.java
+
+```java
+public interface AnInterface {
+    static void staticMethod() {
+        System.out.println("This is a static method...");
+    }
+}
+```
+
+#### AnInstance.java
+
+```java
+public class AnInstance implements AnInterface {
+    public static void main(String[] args) {
+        AnInstance anInstance = new AnInstance();
+        anInstance.staticMethod();  // This will not compile.
+    }
+}
+```
+
+#### Terminal output
+
+```
+AnInstance.java:6: error: cannot find symbol
+        anInstance.staticMethod();  // This will not compile.
+           ^
+  symbol:   method staticMethod()
+  location: variable anInstance of type AnInstance
+1 error
+```
+
+The below class will compile because we are calling the static method that is defined in the interface from the interface reference.
+
+#### AnInterface.java
+
+```java
+public interface AnInterface {
+    static void staticMethod() {
+        System.out.println("This is a static method...");
+    }
+}
+```
+
+#### AnInstance.java
+
+```java
+public class AnInstance implements AnInterface {
+    public static void main(String[] args) {
+        AnInstance anInstance = new AnInstance();
+        AnInstance.staticMethod(); // This will compile.
+    }
+}
+```
+
+#### Terminal output
+
+```
+This is a static method...
 ```
 
 </details>
