@@ -2,32 +2,32 @@ package instances;
 
 public class Instances {
 
-    // this instance variable is visible for any child class.
-    public String name;
+    // This instance variable is visible for any child class.
+    public String field_1;
 
-    // salary variable is visible in Employee class only.
-    private double salary;
+    // Salary variable is visible in Employee class only.
+    private double field_2;
 
     // The name variable is assigned in the constructor.
-    public Instances (String empName) {
-        name = empName;
+    public Instances(String field_1) {
+        this.field_1 = field_1;
     }
 
     // The salary variable is assigned a value.
-    public void setSalary(double empSal) {
-        salary = empSal;
+    public void setField_2(double field_2) {
+        this.field_2 = field_2;
     }
 
     // This method prints the employee details.
-    public void printEmp() {
-        System.out.println("name  : " + name );
-        System.out.println("salary :" + salary);
+    public void printFields() {
+        System.out.println("field_1  : " + field_1);
+        System.out.println("field_2 :" + field_2);
     }
 
     public static void main(String args[]) {
-        Instances empOne = new Instances("Ransika");
-        empOne.setSalary(1000);
-        empOne.printEmp();
+        Instances instance = new Instances("lol");
+        instance.setField_2(1000);
+        instance.printFields();
     }
 
 }
