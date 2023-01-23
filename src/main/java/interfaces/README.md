@@ -1,3 +1,6 @@
+<details>
+<summary>Default methods in interfaces</summary>
+
 ## Default methods in interfaces
 
 Learn what default methods in interfaces are and why they were introduced in Java 8.
@@ -135,3 +138,5 @@ I am inside Main class
 I am inside `InterfaceA`
 I am inside `InterfaceB`
 ```
+
+</details>
