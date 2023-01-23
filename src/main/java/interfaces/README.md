@@ -116,7 +116,7 @@ public class Main implements InterfaceA, InterfaceB {
         //Option 1 -> Provide our own implementation.
         System.out.println("I am inside Main class");
 
-        //Option 2 -> Use existing implementation from interfaceA or interfaceB or both.
+        //Option 2 -> Use existing implementation from InterfaceA or InterfaceB or both.
         InterfaceA.super.printSomething();
         InterfaceB.super.printSomething();
     }
@@ -126,4 +126,12 @@ public class Main implements InterfaceA, InterfaceB {
         main.printSomething();
     }
 }
+```
+
+#### Compilation output
+
+```
+I am inside Main class
+I am inside `InterfaceA`
+I am inside `InterfaceB`
 ```
