@@ -245,7 +245,7 @@ public interface AnInterface {
 ```java
 public class AnInstance implements AnInterface {
     public static void main(String[] args) {
-        AnInstance anInstance = new AnInstance();
+        AnInstance anInstance = new AnInstance();  // Can't use this instance to call the interface's static method.
         AnInterface.staticMethod(); // This will compile.
     }
 }
