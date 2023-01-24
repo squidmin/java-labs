@@ -1141,5 +1141,11 @@ public class UnaryOperatorTest {
 }
 ```
 
+#### Output
+
+```
+625
+```
+
 </details>
 
