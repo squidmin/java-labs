@@ -695,3 +695,357 @@ Similarly, we can use other predicates like `IntPredicate`, `LongPredicate`, and
 You should now have a clear understanding of using the `Predicate` functional interface in your lambdas.
 
 </details>
+
+
+<details>
+<summary>Supplier Functional Interface</summary>
+
+The following topics are covered:
+- `Supplier<T>`
+- `IntSupplier`
+- `DoubleSupplier`
+
+`Supplier` is an interface that does not take in any argument but produces a value when the `get()` function is invoked. Suppliers are useful when we don't need to apply any value and obtain a result at the same time.
+
+Below are some of the functional interfaces, which can be categorized as a supplier.
+
+| Interface name    | Description                                       | Abstract method          |
+|-------------------|---------------------------------------------------|--------------------------|
+| `Suppler<T>`      | Represents a supplier of results (reference type) | `T get()`                |
+| `DoubleSupplier`  | A supplier of double-value results                | `double getAsDouble()`   |
+| `IntSupplier`     | A supplier of int-value results                   | `int getAsInt()`         |
+| `LongSupplier`    | A supplier of long-value results                  | `long getAsLong()`       |
+| `BooleanSupplier` | A supplier of boolean-value results               | `boolean getAsBoolean()` |
+
+### `Supplier<T>`
+
+The `Supplier<T>` interface supplies a result of type `T`. In the previous lesson, we were passing a person object and a predicate to our `isPersonEligibleForVoting()` method.
+
+In this example, we will provide a `Supplier<Person>` instead of the Person object. The `isPersonEligibleForVoting()` method will, itself, fetch the `Person` object from the supplier. Here is the code for this.
+
+```java
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+public class SupplierTest {
+  static boolean isPersonEligibleForVoting(Supplier<Person> supplier, Predicate<Person> predicate) {
+    return predicate.test(supplier.get());
+  }
+
+  public static void main(String args[]) {
+    Supplier<Person> supplier = () -> new Person("Alex", 23);
+    Predicate<Person> predicate = (p) -> p.age > 18;
+    boolean eligible = isPersonEligibleForVoting(supplier, predicate);
+    System.out.println("Person is eligible for voting: " + eligible);
+  }
+}
+
+class Person {
+    String name;
+    int age;
+
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+```
+
+#### Output
+
+```
+Person is eligible for voting: true
+```
+
+The `Supplier<T>` interface does not contain any default or static methods. Here are some of the primitive specializations of the supplier interface.
+
+### `IntSupplier`
+
+The `IntSupplier` interface has a method `getAsInt()`, which applies the given operation on its argument and returns an int value. It is similar to using an object of type `Supplier<Integer>`.
+
+```java
+import java.util.function.IntSupplier;
+
+public class SupplierDemo {
+      public static void main(String[] args) {
+          IntSupplier supplier = () -> (int)(Math.random() * 10);
+          System.out.println(supplier.getAsInt()); 
+      }
+}
+```
+
+#### Output
+
+```
+6
+```
+
+### `DoubleSupplier`
+
+The `DoubleSupplier` interface has a method `getAsDouble()`, which applies the given operation on its argument and returns a `double` value. It is similar to using an object of type `Supplier<Double>`.
+
+```java
+import java.util.function.DoubleSupplier;
+
+public class SupplierDemo {
+    public static void main(String[] args) {
+        DoubleSupplier supplier = () -> (int)(Math.random() * 10);
+        System.out.println(supplier.getAsDouble());
+    }
+}
+```
+
+#### Output
+
+```
+6.0
+```
+
+</details>
+
+
+<details>
+<summary>Consumer Functional Interface</summary>
+
+Basics of Consumer Functional Interfaces
+
+The following topics are covered:
+- `Consumer<T>`
+- `BiConsumer<T, U>`
+
+`Consumer`s are functional interfaces that take in a parameter and do not produce anything.
+
+Below are some of the functional interfaces which can be categorized as `Consumer`s.
+
+| Interface name         | Description                                                                                         | Abstract method                  |
+|------------------------|-----------------------------------------------------------------------------------------------------|----------------------------------|
+| `Consumer<T>`          | Represents an operation that accepts a single (reference type) input argument and returns no result | `void accept(T t)`               |
+| `DoubleConsumer`       | Accepts a single double-value argument and returns no result                                        | `void accept(double value)`      |
+| `IntConsumer`          | Accepts a single int-value argument and returns no result                                           | `void accept(int value)`         |
+| `LongConsumer`         | Accepts a single long-value argument and returns no result                                          | `void accept(long value)`        |
+| `BiConsumer<T, U>`     | Represents an operation that accepts two (reference type) input arguments and returns no result     | `void accept(T t, U u)`          |
+| `ObjDoubleConsumer<T>` | Accepts an object-value and a double-value argument, and returns no result                          | `void accept(T t, double value)` |
+| `ObjIntConsumer<T, U>` | Accepts an object-value and an int-value argument, and returns no result                            | `void accept(T t, int value)`    |
+| `ObjLongConsumer<T>`   | Accepts an object-value and a long-value argument, and returns no result                            | `void accept(T t, long value)`   |
+
+### `Consumer<T>`
+
+This interface takes a parameter of type `T` and does not return anything.
+
+A consumer can be used in all contexts where an object needs to be consumed,i.e. taken as input, and some operation is performed on the object without returning any result.
+
+Below is the list of methods in the `Consumer` interface. `Consumer<T>` has an abstract method `accept()` and a default method called `andThen()`, which is used for chaining.
+
+![img.png](img/03.png)
+
+In the below example, we will create a `Consumer` which prints a value.
+
+```java
+import java.util.function.Consumer;
+
+public class ConsumerDemo {
+    public static void main(String[] args) {
+        Consumer<String> stringConsumer = s -> System.out.println(s);
+        stringConsumer.accept("Hello World.");
+		
+        Consumer<Integer> intConsumer = i -> System.out.println("Integer value = " + i);
+        intConsumer.accept(5);
+	}
+}
+```
+
+#### Output
+
+```
+Hello World.
+Integer value = 5
+```
+
+The `andThen()` method, which is a default method in the `Consumer` interface, is used for chaining. Here is the syntax of this method:
+
+```
+Consumer<T> andThen(Consumer<? super T> after)
+```
+
+The `andThen()` method returns a composed `Consumer` that performs this operation followed by the `after` operation (see above parameter list). In the below example, we will create two consumers, and we will chain them together using the `andThen()` method.
+
+```java
+import java.util.function.Consumer;
+
+public class ConsumerDemo {
+    public static void main(String[] args) {
+        Consumer<String> consumer1 = (arg) -> System.out.println(arg + "My name is Jane.");
+        Consumer<String> consumer2 = (arg) -> System.out.println(arg + "I am from Canada.");
+        consumer1.andThen(consumer2).accept("Hello. ");
+    }
+}
+```
+
+#### Output
+
+```
+Hello. My name is Jane.
+Hello. I am from Canada.
+```
+
+### `BiConsumer<T, U>`
+
+This interface takes two parameters and returns nothing.
+- `T` - the type of the first argument to the operation
+- `U` - the type of the second argument to the operation
+
+This interface has the same methods as present in the `Consumer<T>` interface.
+
+```java
+import java.util.function.BiConsumer;
+
+public class BiConsumerDemo {
+    public static void main(String[] args) {
+      BiConsumer<String, String> greet = (s1, s2) -> System.out.println(s1 + s2);
+      greet.accept("Hello", "World");
+    }
+}
+```
+
+#### Output
+
+```
+HelloWorld
+```
+
+</details>
+
+
+<details>
+<summary>Function Interface</summary>
+
+The following topics are covered:
+- `Function<T, R>`
+  - `R apply(T t)`
+  - `compose(Function<? super V, ? extends T> before)`
+  - `andThen(Function<? super R, ? extends V> after)`
+- `BiFunction<T, U, R>`
+
+`Function` is a category of functional interfaces that takes an object of type `T` and returns an object of type `R`.
+
+Until now, the functional interfaces that we've discussed have either not taken any argument (`Supplier`), not returned any value (`Consumer`), or returned only a boolean (`Predicate`).
+
+`Function` interfaces are very useful as we can specify the type of input and output.
+
+Below are some of the interfaces that fall in this category.
+
+![img.png](img/04.png)
+
+This section contains a discussion of some types of `Function` functional interfaces.
+
+### `Function<T, R>`
+
+The function takes only one argument of type `T` and returns a result of type `R`.
+
+The following is the list of all the methods in the `Function<T, R>` interface.
+
+![img.png](img/05.png)
+
+Below is an example of each method:
+
+### `R apply(T t)`
+
+This is the abstract method of the `Function` interface. It takes one argument of type `T` as input and returns a value of type `R`.
+
+In the below example, we will create a function called `lengthFunction`. It takes a string as input and returns the length of the string as output.
+
+```java
+import java.util.function.Function;
+ 
+public class FunctionInterfaceDemo {
+    public static void main(String[] args) {
+        // Created a function which returns the length of string.
+        Function<String, Integer> lengthFunction = str -> str.length();
+        System.out.println("String length: " + lengthFunction.apply("This is awesome!!"));
+    }
+}
+```
+
+#### Output
+
+```
+String length: 17
+```
+
+### `compose(Function<? super V, ? extends T> before)`
+
+Returns a composed function that first applies the function provided as a parameter on the input, and then applies the function on which it is called, to the result.
+
+```java
+import java.util.function.Function;
+
+public class FunctionDemo {
+
+    public static void main(String[] args) {
+        // Function which adds 10 to the given element.
+        Function<Integer, Integer> increment = x -> x + 10;
+        // Function which doubles the given element.
+        Function<Integer, Integer> multiply = y -> y * 2;
+        // Since we are using compose(), multiplication will be done first and then increment will be done.
+        System.out.println("compose result: " + increment.compose(multiply).apply(3));
+    }
+}
+```
+
+#### Output
+
+```
+compose result: 16
+```
+
+### `andThen(Function<? super R, ? extends V> after)`
+
+This method returns a composed function that first applies the function on which it is called on the input, and then applies the function provided as parameter, to the result.
+
+```java
+import java.util.function.Function;
+
+public class FunctionDemo {
+    public static void main(String[] args) {
+        Function<Integer,Integer> increment = x -> x + 10;
+        Function<Integer,Integer> multiply = y -> y * 2;
+        // Since we are using andThen(), increment will be done first and then multiplication will be done.
+        System.out.println("andThen result: " + increment.andThen(multiply).apply(3));
+    }
+}
+```
+
+#### Output
+
+```
+compose result: 26
+```
+
+### `BiFunction<T, U, R>`
+
+The `BiFunction<T, U, R>` is similar to `Function<T, R>` interface; the only difference is that the `BiFunction` interface takes in **two** parameters and returns an output.
+
+Below is the list of methods in the `BiFunction` interface.
+
+![img.png](img/06.png)
+
+In the below example, we will create a `BiFunction` that takes two numbers as input and returns their sum.
+
+```java
+import java.util.function.BiFunction; 
+  
+public class BiFunctionInterfaceDemo { 
+    public static void main(String[] args) {
+        BiFunction<Integer, Integer, Integer> add = (a, b) -> a + b;
+        System.out.println("Sum = " + add.apply(2, 3));
+    } 
+}
+```
+
+#### Output
+
+```
+Sum = 5
+```
+
+</details>
