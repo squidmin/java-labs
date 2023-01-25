@@ -5,7 +5,7 @@ Explains the `forEachRemaining()` method, which was introduced in the iterator c
 
 `Iterator` is an interface available in the `Collections` framework in `java.util package`. It is used to iterate a collection of objects. This interface has four methods, as shown in the below image. Before, Java 8 the `forEachRemaining()` method did not exist.
 
-![img.png](img/03.png)
+![03.png](img/03.png)
 
 Below is a simple program to iterate a list using iterator before Java 8.
 
@@ -78,5 +78,110 @@ The main purpose of introducing the `forEachRemaining()` method was to make the 
 ---
 
 The next section discusses improvements in the `Map` API.
+
+</details>
+
+
+<details>
+<summary>Map API Improvements: Fetch Operations</summary>
+
+Explains the new methods added in `Map` API for fetch operations.
+
+The following topics are covered:
+- `getOrDefault()`
+- `putIfAbsent()`
+- `compute()`, `computeIfAbsent()`, and `computeIfPresent()`
+
+If you have used `Map` then you must have faced a challenge where you needed to update the value of a key in the `Map`. Now, before updating, you must first check if the value is present in the `Map`, get the current value, update it, and again put the value in the `Map`. This is quite a cumbersome process, and it involves using lots of `if`/`else` statements. This kind of code is difficult to understand and fix if any issues occur.
+
+Thankfully, Java 8 has introduced some new methods in the `Map` interface to make our lives easier. In this lesson, we will discuss some of those new methods.
+
+### 1. `getOrDefault()`
+
+This method is a lifesaver if you need to update a certain key in the `Map`. The `getOrDefault()` method either returns the value of the key, or it returns the default value if the key is not present.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapUpgrades {
+    public static void main(String[] args) {
+        Map<String, Integer> fruits = new HashMap<>();
+        fruits.put("apple", 20);
+    
+        // We need to add 20 bananas in map.
+        // Below line will throw NullPointerException if banana is already not present in the map.
+        
+        // fruits.put("banana", fruits.get("banana") + 20); 
+    
+        // This is the correct way to update map value before Java 8.
+        if (fruits.containsKey("banana")) {
+            fruits.put("banana", fruits.get("banana") + 20);
+        } else {
+            fruits.put("banana", 20);
+        }
+
+        System.out.println(fruits);
+    }
+}
+```
+
+#### Output
+
+```
+{banana=20, apple=20}
+```
+
+Below is the same example using the `getOrDefault()` method. Now we don't need the `if`/`else` checks to update a value in the `Map`.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapUpgrades {
+    public static void main(String[] args) {
+        Map<String, Integer> fruits = new HashMap<>();
+        fruits.put("apple", 20);
+        fruits.put("banana", fruits.getOrDefault("banana", 0) + 20);
+        System.out.println(fruits);
+    }
+}
+```
+
+#### Output
+
+```
+{banana=20, apple=20}
+```
+
+### 3. `putIfAbsent()`
+
+You might be aware that the `put()` method in `Map` either inserts a key-value pair in the `Map` or updates the value if the key is already present. Now, what if you don't want to update the value in the `Map`. You want to insert a key-value pair only if it is not present in the `Map`.
+
+This can be achieved by the `putIfAbsent()` method. This method inserts a key and value in the `Map` only if it is not present. Let's look at how it works in the example below.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapUpgrades {
+    public static void main(String[] args){
+        Map<String , Integer> fruits = new HashMap<>();
+        fruits.put("apple", 20);
+        System.out.println(fruits.get("apple"));
+        fruits.putIfAbsent("apple", 30);
+        System.out.println(fruits.get("apple"));
+    }
+}
+```
+
+#### Output
+
+```
+20
+20
+```
+
+
 
 </details>
