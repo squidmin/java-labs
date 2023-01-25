@@ -94,7 +94,7 @@ The following topics are covered:
 
 If you have used `Map` then you must have faced a challenge where you needed to update the value of a key in the `Map`. Now, before updating, you must first check if the value is present in the `Map`, get the current value, update it, and again put the value in the `Map`. This is quite a cumbersome process, and it involves using lots of `if`/`else` statements. This kind of code is difficult to understand and fix if any issues occur.
 
-Thankfully, Java 8 has introduced some new methods in the `Map` interface to make our lives easier. In this lesson, we will discuss some of those new methods.
+Thankfully, Java 8 has introduced some new methods in the `Map` interface to make our lives easier. This section discusses some of those new methods.
 
 ### 1. `getOrDefault()`
 
@@ -214,7 +214,7 @@ The `computeIfAbsent()` method returns:
 - The original value if the key is already present in the map.
 - The computed value if the key is not present in the map.
 
-This method takes a key and a Function as a parameters.
+This method takes a key and a `Function` as a parameters.
 
 ```java
 import java.util.HashMap;
@@ -225,10 +225,10 @@ public class ComputeIfAbsentExample {
         Map<String, Integer> fruits = new HashMap<>();
         fruits.put("apple", 20);
     
-        int val = fruits.computeIfAbsent("apple", v ->  10);
+        int val = fruits.computeIfAbsent("apple", v -> 10);
         System.out.println(val);
         
-        val = fruits.computeIfAbsent("banana", v ->  10);
+        val = fruits.computeIfAbsent("banana", v -> 10);
         System.out.println(val);
     }
 }
@@ -275,5 +275,223 @@ null
 ---
 
 The next section discusses more improvements done to the `Map` interface.
+
+</details>
+
+
+<details>
+<summary>Map API Improvements: Replace Operations</summary>
+
+Explains the new methods for value replacement that have been added to `Map` API.
+
+The following topics are covered:
+1. `replace()`, `replaceAll()`, and `remove()`
+   - `replace(K key, V value)`
+   - `replace(K key, V oldValue, V newValue)`
+   - `replaceAll(BiFunction<? super K, ? super V, ? extends V> function)`
+   - `remove(Object key)`
+   - `remove(Object key, Object value)`
+2. Iterating over the `Map` using `forEach()`
+
+In the previous section, we discussed a few new methods that have been added to the `Map` interface. In this section, we will look at some more improvements that have been done in `Map` API.
+
+### 1. `replace()`, `replaceAll()`, and `remove()`
+
+Sometimes we are required to change certain values in a `HashMap`. Before Java 8, the only way to do this was to iterate over the `Map` and change each value one-by-one.
+
+This is a cumbersome process, and it is prone to errors if the logic is not written properly. To overcome this issue, a few new methods have been introduced in Java 8.
+
+### a) `replace(K key, V value)`
+
+This method replaces the entry for the specified key only if it is currently mapped to some value. If the key is not present or if the key is present but the current value is `null`, then nothing is done.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapImprovements {
+    public static void main(String[] args) {
+        Map<String, Integer> fruits = new HashMap<>();
+        fruits.put("apple", 20);
+        fruits.put("banana", 20);
+
+        fruits.replace("apple", 50);
+
+        System.out.println(fruits.get("apple"));
+    }
+}
+```
+
+#### Output
+
+```
+50
+```
+
+### b) `replace(K key, V oldValue, V newValue)`
+
+This method replaces the entry for the specified key only if it is currently mapped to the specified value.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapImprovements {
+    public static void main(String[] args) {
+        Map<String, Integer> fruits = new HashMap<>();
+        fruits.put("apple", 20);
+        fruits.put("banana", 20);
+
+        fruits.replace("apple", 30, 50);
+
+        System.out.println(fruits.get("apple"));
+
+        fruits.replace("apple", 20, 50);
+
+        System.out.println(fruits.get("apple"));
+    }
+}
+```
+
+#### Output
+
+```
+20
+50
+```
+
+### c) `replaceAll(BiFunction<? super K, ? super V, ? extends V> function)`
+
+This method replaces each entry's value with the result of invoking the given function on that entry until all of the entries have been processed or the function throws an exception.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapImprovements {
+    public static void main(String[] args) {
+        Map<String, Integer> fruits = new HashMap<>();
+        fruits.put("apple", 20);
+        fruits.put("banana", 20);
+
+        fruits.replaceAll((k, v) -> 50);  //Value becomes 50 for all keys
+
+        System.out.println(fruits.get("apple"));
+        System.out.println(fruits.get("banana"));
+    }
+}
+```
+
+#### Output
+
+```
+50
+50
+```
+
+### d) `remove(Object key)`
+
+This method removes the mapping for a key from this `Map` if it is present.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapImprovements {
+    public static void main(String[] args) {
+        Map<String, Integer> fruits = new HashMap<>();
+        fruits.put("apple", 20);
+        fruits.put("banana", 20);
+
+        fruits.remove("apple");  // apple will be removed
+
+        System.out.println(fruits.get("apple"));
+    }
+}
+```
+
+#### Output
+
+```
+null
+```
+
+### e) `remove(Object key, Object value)`
+
+This method removes the entry for the specified key only if it is currently mapped to the specified value.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapImprovements {
+    public static void main(String[] args) {
+        Map<String, Integer> fruits = new HashMap<>();
+        fruits.put("apple", 20);
+        fruits.put("banana", 20);
+
+        fruits.remove("apple" , 30);  // apple will not be removed because the value is 20
+        System.out.println(fruits.get("apple"));
+
+        fruits.remove("apple" , 20);  // apple will be removed
+        System.out.println(fruits.get("apple"));
+    }
+}
+```
+
+#### Output
+
+```
+20
+null
+```
+
+### 2) Iterating over the map using `forEach()`
+
+Before Java 8, if you needed to iterate over a `HashMap`, then there were quite a few ways to do so, like getting the `keySet()` or `entrySet()`. However, these methods were not very flexible and needed some practice to get a hold of.
+
+Now you can easily iterate over a `Map` using the `forEach()` method added in Java 8.
+
+Here is the syntax of the `forEach()` method.
+
+`forEach(BiConsumer<? super K,? super V> action)`
+
+It takes a `BiConsumer` as a parameter.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapImprovements {
+    public static void main(String[] args) {
+        Map<String, Integer> fruits = new HashMap<>();
+        fruits.put("apple", 10);
+        fruits.put("banana", 20);
+        fruits.put("orange", 30);
+
+        fruits.forEach((k,v) -> System.out.println("Key: " + k + " Value: " + v));
+    }
+}
+```
+
+#### Output
+
+```
+Key: banana Value: 20
+Key: orange Value: 30
+Key: apple Value: 10
+```
+
+---
+
+The next section discusses the renewed `Comparator`.
+
+</details>
+
+
+<details>
+<summary>Renewed Comparator</summary>
+
+
 
 </details>
