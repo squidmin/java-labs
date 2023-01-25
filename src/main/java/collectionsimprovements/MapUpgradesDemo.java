@@ -3,7 +3,7 @@ package collectionsimprovements;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapUpgrades {
+public class MapUpgradesDemo {
 
     private static void withoutGetOrDefault() {
         Map<String, Integer> fruits = new HashMap<>();

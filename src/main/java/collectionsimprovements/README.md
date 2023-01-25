@@ -5,7 +5,7 @@ Explains the `forEachRemaining()` method, which was introduced in the iterator c
 
 `Iterator` is an interface available in the `Collections` framework in `java.util package`. It is used to iterate a collection of objects. This interface has four methods, as shown in the below image. Before, Java 8 the `forEachRemaining()` method did not exist.
 
-![03.png](img/03.png)
+![03.png](img/01.png)
 
 Below is a simple program to iterate a list using iterator before Java 8.
 
@@ -85,7 +85,7 @@ The next section discusses improvements in the `Map` API.
 <details>
 <summary>Map API Improvements: Fetch Operations</summary>
 
-Explains the new methods added in `Map` API for fetch operations.
+Explains the new methods added in the `Map` API for fetch operations.
 
 The following topics are covered:
 - `getOrDefault()`
@@ -154,7 +154,7 @@ public class MapUpgrades {
 {banana=20, apple=20}
 ```
 
-### 3. `putIfAbsent()`
+### 2. `putIfAbsent()`
 
 You might be aware that the `put()` method in `Map` either inserts a key-value pair in the `Map` or updates the value if the key is already present. Now, what if you don't want to update the value in the `Map`. You want to insert a key-value pair only if it is not present in the `Map`.
 
@@ -182,6 +182,98 @@ public class MapUpgrades {
 20
 ```
 
+### 3. `compute()`, `computeIfAbsent()`, and `computeIfPresent()`
 
+The `compute()` method computes a new mapping given the key and its existing value. This method returns the computed value. If the key is not present in the map, then an exception is thrown.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class ComputeExample {
+    public static void main(String[] args) {
+        Map<String, Integer> fruits = new HashMap<>();
+        fruits.put("apple", 20);
+    
+        int val = fruits.compute("apple", (k, v) -> v + 10);
+    
+        System.out.println(val);
+        // Below line will throw Null Pointer Exception.
+        // val = fruits.compute("banana", (k, v) -> v + 10);
+    }
+}
+```
+
+### Output
+
+```
+30
+```
+
+The `computeIfAbsent()` method returns:
+- The original value if the key is already present in the map.
+- The computed value if the key is not present in the map.
+
+This method takes a key and a Function as a parameters.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class ComputeIfAbsentExample {
+    public static void main(String[] args) {
+        Map<String, Integer> fruits = new HashMap<>();
+        fruits.put("apple", 20);
+    
+        int val = fruits.computeIfAbsent("apple", v ->  10);
+        System.out.println(val);
+        
+        val = fruits.computeIfAbsent("banana", v ->  10);
+        System.out.println(val);
+    }
+}
+```
+
+#### Output
+
+```
+20
+10
+```
+
+The `computeIfPresent()` method returns:
+- A `null` value if the key is not present in the map.
+- The computed value if the key is present in the map.
+
+This method takes a key and a `BiFunction` as parameters.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class ComputeIfPresentExample {
+    public static void main(String[] args) {
+        Map<String, Integer> fruits = new HashMap<>();
+        fruits.put("apple", 20);
+    
+        Integer val = fruits.computeIfPresent("apple", (k, v) -> v + 10);
+        System.out.println(val);
+        
+        val = fruits.computeIfPresent("banana", (k, v) -> v + 10);
+        System.out.println(val);
+    }
+}
+```
+
+#### Output
+
+```
+30
+null
+```
+
+---
+
+The next section discusses more improvements done to the `Map` interface.
 
 </details>
