@@ -278,24 +278,7 @@ public class StreamDemo {
 }
 
 class Person {
-    String name;
-    int age;
-
-    Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -706,28 +689,7 @@ public class StreamDemo {
 
 
 class Employee {
-    String name;
-    int age;
-    int salary;
-    Employee(String name) { this.name = name; }
-    Employee(String name, int age, int salary) {
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public int getSalary() { return salary; }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -796,29 +758,7 @@ public class StreamDemo {
 }
 
 class Employee {
-    String name;
-    int age;
-    int salary;
-
-    Employee(String name) { this.name = name; }
-    Employee(String name, int age, int salary) {
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public int getSalary() { return salary; }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -857,29 +797,7 @@ public class StreamDemo {
 }
 
 class Employee {
-    String name;
-    int age;
-    int salary;
-
-    Employee(String name) { this.name = name; }
-    Employee(String name, int age, int salary) {
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public int getSalary() { return salary; }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -998,29 +916,7 @@ public class StreamDemo {
 }
 
 class Employee {
-    String name;
-    int age;
-    int salary;
-
-    Employee(String name) { this.name = name; }
-    Employee(String name, int age, int salary) {
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public int getSalary() { return salary; }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -1183,30 +1079,7 @@ public class StreamDemo {
 }
 
 class Employee {
-    String name;
-    int age;
-    int salary;
-
-    Employee(String name) { this.name = name; }
-
-    Employee(String name, int age, int salary) {
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public int getSalary() { return salary; }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -1246,31 +1119,7 @@ public class OptionalDemo {
 }
 
 class Employee {
-    String name;
-    int age;
-    int salary;
-
-    Employee(String name) {
-        this.name = name;
-    }
-    Employee(String name, int age, int salary) {
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public Optional<Integer> getSalary() { return Optional.of(salary); }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -1479,21 +1328,7 @@ public class StreamDemo {
 
 
 class Person {
-    String name;
-    int age;
-    String country;
-
-    Person(String name, int age, String country) {
-        this.name = name;
-        this.age = age;
-        this.country = country;
-    }
-
-    public String getName() { return name; }
-
-    public int getAge() { return age; }
-
-    public String getCountry() { return country; }
+    ...
 }
 ```
 
@@ -1540,19 +1375,7 @@ public class StreamDemo {
 
 
 class Person {
-    String name;
-    int age;
-    String country;
-
-    Person(String name, int age, String country) {
-        this.name = name;
-        this.age = age;
-        this.country = country;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public String getCountry() { return country; }
+    ...
 }
 ```
 
@@ -1599,19 +1422,7 @@ public class StreamDemo {
 
 
 class Person {
-    String name;
-    int age;
-    String country;
-
-    Person(String name, int age, String country) {
-        this.name = name;
-        this.age = age;
-        this.country = country;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public String getCountry() { return country; }
+    ...
 }
 ```
 
@@ -1685,19 +1496,7 @@ public class StreamDemo {
 
 
 class Person {
-    String name;
-    int age;
-    String country;
-
-    Person(String name, int age, String country) {
-        this.name = name;
-        this.age = age;
-        this.country = country;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public String getCountry() { return country; }
+    ...
 }
 ```
 
@@ -1742,21 +1541,8 @@ public class StreamDemo {
     }
 }
 
-
 class Person {
-    String name;
-    int age;
-    String country;
-
-    Person(String name, int age, String country) {
-        this.name = name;
-        this.age = age;
-        this.country = country;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public String getCountry() { return country; }
+    ...
 }
 ```
 
@@ -1801,21 +1587,8 @@ public class StreamDemo {
     }
 }
 
-
 class Person {
-    String name;
-    int age;
-    String country;
-
-    Person(String name, int age, String country) {
-        this.name = name;
-        this.age = age;
-        this.country = country;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public String getCountry() { return country;  }
+    ...
 }
 ```
 
@@ -1883,30 +1656,8 @@ public class StreamDemo {
     }
 }
 
-
 class Person {
-    String name;
-    int age;
-    String country;
-
-    Person(String name, int age, String country) {
-        this.name = name;
-        this.age = age;
-        this.country = country;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public String getCountry() { return country; }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", country=" + country +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -1954,30 +1705,8 @@ public class StreamDemo {
     }
 }
 
-
 class Person {
-    String name;
-    int age;
-    String country;
-
-    Person(String name, int age, String country) {
-        this.name = name;
-        this.age = age;
-        this.country = country;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public String getCountry() { return country; }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", country=" + country +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -2050,28 +1779,7 @@ public class StreamDemo {
 }
 
 class Employee {
-  String name;
-  int age;
-  int salary;
-
-  Employee(String name, int age, int salary) {
-    this.name = name;
-    this.age = age;
-    this.salary = salary;
-  }
-
-  public String getName() { return name; }
-  public int getAge() { return age; }
-  public int getSalary() { return salary; }
-
-  @Override
-  public String toString() {
-    return "Employee{" +
-            "name='" + name + '\'' +
-            ", age=" + age +
-            ", salary=" + salary +
-            '}';
-  }
+    ...
 }
 ```
 
@@ -2108,28 +1816,7 @@ public class StreamDemo {
 }
 
 class Employee {
-    String name;
-    int age;
-    int salary;
-
-    Employee(String name, int age, int salary) {
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public int getSalary() { return salary; }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -2360,31 +2047,7 @@ public class CollectorsDemo {
 }
 
 class Employee {
-    String name;
-    int age;
-    int salary;
-    String country;
-
-    Employee(String name, int age, int salary, String country) {
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-        this.country = country;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public Integer getSalary() { return salary; }
-    public String getCountry() { return country; }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -2424,31 +2087,7 @@ public class CollectorsDemo {
 }
 
 class Employee {
-    String name;
-    int age;
-    int salary;
-    String country;
-
-    Employee(String name, int age, int salary, String country) {
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-        this.country = country;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public Integer getSalary() { return salary; }
-    public String getCountry() { return country; }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -2490,29 +2129,7 @@ public class CollectorsDemo {
 }
 
 class Employee {
-    String name;
-    int age;
-    int salary;
-
-    Employee(String name) { this.name = name; }
-    Employee(String name, int age, int salary) {
-        this.name = name;
-        this.age = age;
-        this.salary = salary;
-    }
-
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public int getSalary() { return salary; }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                '}';
-    }
+    ...
 }
 ```
 
@@ -2660,5 +2277,15 @@ public class CollectorsDemo {
 ---
 
 The next section discusses a few other methods used to calculate some data. These methods are available in the `Collectors` class.
+
+</details>
+
+
+<details>
+<summary>Collectors: Aggregation Operations</summary>
+
+Discussion of methods of the `Collectors` class, which are used for aggregation.
+
+
 
 </details>
