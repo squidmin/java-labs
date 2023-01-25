@@ -3,7 +3,7 @@
 
 Explains the `forEachRemaining()` method, which was introduced in the iterator class in Java 8.
 
-`Iterator` is an interface available in the `Collections` framework in `java.util package`. It is used to iterate a collection of objects. This interface has four methods, as shown in the below image. Before, Java 8 the `forEachRemaining()` method did not exist.
+`Iterator` is an interface available in the `Collections` framework in `java.util package`. It is used to iterate a collection of objects. This interface has four methods, as shown in the below image. Before Java 8, the `forEachRemaining()` method did not exist.
 
 ![03.png](img/01.png)
 
