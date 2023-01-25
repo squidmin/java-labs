@@ -492,6 +492,321 @@ The next section discusses the renewed `Comparator`.
 <details>
 <summary>Renewed Comparator</summary>
 
+Discusses how to use the power of the newly added methods in the `Comparator` interface to write concise and efficient `Comparators`.
 
+- Introduction to the `Comparator` interface
+- New methods in the `Comparator` interface
+  - `comparing()`
+  - `thenComparing()`
+  - `naturalOrder()`
+  - `reverseOrder()`
+  - `nullsFirst()`
+  - `nullsLast()`
+
+### Introduction to the `Comparator` interface
+
+`Comparator` is an interface that is used to define how a collection must be sorted. In Java 7, it had just 2 methods – `compare()` and `equals()`. The enhanced `Comparator` in Java 8 now has 19 methods. However, the `Comparator` is still a functional interface as it has only one abstract method, i.e., `compare()`. `Comparator` now supports declarations via lambda expressions as it is a Functional Interface. This was seen in the earlier lambda expressions section as well. Below is the list of methods in the `Comparator` interface.
+
+![02.png](img/02.png)
+
+We will look at how these new methods work and discuss the functionalities they provide. Before Java 8, there was only one way to use the `Comparator` interface. We would create an implementation of the `Comparator<T>` interface, override the `compare()` method of the interface with the desired comparison logic and use `Collections.sort()`, or a similar method in Collections API, to sort the collection of objects.
+
+Below is an example of sorting a List of objects before Java 8.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class ComparatorDemo {
+    public static void main(String[] args) {
+        List<Person> personList = new ArrayList<>();
+        personList.add(new Person("Jane",54));
+        personList.add(new Person("Dave",21));
+        personList.add(new Person("Carl",34));
+
+        // Here we are using an anonymous comparator to sort the List.
+        Collections.sort(personList, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
+        personList.forEach(System.out::println);
+    }
+}
+
+class Person {
+    String name;
+    int age;
+    int yearsOfService;
+
+    Person(String name, int age){
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() { return name; }
+    public int getAge() { return age; }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+```
+
+#### Output
+
+```
+Person{name='Carl', age=34}
+Person{name='Dave', age=21}
+Person{name='Jane', age=54}
+```
+
+Java 8 allows usage of lambda expressions instead of using an anonymous class. We already saw this in the lambdas chapter.
+
+### New methods in the `Comparator` interface
+
+This lesson primarily focuses on the new methods that have been added to the `Comparator` interface.
+
+### a) `comparing()`
+
+`comparing()` is a static method introduced in Java 8. It takes a `Function<T, R>` functional interface instance as an input and returns a `Comparator` instance.
+
+Let's see how the above program can be written using the `comparing()` method.
+
+The basic idea here is that we don't need to write the entire logic of comparing ourselves. We just need to specify which fields from the object should be used for comparison.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class ComparatorDemo {
+    public static void main(String[] args) {
+        List<Person> personList = new ArrayList<>();
+        personList.add(new Person("Jane", 54));
+        personList.add(new Person("Dave", 21));
+        personList.add(new Person("Carl", 34));
+        // Sorting the List using comparing() method of Comparator.
+        Collections.sort(personList, Comparator.comparing(Person::getName));
+
+        personList.forEach(System.out::println);
+    }
+}
+
+class Person {
+    ...
+}
+```
+
+#### Output
+
+```
+Person{name='Carl', age=34}
+Person{name='Dave', age=21}
+Person{name='Jane', age=54}
+```
+
+### b) `thenComparing()`
+
+What if we need to sort the person object based on the basis of name? If the name is the same then we will need to sort on the basis of age.
+
+In this scenario, we will use `thenComparing()` method. It is a `default` method that takes in a function and returns a `Comparator`.
+
+Since this is a non-static method, it cannot be called directly from the `Comparator`. It can be called from the `Comparator` object. The below code will not compile.
+
+`Collections.sort(personList, Comparator.thenComparing(Person::getAge));`
+
+Below is the example to sort the person list by name and age.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class ComparatorDemo {
+    public static void main(String[] args) {
+        List<Person> personList = new ArrayList<>();
+        personList.add(new Person("Jane",54));
+        personList.add(new Person("Dave",21));
+        personList.add(new Person("Carl",34));
+        personList.add(new Person("Dave",58));
+        personList.add(new Person("Carl",12));
+
+        // Using thenComparing() method to sort the List on the basis of two criterias.
+        Collections.sort(personList, Comparator.comparing(Person::getName).thenComparing(Person::getAge));
+
+        personList.forEach(System.out::println);
+    }
+}
+
+class Person {
+    ...
+}
+```
+
+#### Output
+
+```
+Person{name='Carl', age=12}
+Person{name='Carl', age=34}
+Person{name='Dave', age=21}
+Person{name='Dave', age=58}
+Person{name='Jane', age=54}
+```
+
+### c) `naturalOrder()`
+
+If we don't need to provide our own implementation of the `Comparator` and use the natural order, we can use the `naturalOrder()` method. This is a static method that returns a comparator, which sorts in the natural order.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class ComparatorDemo {
+    public static void main(String[] args) {
+        List<String> fruits = new ArrayList<>();
+        fruits.add("guava");
+        fruits.add("peach");
+        fruits.add("apple");
+        fruits.add("banana");
+
+        Collections.sort(fruits, Comparator.naturalOrder());
+
+        fruits.forEach(System.out::println);
+    }
+}
+```
+
+#### Output
+
+```
+apple
+banana
+guava
+peach
+```
+
+### d) `reverseOrder()`
+
+This is a static method that returns a `Comparator`, which sorts in the reverse order of the natural order.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class ComparatorDemo {
+    public static void main(String[] args) {
+        List<String> fruits = new ArrayList<>();
+        fruits.add("guava");
+        fruits.add("peach");
+        fruits.add("apple");
+        fruits.add("banana");
+
+        // Sorting the List in reverse order.
+        Collections.sort(fruits, Comparator.reverseOrder());
+
+        fruits.forEach(System.out::println);
+    }
+}
+```
+
+#### Output
+
+```
+peach
+guava
+banana
+apple
+```
+
+### e) `nullsFirst()`
+
+Comparator's `nullsFirst()` method takes in a `Comparator` as input and returns a `Comparator`, which considers `null` values lesser than non-`null` values.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class ComparatorDemo {
+    public static void main(String[] args) {
+        List<String> fruits = new ArrayList<>();
+        fruits.add("guava");
+        fruits.add(null);
+        fruits.add("apple");
+        fruits.add("banana");
+
+        // Sorting the List keeping nulls first.
+        Collections.sort(fruits, Comparator.nullsFirst(Comparator.naturalOrder()));
+
+        fruits.forEach(System.out::println);
+    }
+}
+```
+
+#### Output
+
+```
+null
+apple
+banana
+guava
+```
+
+### f) `nullsLast()`
+
+Comparator's `nullsLast()` method takes in a `Comparator` as input and returns a `Comparator`, which considers `null` values greater than non-`null` values.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class ComparatorDemo {
+    public static void main(String[] args) {
+        List<String> fruits = new ArrayList<>();
+        fruits.add("guava");
+        fruits.add(null);
+        fruits.add("apple");
+        fruits.add("banana");
+
+        // Sorting the List keeping nulls last.
+        Collections.sort(fruits, Comparator.nullsLast(Comparator.naturalOrder()));
+
+        fruits.forEach(System.out::println);
+    }
+}
+```
+
+#### Output
+
+```
+apple
+banana
+guava
+null
+```
+
+These are the main methods that you should know to write concise and efficient sorting logic using `Comparator`.
+
+---
+
+The next section discusses the improvements made in the concurrency API.
 
 </details>
