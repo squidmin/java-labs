@@ -10,12 +10,12 @@ public class MapUpgradesDemo {
         fruits.put("apple", 20);
 
         // We need to add 20 bananas in map.
-        // Below line will throw NullPointerException if banana
+        // Below line will throw NullPointerException if banana.
         // is already not present in the map.
 
         // fruits.put("banana", fruits.get("banana") + 20);
 
-        // This is the correct way to update map value fefore Java 8
+        // This is the correct way to update map value before Java 8.
         if (fruits.containsKey("banana")) fruits.put("banana", fruits.get("banana") + 20);
         else fruits.put("banana", 20);
 
