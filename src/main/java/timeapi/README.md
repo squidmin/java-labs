@@ -784,3 +784,181 @@ Date after subtracting nanoseconds is: 2023-01-26T16:39:16.693999985Z[Etc/UTC]
 The next section discusses the `Period` and `Duration` classes.
 
 </details>
+
+
+<details>
+<summary>Period and Duration</summary>
+
+Discussion of the `Period` and `Duration` classes and their methods.
+
+The following topics are covered:
+- `Period`
+  - Creating a period
+  - Finding the difference between two dates
+  - Getting a specific value from `Period`
+- Duration
+  - Creating a duration
+  - Finding the difference between two values
+
+If we need to show the amount of time taken, e.g., 2 days or 3 hours then we need to use the `Period` and `Duration` classes introduced in Java 8 time API.
+
+Let’s have a deeper look into these classes.
+
+### `Period`
+
+A period represents the date-based amount of time in the **ISO-8601** calendar system, such as 2 years, 3 months, and 4 days. This class is used to modify a given date or to find the difference between dates. We will look at some of the methods provided by this class and how they work.
+
+### a) Creating a period
+
+We can create a period using the `of()` method. There are multiple overloaded variants of the `of()` method. In the example given below, we will cover the most important ones.
+
+```java
+import java.time.LocalDate;
+import java.time.Period;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        Period period = Period.ofDays(5);  // Period of 5 days.
+        System.out.println(period.getDays());
+
+        period = Period.ofMonths(3);  // Period of 3 months.
+        System.out.println(period.getMonths());
+
+        period = Period.ofYears(2);  // Period of 2 Years
+        System.out.println(period.getYears());
+
+        period = Period.of(2, 5, 12); // Period of 2 Years, 5 Months and 12 Days.
+        System.out.println(period.getYears()); 
+        System.out.println(period.getMonths());
+        System.out.println(period.getDays());
+    }
+}
+```
+
+#### Output
+
+```
+5
+3
+2
+2
+5
+12
+```
+
+### b) Finding the difference between two dates
+
+To find the difference between two dates, we have a method called `between()` in the `Period` class.
+
+```java
+import java.time.LocalDate;
+import java.time.Period;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        Period period = Period.between(LocalDate.parse("2020-05-18"), LocalDate.parse("2017-04-17"));
+        System.out.println(period);
+    }
+}
+```
+
+#### Output
+
+```
+P-3Y-1M-1D
+```
+
+### c) Getting a specific value from `Period`
+
+In the previous example, we saw that we can get a period using the `between()` method. We can fetch the specific value of the year, month, or days also from the period object.
+
+Below is the example.
+
+```java
+import java.time.LocalDate;
+import java.time.Period;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        Period period = Period.between(LocalDate.parse("2017-04-17"), LocalDate.parse("2020-05-18"));
+        
+        int years = period.getYears();
+        int months = period.getMonths();
+        int days = period.getDays();
+
+        System.out.println("The difference between two dates is " + years + " Years, " + months + " Months and " + days + " Days");
+    }
+}
+```
+
+#### Output
+
+```
+The difference between two dates is 3 Years, 1 Months and 1 Days
+```
+
+### `Duration`
+
+`Duration` represents the time-based amount of time in the **ISO-8601** calendar system, such as 8 minutes. This class is used to modify a given time or to find the difference between times.
+
+We will look at some of the methods provided by this class and how they work.
+
+### a) Creating a `Duration`
+
+We can create a period using the `of()` method. There are multiple overloaded variants of the `of()` method. In the example given below, we will cover the most important ones.
+
+```java
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        Duration duration = Duration.ofDays(1);  // Created a duration of 1 day.
+        System.out.println(duration.getSeconds() + " seconds"); // This will return the number of seconds in a day.
+
+        duration = Duration.ofHours(2);  // Created a duration of 2 hours.
+        System.out.println(duration.getSeconds() + " seconds"); // This will return the number of seconds in 2 hours.
+
+        duration = Duration.ofMinutes(23);  // Created a duration of 23 minutes.
+        System.out.println(duration.getSeconds() + " seconds"); // This will return the number of seconds in 23 minutes.
+        
+        duration = Duration.of(1, ChronoUnit.HOURS);
+        System.out.println(duration.getSeconds() + " seconds");
+    }
+}
+```
+
+#### Output
+
+```
+86400 seconds
+7200 seconds
+1380 seconds
+3600 seconds
+```
+
+### b) Finding the difference between two values
+
+To find the difference between two values of time, we have a method called `between()` in the `Duration` class.
+
+```java
+import java.time.Duration;
+import java.time.LocalTime;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        Duration duration = Duration.between(LocalTime.parse("12:14"), LocalTime.parse("13:15"));
+        System.out.println("The difference is " + duration.getSeconds() + " Seconds");
+    }
+}
+```
+
+#### Output
+
+```
+The difference is 3660 Seconds
+```
+
+---
+
+</details>
