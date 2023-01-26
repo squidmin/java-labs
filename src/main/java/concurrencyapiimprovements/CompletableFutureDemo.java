@@ -4,9 +4,13 @@ import java.util.concurrent.*;
 
 public class CompletableFutureDemo {
     public static void main(String[] args) {
-        Executor executor = Executors.newFixedThreadPool(5);
+        ExecutorService pool = Executors.newFixedThreadPool(5);
 
-        // Passing a runnable and executor as parameter to runAsync() method.
+        /*
+        Passing a Runnable and ExecutorService as parameters to runAsync() method.
+        The static method call Executors.newFixedThreadPool(5) could also be passed as the Executor argument, but as a
+        consequence the thread pool would not be able to `shutdown()` and the application would not terminate properly.
+        */
         CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
             try {
                 TimeUnit.SECONDS.sleep(5);
@@ -14,7 +18,7 @@ public class CompletableFutureDemo {
                 throw new IllegalStateException(e);
             }
             System.out.println("Doing some processing");
-        }, executor);
+        }, pool);
 
         System.out.println("This will print immediately");
 
@@ -25,7 +29,6 @@ public class CompletableFutureDemo {
         }
 
         System.out.println("This will print after 5 seconds");
-
-
+        pool.shutdown();
     }
 }
