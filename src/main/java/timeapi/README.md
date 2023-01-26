@@ -553,6 +553,234 @@ The next section discusses the `ZonedDateTime` class.
 <details>
 <summary>ZonedDateTime</summary>
 
+Discussion of the `ZonedDateTime` class and its methods.
 
+The following topics are covered:
+- Creating the `ZonedDateTime` instance
+- Fetching `Date` and `Time` of a `ZonedDateTime`
+- Modifying date and time
+
+The `ZonedDateTime` class represents a date and a time with time zone information. While creating an instance of `ZonedDateTime`, we need to provide a `ZoneId`. The `ZoneId` is an identifier used to represent different zones. Before we proceed towards `ZonedDateTime`, let’s look at `ZoneId` briefly.
+
+The below example shows how to get a `ZoneId` for a given `Zone`.
+
+```java
+import java.time.ZoneId;
+import java.util.Set;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        //Fetching the Zoneid for given Zone.
+        ZoneId zoneId = ZoneId.of("America/Marigot");
+        System.out.println("Zone Id " + zoneId);
+
+        //Fetching a Set of all Zoneids
+        Set<String> zoneIdList = ZoneId.getAvailableZoneIds();
+
+        for (String zone : zoneIdList) {
+            System.out.println(zone);
+        }
+    }
+}
+```
+
+#### Output
+
+```
+Zone Id America/Marigot
+Asia/Aden
+America/Cuiaba
+Etc/GMT+9
+Etc/GMT+8
+Africa/Nairobi
+America/Marigot
+Asia/Aqtau
+...
+```
+
+(The above **Output** is truncated to conserve space in this document.)
+
+### 1) Creating a `ZonedDateTime` instance
+
+We can create a `ZonedDateTime` instance using the `now()` or `of()` methods.
+
+Below is an example, to show how to create a `ZonedDateTime` object.
+
+```java
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        // Fetching the current TimeZone
+        ZonedDateTime zonedDateTime = ZonedDateTime.now();
+        System.out.println(zonedDateTime);
+        // fetching the ZoneId for Canada/Atlantic
+        ZoneId zoneId = ZoneId.of("Canada/Atlantic");
+
+        zonedDateTime =
+                ZonedDateTime.of(2020, 10, 15, 23, 45, 59, 1234, zoneId);
+        System.out.println(zonedDateTime);
+    }
+}
+```
+
+#### Output
+
+```
+2023-01-26T16:34:52.633Z[Etc/UTC]
+2020-10-15T23:45:59.000001234-03:00[Canada/Atlantic]
+```
+
+### Fetching `Date` and `Time` of a `ZonedDateTime`
+
+We can fetch the date and time fields of a `ZonedDateTime` instance using one of the following methods:
+
+- `getYear()`
+- `getMonth()`
+- `getDayOfMonth()`
+- `getDayOfWeek()`
+- `getDayOfYear()`
+- `getHour()`
+- `getMinute()`
+- `getSecond()`
+- `getNano()`
+
+The example below shows the usage of all these methods.
+
+```java
+import java.time.DayOfWeek;
+import java.time.Month;
+import java.time.ZonedDateTime;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        ZonedDateTime zonedDateTime = ZonedDateTime.now();
+
+        int year = zonedDateTime.getYear();
+        System.out.println("Year is: " + year);
+
+        Month month = zonedDateTime.getMonth();
+        System.out.println("Month is: " + year);
+
+        int dayOfMonth = zonedDateTime.getDayOfMonth();
+        System.out.println("Day Of Month is: " + dayOfMonth);
+
+        DayOfWeek dayOfWeek = zonedDateTime.getDayOfWeek();
+        System.out.println("Day of week is: " + dayOfWeek);
+
+        int dayOfYear = zonedDateTime.getDayOfYear();
+        System.out.println("Day of year is: " + dayOfYear);
+
+        int hour = zonedDateTime.getHour();
+        System.out.println("Hour is: " + hour);
+
+        int minute = zonedDateTime.getMinute();
+        System.out.println("Minute is: " + minute);
+
+        int second = zonedDateTime.getSecond();
+        System.out.println("Second is: " + second);
+
+        int nano = zonedDateTime.getNano();
+        System.out.println("Nano is: " + nano);
+    }
+}
+```
+
+#### Output
+
+```
+Year is: 2023
+Month is: 2023
+Day Of Month is: 26
+Day of week is: THURSDAY
+Day of year is: 26
+Hour is: 16
+Minute is: 37
+Second is: 16
+Nano is: 143000000
+```
+
+### 3) Modifying date and time
+
+The `ZonedDateTime` class contains a set of methods used for modifying the date and time. Some of these methods are:
+
+- `plusYears()`
+- `plusMonths()`
+- `plusDays()`
+- `plusHours()`
+- `plusMinutes()`
+- `plusSeconds()`
+- `plusNanos()`
+- `minusYears()`
+- `minusMonths()`
+- `minusDays()`
+- `minusHours()`
+- `minusMinutes()`
+- `minusSeconds()`
+- `minusNanos()`
+
+The example given below shows the usage of all these methods.
+
+```java
+import java.time.ZonedDateTime;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        ZonedDateTime zonedDateTime = ZonedDateTime.now();
+
+        System.out.println("Date after adding Year is: " + zonedDateTime.plusYears(1));
+
+        System.out.println("Date after adding Month is: " + zonedDateTime.plusMonths(1));
+
+        System.out.println("Date after adding days is: " + zonedDateTime.plusDays(15));
+
+        System.out.println("Date after adding hours is: " + zonedDateTime.plusHours(15));
+
+        System.out.println("Date after adding minutes is: " + zonedDateTime.plusMinutes(1));
+
+        System.out.println("Date after adding seconds is: " + zonedDateTime.plusSeconds(15));
+
+        System.out.println("Date after adding nanoseconds is: " + zonedDateTime.plusNanos(15));
+
+        System.out.println("Date after subtracting Year is: " + zonedDateTime.minusYears(1));
+
+        System.out.println("Date after subtractng Month is: " + zonedDateTime.minusMonths(1));
+
+        System.out.println("Date after subtracting days is: " + zonedDateTime.minusDays(15));
+
+        System.out.println("Date after subtracting hours is: " + zonedDateTime.minusHours(15));
+
+        System.out.println("Date after subtracting minutes is: " + zonedDateTime.minusMinutes(1));
+
+        System.out.println("Date after subtracting seconds is: " + zonedDateTime.minusSeconds(15));
+
+        System.out.println("Date after subtracting nanoseconds is: " + zonedDateTime.minusNanos(15));
+    }
+}
+```
+
+#### Output
+
+```
+Date after adding Year is: 2024-01-26T16:39:16.694Z[Etc/UTC]
+Date after adding Month is: 2023-02-26T16:39:16.694Z[Etc/UTC]
+Date after adding days is: 2023-02-10T16:39:16.694Z[Etc/UTC]
+Date after adding hours is: 2023-01-27T07:39:16.694Z[Etc/UTC]
+Date after adding minutes is: 2023-01-26T16:40:16.694Z[Etc/UTC]
+Date after adding seconds is: 2023-01-26T16:39:31.694Z[Etc/UTC]
+Date after adding nanoseconds is: 2023-01-26T16:39:16.694000015Z[Etc/UTC]
+Date after subtracting Year is: 2022-01-26T16:39:16.694Z[Etc/UTC]
+Date after subtractng Month is: 2022-12-26T16:39:16.694Z[Etc/UTC]
+Date after subtracting days is: 2023-01-11T16:39:16.694Z[Etc/UTC]
+Date after subtracting hours is: 2023-01-26T01:39:16.694Z[Etc/UTC]
+Date after subtracting minutes is: 2023-01-26T16:38:16.694Z[Etc/UTC]
+Date after subtracting seconds is: 2023-01-26T16:39:01.694Z[Etc/UTC]
+Date after subtracting nanoseconds is: 2023-01-26T16:39:16.693999985Z[Etc/UTC]
+```
+
+---
+
+The next section discusses the `Period` and `Duration` classes.
 
 </details>
