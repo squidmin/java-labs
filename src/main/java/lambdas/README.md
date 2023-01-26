@@ -91,6 +91,8 @@ Our `wish(AFunctionalInterface functionalInterface)` method will directly execut
 
 This is possible through anonymous classes. We will quickly see how this can be done through an anonymous class, and then jump straight back into lambdas.
 
+Note that the `@FunctionalInterface` annotation allows the Java compiler to trigger an error in response to any attempt to break the predefined structure of a functional interface. It's also a handy tool to make an application architecture easier to understand for other developers.  
+
 In the below example, we will change the `ClassC` class to use an anonymous class.
 
 #### AFunctionalInterface
