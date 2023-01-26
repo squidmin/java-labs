@@ -226,6 +226,30 @@ public class CompletableFutureDemo {
         });
     }
 
+    private static void thenCombineDemo() {
+        // Create a future which returns an integer.
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println(Thread.currentThread().getName());
+            } catch (InterruptedException e) {
+                throw new IllegalStateException(e);
+            }
+            return 50;
+        });
+
+        // Calling thenCombine() which takes a Function as parameter.
+        // It takes a number (num1) as input and returns a CompletableFuture of the sum of num1 and num2.
+        CompletableFuture<Integer> resultFuture = future.thenCombine(
+            CompletableFuture.supplyAsync(() -> 20), (num1, num2) -> num1 + num2);  // 50 + 20 = 70
+
+        try {
+            System.out.println(resultFuture.get());
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
 //        System.out.println("--- runAsync() demo ---");
 //        runAsyncDemo();
@@ -262,8 +286,13 @@ public class CompletableFutureDemo {
 //        System.out.println();
 
 
-        System.out.println("--- thenRun() demo ---");
-        thenRunDemo();
+//        System.out.println("--- thenRun() demo ---");
+//        thenRunDemo();
+//        System.out.println();
+
+
+        System.out.println("--- thenCombine() demo ---");
+        thenCombineDemo();
         System.out.println();
     }
 

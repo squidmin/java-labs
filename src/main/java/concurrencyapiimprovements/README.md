@@ -523,3 +523,117 @@ The next section discusses how to chain `CompletableFuture`s.
 </details>
 
 
+<details>
+<summary>CompletableFuture: Chaining</summary>
+
+Discussion of how to chain `CompletableFuture`s.
+
+The following topics are covered:
+- `thenCompose()`
+- `thenCombine()`
+
+Until now, we have looked at how to create a `CompletableFuture` and how to add callbacks.
+
+One more interesting thing that we can do is combine `CompletableFuture` instances in a chain of computation steps. Suppose we want to get some data from a service and save it to the database. We can write two `CompletableFuture` instances and chain them together. The first instance will complete and share its result to the second instance.
+
+There are two methods which help us achieve this. The first one is `thenCompose()`, and the second one is `thenCombine()`. We will look at each one of them below.
+
+### 1) `thenCompose()`
+
+```java
+import java.util.concurrent.*;
+
+public class CompletableFutureDemo {
+    public static void main(String[] args) {
+        // Create a future which returns an integer.
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println(Thread.currentThread().getName());
+            } catch (InterruptedException e) {
+                throw new IllegalStateException(e);
+            }
+            return 50;
+        });
+    
+        // Calling thenCompose() which takes a Function as parameter. 
+        // It takes a number as input and returns a CompletableFuture of double of number.
+        CompletableFuture<Integer> resultFuture = future.thenCompose(
+            num -> CompletableFuture.supplyAsync(() -> num * 2)
+        );
+    
+        try {
+            System.out.println(resultFuture.get());
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### Output
+
+```
+ForkJoinPool.commonPool-worker-1
+100
+```
+
+### 2) `thenCombine()`
+
+In the previous example, we used `thenCompose()` which takes the output of a `Supplier` as a parameter. However, if we want to execute two independent `Futures` and do something with their results, we can use the `thenCombine()` method.
+
+It accepts a `Future` and a `BiFunction` to process both results.
+
+We will look at the same example that we looked at for `thenCompose()` but this time, we will use `thenCombine()`.
+
+The callback function passed to `thenCombine()` will be called when both the futures are executed.
+
+```java
+import java.util.concurrent.*;
+
+public class CompletableFutureDemo {
+    public static void main(String[] args) {
+        // Create a future which returns an integer.
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println(Thread.currentThread().getName());
+            } catch (InterruptedException e) {
+                throw new IllegalStateException(e);
+            }
+            return 50;
+        });
+    
+        // Calling thenCombine() which takes a Function as parameter. 
+        // It takes a number (num1) as input and returns a CompletableFuture of the sum of num1 and num2.
+        CompletableFuture<Integer> resultFuture = future.thenCombine(
+            CompletableFuture.supplyAsync(() -> 20), (num1, num2) -> num1 + num2);  // 50 + 20 = 70
+    
+        try {
+            System.out.println(resultFuture.get());
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### Output
+
+```
+70
+```
+
+---
+
+The next section discusses how to combine the results of an arbitrary number of futures together.
+
+</details>
+
+
+<details>
+<summary>Completable Future: Combining the Results of Futures</summary>
+
+
+
+</details>
