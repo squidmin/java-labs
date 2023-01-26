@@ -8,6 +8,9 @@ public class Instances {
     // field_2 variable is visible in Instances class only.
     private double field_2;
 
+    // Can be accessed within its own package, and within any subclass of the Instances class.
+    protected int field_3;
+
     // The name variable is assigned in the constructor.
     public Instances(String field_1) {
         this.field_1 = field_1;
