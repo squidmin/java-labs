@@ -219,7 +219,72 @@ This is how simple it is to write a lambda expression.
 
 To recap, when we write a lambda expression, we are basically sending a function as a method parameter, and it is directly getting executed.
 
+### Don't treat lambda expressions as inner classes
+
 Note that lambda expressions are not compiled to anonymous inner classes. Instead, lambdas get wrapped inside new classes generated during runtime.
+
+In earlier examples, an inner class was essentially substituted by a lambda expression, but the concepts of inner class and lambda expression are different in an important way: **scope**.
+
+When an inner class is used, it creates a new scope. We can hide local variables from the enclosing scope by instantiating new local variables with the same names. We can also use the keyword `this` inside our inner class as a reference to its instance.
+
+Lambda expressions, however, work with enclosing scope. We can’t hide variables from the enclosing scope inside the lambda’s body. In this case, the keyword `this` is a reference to an enclosing instance.
+
+For example, in the class `ScopeExperiment`, we have an instance variable `value`:
+
+```java
+private String value = "Enclosing scope value";
+```
+
+Then in some method of this class, place the following code and execute this method:
+
+```java
+public class ScopeExperiment {
+    
+    private String value = "Enclosing scope value";
+    
+    public String scopeExperiment() {
+        Foo fooIC = new Foo() {
+            String value = "Inner class value";
+    
+            @Override
+            public String method(String string) {
+              return this.value;
+            }
+        };
+        String resultIC = fooIC.method("");
+    
+        Foo fooLambda = parameter -> {
+            String value = "Lambda value";
+            return this.value;
+        };
+        String resultLambda = fooLambda.method("");
+    
+        return "Results: resultIC = " + resultIC +
+                ", resultLambda = " + resultLambda;
+    }
+    
+    public static void main(String[] args) {
+        scopeExperiment();
+    }
+    
+}
+```
+
+#### Output
+
+```
+Results: resultIC = Inner class value, resultLambda = Enclosing scope value
+```
+
+By calling `this.value` in `fooIC`, we can access a local variable from its instance. In the case of the lambda, the `this.value` call accesses the instance-level variable `value`, which is defined in the `ScopeExperiment` class, but not to the variable `value` defined inside the lambda's body.
+
+### Keep lambda expressions short and self-explanatory
+
+- Avoid blocks of code in a lambda's body
+- Avoid specifying parameter types
+- Avoid parentheses around a single parameter
+- Avoid the `return` statement and braces
+- Use method references
 
 </details>
 
@@ -1351,6 +1416,20 @@ CapturingLambdaDemo.java:16: error: local variables referenced from a lambda exp
                                                          ^
 1 error
 ```
+
+One of the main purposes of lambdas is use in parallel computing, which means that they're really helpful when it comes to thread-safety.
+
+The "effectively final" paradigm helps a lot with thread-safety, but not in every case. Lambdas can't change a value of an object from enclosing scope. But in the case of mutable object variables, a state could be changed inside lambda expressions.
+
+Consider the following code:
+
+```java
+int[] total = new int[1];
+Runnable r = () -> total[0]++;
+r.run();
+```
+
+This code is legal, as the `total` variable remains “effectively final,” but the object it references **will not have the same state after execution of the lambda**.
 
 After reading this, you should have a clear idea of what **effectively final** variables are and why local variables in lambdas should be **effectively final**.
 

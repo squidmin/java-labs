@@ -139,6 +139,12 @@ I am inside `InterfaceA`
 I am inside `InterfaceB`
 ```
 
+Just as with regular interfaces, extending different functional interfaces with the same default method can be problematic for the reasons described above.
+
+Adding too many default methods to an interface is not a very good architectural decision. It should be considered a compromise, only to be used when required for upgrading existing interfaces without breaking backward compatibility.
+
+To summarize, default methods in functional interfaces should not be overused. 
+
 </details>
 
 <details>
@@ -298,5 +304,58 @@ public interface Functional {
 ```
 
 If we try to add one more abstract method in the above interface, the compiler shows an error. If an interface is annotated with `@FunctionalInterface` annotation but does not contain even a single abstract method, then also the compiler will complain.
+
+### Avoid overloading methods with functional interfaces as parameters
+
+Methods should have different names to avoid collisions.
+
+```java
+public interface Processor {
+    String process(Callable<String> c) throws Exception;
+    String process(Supplier<String> s);
+}
+
+public class ProcessorImpl implements Processor {
+    @Override
+    public String process(Callable<String> c) throws Exception {
+        // implementation details
+    }
+
+    @Override
+    public String process(Supplier<String> s) {
+        // implementation details
+    }
+}
+```
+
+At first glance this seems reasonable, but any attempt to execute either of the `ProcessorImpl`'s methods:
+
+```java
+String result = processor.process(() -> "abc");
+```
+
+Ends with an error with the following message:
+
+```
+reference to process is ambiguous
+both method process(java.util.concurrent.Callable<java.lang.String>) 
+in com.squidmin.interfaces.ProcessorImpl 
+and method process(java.util.function.Supplier<java.lang.String>) 
+in com.squidmin.interfaces.ProcessorImpl match
+```
+
+To solve this problem, we have two options. The first option is to use methods with different names:
+
+```java
+String processWithCallable(Callable<String> c) throws Exception;
+
+String processWithSupplier(Supplier<String> s);
+```
+
+The second option is to perform casting manually, which is not preferred:
+
+```java
+String result = processor.process((Supplier<String>) () -> "abc");
+```
 
 </details>
