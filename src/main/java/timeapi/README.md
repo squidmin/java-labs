@@ -232,6 +232,201 @@ This has been a basic introduction to the `LocalDate` class and its utilities. T
 
 Discussion of the `LocalTime` class.
 
+The following topics are covered:
+- Getting the current time
+- Getting a specific time using the `of()` method
+- Getting a specific time using the `parse()` method
+- Adding seconds, minutes and hours to a given time
+- Getting minute from time
+- Checking if time is before or after a given time
+
+As per JavaDocs,
+
+<blockquote>“LocalTime is an immutable date-time object that represents a time, often viewed as hour-minute-second. Time is represented to nanosecond precision. For example, the value “13:45.30.123456789” can be stored in a LocalTime”.</blockquote>
+
+In other words, the `LocalTime` represents time without a date. An instance of `LocalTime` can be created from the system clock or by using the `now()`, `parse()` and `of()` methods.
+
+Let's look at some of the utilities provided by this class.
+
+### a) Getting the current time
+
+We can get the current time by using the static `now()` method in the `LocalTime` class.
+
+```java
+import java.time.LocalTime;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        LocalTime time = LocalTime.now();
+        System.out.println(time);
+    }
+}
+```
+
+#### Output
+
+```
+15:58:42.416
+```
+
+### b) Getting a specific time using the `of()` method
+
+We can get a specific time by using the static `of()` method in the `LocalTime` class. This method has three overloaded versions.
+
+Each of them is shown in the example below.
+
+```java
+import java.time.LocalTime;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        // of(int hour, int minute)
+        LocalTime time = LocalTime.of(11, 25);
+        System.out.println(time);
+
+        // of(int hour, int minute, int second)
+        time = LocalTime.of(11, 25, 03);
+        System.out.println(time);
+
+        // of(int hour, int minute, int second, int nanoOfSecond)
+        time = LocalTime.of(11, 25, 04, 323);
+        System.out.println(time);
+    }
+}
+```
+
+#### Output
+
+```
+11:25
+11:25:03
+11:25:04.000000323
+```
+
+### c) Getting a specific time using the `parse()` method
+
+We can get a specific time by using the static `parse()` method in the `LocalTime` class. This method has two overloaded versions.
+
+Each of them is shown in the example below.
+
+```java
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        // parse(CharSequence text)
+        LocalTime time = LocalTime.parse("08:27");
+        System.out.println(time);
+
+        // parse(CharSequence text, DateTimeFormatter formatter)
+        time = LocalTime.parse("08:27", DateTimeFormatter.ofPattern("HH:mm"));
+        System.out.println(time);
+    }
+}
+```
+
+#### Output
+
+```
+08:27
+08:27
+```
+
+### d) Adding seconds, minutes, and hours to a given time
+
+We can use a whole range of addition operations to add seconds, minutes and hours to a given time.
+
+```java
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        // Adding 4 seconds to the given time.
+        LocalTime time = LocalTime.parse("12:54:53").plusSeconds(4);
+        System.out.println(time);
+
+        // Adding 10 minutes to the given time.
+        time = LocalTime.parse("12:54:53").plusMinutes(10);
+        System.out.println(time);
+
+        // Adding 2 hours to the given time.
+        time = LocalTime.parse("12:54:53").plusHours(2);
+        System.out.println(time);
+
+        // Adding 4 minutes to the given time.
+        time = LocalTime.parse("12:54:53").plus(4, ChronoUnit.MINUTES);
+        System.out.println(time);
+    }
+}
+```
+
+#### Output
+
+```
+12:54:57
+13:04:53
+14:54:53
+12:58:53
+```
+
+### e) Getting minute from time
+
+We can get the value of minutes using `getMinute()` method.
+
+```java
+import java.time.LocalTime;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        int minute = LocalTime.parse("07:45").getMinute();
+        System.out.println(minute);
+    }
+}
+```
+
+#### Output
+
+```
+45
+```
+
+### f) Checking if time is before or after a given time
+
+```java
+import java.time.LocalTime;
+
+class DateTimeDemo {
+    public static void main(String[] args) {
+        boolean isBefore = LocalTime.parse("06:23")
+                .isBefore(LocalTime.parse("07:50"));
+        System.out.println(isBefore);
+
+        boolean isAfter = LocalTime.parse("06:23")
+                .isAfter(LocalTime.parse("07:50"));
+        System.out.println(isAfter);
+    }
+}
+```
+
+#### Output
+
+```
+true
+false
+```
+
+---
+
+These are some of the important utilities of the `LocalTime` class. The next section discusses the `LocalDatetime` class.
+
+</details>
+
+
+<details>
+<summary>LocalDateTime</summary>
+
 
 
 </details>
