@@ -3,9 +3,7 @@ package binaryliterals;
 public class BinaryLiterals {
 
     public Integer convertBinaryToDecimal(Integer binaryNumber) {
-        int decimalNumber = 0;
-        int base = 1;
-
+        int decimalNumber = 0, base = 1;
         while (binaryNumber > 0) {
             int lastDigit = binaryNumber % 10;
             binaryNumber = binaryNumber / 10;
@@ -20,7 +18,6 @@ public class BinaryLiterals {
 
         StringBuilder binaryNumber = new StringBuilder();
         int quotient = decimalNumber;
-
         while (quotient > 0) {
             int remainder = quotient % 2;
             binaryNumber.append(remainder);
