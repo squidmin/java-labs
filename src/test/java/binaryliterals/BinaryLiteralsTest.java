@@ -38,7 +38,7 @@ public class BinaryLiteralsTest {
 
     @Test
     public void convertBinaryToDecimal_givenBinaryNumber_returnDecimalNumber() {
-        Integer result = BinaryLiterals.convertBinaryToDecimal(010101);
+        Integer result = BinaryLiterals.convertBinaryToDecimal(0b010101);
         assertEquals(Integer.valueOf(49), result);
     }
 
@@ -48,6 +48,8 @@ public class BinaryLiteralsTest {
         assertEquals(Integer.valueOf(1111), result);
     }
 
+    public void subtractBinaryNumber_givenValidArguments_returnExpectedResult() {
 
+    }
 
 }
