@@ -48,7 +48,7 @@ public class BinaryLiteralsTest {
     @Test
     public void convertBinaryToDecimal_givenBinaryNumber_returnDecimalNumber() {
         Integer result = BinaryLiterals.convertBinaryToDecimal(Integer.valueOf("010101"));
-        assertEquals(Integer.valueOf(5), result);
+        assertEquals(Integer.valueOf(21), result);
     }
 
     @Test
