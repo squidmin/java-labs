@@ -6,6 +6,10 @@ import static org.junit.Assert.assertEquals;
 
 public class BinaryLiteralsTest {
 
+    /**
+     * Basic binary literal demos
+     */
+
     @Test
     public void given_binaryLiteral_thenReturnDecimalValue() {
         byte five = 0b101;
@@ -35,6 +39,11 @@ public class BinaryLiteralsTest {
         assertEquals(8, Integer.parseInt("1000", 2));
         assertEquals(20, Integer.parseInt("10100", 2));
     }
+
+
+    /**
+     * Test cases for the BinaryLiterals class
+     */
 
     @Test
     public void convertBinaryToDecimal_givenBinaryNumber_returnDecimalNumber() {
