@@ -42,4 +42,10 @@ public class BinaryLiteralsTest {
         assertEquals(Integer.valueOf(49), result);
     }
 
+    @Test
+    public void convertDecimalToBinary_givenDecimalNumber_returnBinaryNumber() {
+        Integer result = BinaryLiterals.convertDecimalToBinary(15);
+        assertEquals(Integer.valueOf(1111), result);
+    }
+
 }

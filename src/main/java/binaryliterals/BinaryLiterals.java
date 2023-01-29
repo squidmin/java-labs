@@ -13,7 +13,7 @@ public class BinaryLiterals {
         return decimalNumber;
     }
 
-    public Integer convertDecimalToBinary(Integer decimalNumber) {
+    public static Integer convertDecimalToBinary(Integer decimalNumber) {
         if (decimalNumber == 0) { return decimalNumber; }
 
         StringBuilder binaryNumber = new StringBuilder();
@@ -28,7 +28,7 @@ public class BinaryLiterals {
     }
 
     // Addition of binary numbers
-    public Integer addBinaryNumber(Integer firstNum, Integer secondNum) {
+    public static Integer addBinaryNumber(Integer firstNum, Integer secondNum) {
         StringBuilder output = new StringBuilder();
         int carry = 0;
         int temp;
@@ -45,7 +45,7 @@ public class BinaryLiterals {
     }
 
     // Get one's complement of a binary number
-    public Integer getOnesComplement(Integer num) {
+    public static Integer getOnesComplement(Integer num) {
         StringBuilder onesComplement = new StringBuilder();
         while (num > 0) {
             int lastDigit = num % 10;
@@ -57,7 +57,7 @@ public class BinaryLiterals {
     }
 
     // Subtract binary numbers
-    public Integer substractBinaryNumber(Integer firstNum, Integer secondNum) {
+    public static Integer substractBinaryNumber(Integer firstNum, Integer secondNum) {
         int onesComplement = getOnesComplement(secondNum);
         StringBuilder output = new StringBuilder();
         int carry = 0;
