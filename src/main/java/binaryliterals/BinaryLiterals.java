@@ -2,7 +2,7 @@ package binaryliterals;
 
 public class BinaryLiterals {
 
-    public Integer convertBinaryToDecimal(Integer binaryNumber) {
+    public static Integer convertBinaryToDecimal(Integer binaryNumber) {
         int decimalNumber = 0, base = 1;
         while (binaryNumber > 0) {
             int lastDigit = binaryNumber % 10;

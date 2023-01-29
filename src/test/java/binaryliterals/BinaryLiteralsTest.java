@@ -36,4 +36,10 @@ public class BinaryLiteralsTest {
         assertEquals(20, Integer.parseInt("10100", 2));
     }
 
+    @Test
+    public void convertBinaryToDecimal_givenBinaryNumber_returnDecimalNumber() {
+        Integer result = BinaryLiterals.convertBinaryToDecimal(010101);
+        assertEquals(Integer.valueOf(49), result);
+    }
+
 }
