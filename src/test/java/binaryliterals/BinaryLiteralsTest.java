@@ -48,8 +48,10 @@ public class BinaryLiteralsTest {
         assertEquals(Integer.valueOf(1111), result);
     }
 
+    @Test
     public void subtractBinaryNumber_givenValidArguments_returnExpectedResult() {
-
+        Integer result = BinaryLiterals.subtractBinaryNumber(0b1110, 0b0101);  // 16 - 5
+        assertEquals(Integer.valueOf(11), result);
     }
 
 }
