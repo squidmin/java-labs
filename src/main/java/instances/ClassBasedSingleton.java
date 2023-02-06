@@ -7,7 +7,7 @@ public class ClassBasedSingleton {
 
     private ClassBasedSingleton() {}  // Private constructor.
 
-    public static ClassBasedSingleton getInstance() {
+    public synchronized static ClassBasedSingleton getInstance() {
         if (INSTANCE == null) { INSTANCE = new ClassBasedSingleton(); }
         return INSTANCE;
     }
