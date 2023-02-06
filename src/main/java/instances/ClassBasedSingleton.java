@@ -19,7 +19,8 @@ public class ClassBasedSingleton {
         System.out.println(ClassBasedSingleton.INSTANCE);
         /*
          * As long as `getInstance()` is called (rather than the constructor), only one instance is created.
-         * This approach to creating a Singleton doesn't guarantee thread safety.
+         * This approach to creating a Singleton doesn't guarantee thread safety, unless the `synchronized` keyword is
+         *   used to guarantee the atomicity of the operation.
          */
         ClassBasedSingleton instance = ClassBasedSingleton.getInstance();  // Prints the same address.
         System.out.println(instance);
