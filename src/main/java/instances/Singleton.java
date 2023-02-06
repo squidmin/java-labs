@@ -17,7 +17,10 @@ public class Singleton {
     public static void main(String[] args) {
         Singleton.INSTANCE = Singleton.getInstance();
         System.out.println(Singleton.INSTANCE);
-        Singleton.INSTANCE = Singleton.getInstance();  // As long as `getInstance()` is called, only one instance is created.
+        /*
+         * As long as `getInstance()` is called (rather than the constructor), only one instance is created.
+         */
+        Singleton.INSTANCE = Singleton.getInstance();  // Prints the same address.
         System.out.println(Singleton.INSTANCE);
     }
 
