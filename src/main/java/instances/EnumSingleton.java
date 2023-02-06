@@ -6,13 +6,10 @@ public enum EnumSingleton {
 
     private String info;
 
-    private EnumSingleton(String info) {
-        this.info = info;
-    }
+    private EnumSingleton(String info) { this.info = info; }  // Private constructor.
 
-    public EnumSingleton getInstance() {
-        return INSTANCE;
-    }
+    public EnumSingleton getInstance() { return INSTANCE; }
 
     // getters and setters
+
 }
