@@ -1383,7 +1383,7 @@ public class CapturingLambdaDemo {
 
 Now, let's discuss why the local variable should be *final* or *effectively final* if it is used in a lambda expression.
 
-When a local variable is used in a lambda expression, the lambda makes a copy of that variable. This occurs because the scope of a lambda expression consists of the duration of time in which the method exists in the stack. If the lambda does not make a copy of the variable, then the variable is lost after the method is removed from the stack.
+When a local variable is used in a lambda expression, the lambda makes a copy of that variable. This occurs because the scope of a lambda expression consists of the duration of time in which the method exists in the genericClasses. If the lambda does not make a copy of the variable, then the variable is lost after the method is removed from the genericClasses.
 
 Now, if the variable is not final or effectively final, it is possible that the value of the variable is changed after using it in the lambda as shown below.
 
