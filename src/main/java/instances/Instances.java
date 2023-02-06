@@ -1,6 +1,20 @@
 package instances;
 
-public class Instances {
+class Parent {
+    Parent() {}
+    public void method() {
+        System.out.println("Parent class method.");
+    }
+}
+
+class Child extends Parent {
+    Child() {}
+    public void method() {
+        System.out.println("Child class method.");
+    }
+}
+
+public class Instances extends Parent {
 
     // This instance variable is visible for any child class.
     public String field_1;
@@ -24,13 +38,19 @@ public class Instances {
     // This method prints the instance field values.
     public void printFields() {
         System.out.println("field_1: " + field_1);
-        System.out.println("field_2:" + field_2);
+        System.out.println("field_2: " + field_2);
     }
 
     public static void main(String[] args) {
         Instances instance = new Instances("lol");
         instance.setField_2(1000);
         instance.printFields();
+
+        // Polymorphism
+        Parent parentInstance_1 = new Child();
+        Parent parentInstance_2 = new Instances("field_1");
+        parentInstance_1.method();  // Calls method() of Child class.
+        parentInstance_2.method();  // Calls method() of Parent class.
     }
 
 }
