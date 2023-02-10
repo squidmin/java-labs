@@ -1,4 +1,4 @@
-package streamapi;
+package practice.streamapi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class StreamDemo_FlatMap_Filter {
         // Flattened the stream.
         Stream<String> stream2 = stream1.flatMap(s -> s.stream());
         // Applied filter on flattened stream.
-        Stream<String> stream3 = stream2.filter(x -> "a".equals(x));
+        Stream<String> stream3 = stream2.filter(x -> "e".equals(x));
 
         stream3.forEach(System.out::println);
     }
