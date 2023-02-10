@@ -15,13 +15,11 @@ public class StreamDemo_FlatMap_Filter {
         list.add(Arrays.asList("j","k","l"));
 
         // Created a stream from the list.
-        Stream<List<String>> stream1 = list.stream();
-        // Flattened the stream.
-        Stream<String> stream2 = stream1.flatMap(s -> s.stream());
-        // Applied filter on flattened stream.
-        Stream<String> stream3 = stream2.filter(x -> "e".equals(x));
 
-        stream3.forEach(System.out::println);
+        // Flattened the stream.
+
+        // Applied filter on flattened stream.
+
     }
 
 }
