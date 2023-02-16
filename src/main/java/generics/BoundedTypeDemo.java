@@ -6,10 +6,6 @@ import lombok.ToString;
 
 import java.util.Date;
 
-interface TwoDimensionalObject {
-    public double getArea();
-}
-
 @Getter
 @Setter
 @ToString
