@@ -53,9 +53,8 @@ class Circle extends GeometricObject {
         this.radius = radius;
     }
     public Circle(double radius, String color, boolean filled) {
+        super(color, filled);
         this.radius = radius;
-        setColor(color);
-        setFilled(filled);
     }
     @Override
     public double getArea() {
@@ -71,8 +70,8 @@ public class BoundedTypeDemo {
     }
 
     public static void main(String[] args) {
-        Rectangle rectangle = new Rectangle(2, 2);
-        Circle circle = new Circle(2);
+        GeometricObject rectangle = new Rectangle(2, 2);
+        GeometricObject circle = new Circle(2);
         System.out.println("Same area? " + BoundedTypeDemo.<GeometricObject>equalArea(rectangle, circle));
     }
 
