@@ -92,7 +92,6 @@ public class BinaryLiterals {
 
         long d1 = 0b0000011111100011;  // Long type Binary literal
         long d2 = 0B0000011111100001;  // The b can be lower or upper case
-
         System.out.println("Binary Literal in Long----->");
         System.out.println("d1 = " + d1 + ", " + "d2 = " + d2);
     }

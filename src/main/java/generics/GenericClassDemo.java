@@ -2,7 +2,7 @@ package generics;
 
 import java.util.ArrayList;
 
-class Stack<E> {
+class GenericStack<E> {
     private ArrayList<E> list = new ArrayList<>();
 
     public int getSize() { return list.size(); }
@@ -20,16 +20,16 @@ class Stack<E> {
     public boolean isEmpty() { return list.isEmpty(); }
 }
 
-public class GenericClasses {
+public class GenericClassDemo {
 
     public static void main(String[] args) {
-        Stack<String> stack = new Stack<>();
+        GenericStack<String> stack = new GenericStack<>();
         stack.push("Ok");
         stack.push("I");
         stack.push("pull");
         stack.push("up");
 
-        Stack<Integer> _stack = new Stack<>();
+        GenericStack<Integer> _stack = new GenericStack<>();
         _stack.push(0);
         _stack.push(1);
         _stack.push(2);
