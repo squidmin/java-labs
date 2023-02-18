@@ -4,7 +4,7 @@ import java.util.concurrent.*;
 
 public class CompletableFutureDemo {
 
-    private static void supplyAsyncDemo() {
+    public static void supplyAsyncDemo() {
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
             try {
                 TimeUnit.SECONDS.sleep(5);
@@ -25,7 +25,7 @@ public class CompletableFutureDemo {
         System.out.println("This will print after 5 seconds");
     }
 
-    private static void supplyAsyncOverloadedDemo() {
+    public static void supplyAsyncExecutorDemo() {
         ExecutorService pool = Executors.newFixedThreadPool(5);
 
         /*
@@ -54,7 +54,7 @@ public class CompletableFutureDemo {
         pool.shutdown();
     }
 
-    private static void runAsyncDemo() {
+    public static void runAsyncDemo() {
         // Passing a Runnable to runAsync() method.
         CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
             try {
@@ -76,7 +76,7 @@ public class CompletableFutureDemo {
         System.out.println("This will print after 5 seconds " + Thread.currentThread().getName());
     }
 
-    private static void runAsyncOverloadedDemo() {
+    public static void runAsyncExecutorDemo() {
         ExecutorService pool = Executors.newFixedThreadPool(5);
 
         /*
@@ -105,7 +105,7 @@ public class CompletableFutureDemo {
         pool.shutdown();
     }
 
-    private static void thenApplyDemo() {
+    public static void thenApplyDemo() {
         // Create a future which returns an integer.
         CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
             try {
@@ -118,7 +118,7 @@ public class CompletableFutureDemo {
         });
 
         // Calling thenApply() which takes a Function as parameter.
-        // It takes a number as input and returns double of number.
+        // It takes a number as input and returns double of the number.
         CompletableFuture<Integer> resultFuture = future.thenApply(num -> {
             System.out.println(Thread.currentThread().getName());
             return num * 2;
@@ -131,7 +131,7 @@ public class CompletableFutureDemo {
         }
     }
 
-    private static void thenApplyAsyncDemo() {
+    public static void thenApplyAsyncDemo() {
         // Create a future which returns an integer.
         CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
             try {
@@ -144,7 +144,7 @@ public class CompletableFutureDemo {
         });
 
         // Calling thenApplyAsync() which takes a Function as parameter.
-        // It takes a number as input and returns double of number.
+        // It takes a number as input and returns double of the number.
         CompletableFuture<Integer> resultFuture = future.thenApplyAsync(num -> {
             System.out.println(Thread.currentThread().getName());
             return num * 2;
@@ -157,7 +157,7 @@ public class CompletableFutureDemo {
         }
     }
 
-    private static void thenApplyAsyncOverloadedDemo() {
+    public static void thenApplyAsyncExecutorDemo() {
         ExecutorService pool = Executors.newFixedThreadPool(5);
 
         // Create a future which returns an integer.
@@ -186,7 +186,7 @@ public class CompletableFutureDemo {
         pool.shutdown();
     }
 
-    private static void thenAcceptDemo() {
+    public static void thenAcceptDemo() {
         // Create a future which returns an integer.
         CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
             try {
@@ -206,7 +206,7 @@ public class CompletableFutureDemo {
         });
     }
 
-    private static void thenRunDemo() {
+    public static void thenRunDemo() {
         // Create a future which returns an integer.
         CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
             try {
@@ -226,7 +226,7 @@ public class CompletableFutureDemo {
         });
     }
 
-    private static void thenCombineDemo() {
+    public static void thenCombineDemo() {
         // Create a future which returns an integer.
         CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
             try {
@@ -251,49 +251,51 @@ public class CompletableFutureDemo {
     }
 
     public static void main(String[] args) {
-//        System.out.println("--- runAsync() demo ---");
-//        runAsyncDemo();
-//        System.out.println();
-//
-//        System.out.println("--- runAsync() with Executor demo ---");
-//        runAsyncOverloadedDemo();
-//        System.out.println();
+
+        System.out.println("--- runAsyncDemo() ---");
+        runAsyncDemo();
+        System.out.println();
+
+        System.out.println("--- runAsyncExecutorDemo() ---");
+        runAsyncExecutorDemo();
+        System.out.println();
 
 
-//        System.out.println("--- supplyAsync() demo ---");
-//        supplyAsyncDemo();
-//        System.out.println();
-//        System.out.println("--- supplyAsync() with Executor demo ---");
-//        supplyAsyncOverloadedDemo();
-//        System.out.println();
+        System.out.println("--- supplyAsyncDemo() ---");
+        supplyAsyncDemo();
+        System.out.println();
+        System.out.println("--- supplyAsyncExecutorDemo() ---");
+        supplyAsyncExecutorDemo();
+        System.out.println();
 
 
-//        System.out.println("--- thenApply() demo ---");
-//        thenApplyDemo();
-//        System.out.println();
+        System.out.println("--- thenApplyDemo() ---");
+        thenApplyDemo();
+        System.out.println();
 
-//        System.out.println("--- thenApplyAsync() demo ---");
-//        thenApplyAsyncDemo();
-//        System.out.println();
+        System.out.println("--- thenApplyAsyncDemo() ---");
+        thenApplyAsyncDemo();
+        System.out.println();
 
-//        System.out.println("--- thenApplyAsyncOverloaded() demo ---");
-//        thenApplyAsyncOverloadedDemo();
-//        System.out.println();
-
-
-//        System.out.println("--- thenAccept() demo ---");
-//        thenAcceptDemo();
-//        System.out.println();
+        System.out.println("--- thenApplyAsyncExecutorDemo() ---");
+        thenApplyAsyncExecutorDemo();
+        System.out.println();
 
 
-//        System.out.println("--- thenRun() demo ---");
-//        thenRunDemo();
-//        System.out.println();
+        System.out.println("--- thenAcceptDemo() ---");
+        thenAcceptDemo();
+        System.out.println();
 
 
-        System.out.println("--- thenCombine() demo ---");
+        System.out.println("--- thenRunDemo() ---");
+        thenRunDemo();
+        System.out.println();
+
+
+        System.out.println("--- thenCombineDemo() ---");
         thenCombineDemo();
         System.out.println();
+
     }
 
 }
