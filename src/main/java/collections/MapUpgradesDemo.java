@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class MapUpgradesDemo {
 
-    private static void withoutGetOrDefault() {
+    public static Map<String, Integer> withoutGetOrDefault() {
         Map<String, Integer> fruits = new HashMap<>();
         fruits.put("apple", 20);
 
@@ -20,21 +20,25 @@ public class MapUpgradesDemo {
         else fruits.put("banana", 20);
 
         System.out.println(fruits);
+
+        return fruits;
     }
 
-    private static void withGetOrDefault() {
+    public static Map<String, Integer> withGetOrDefault() {
         Map<String, Integer> fruits = new HashMap<>();
         fruits.put("apple", 20);
         fruits.put("banana", fruits.getOrDefault("banana", 0) + 20);
         System.out.println(fruits);
+        return fruits;
     }
 
-    private static void putIfAbsent() {
+    public static Map<String, Integer> putIfAbsent() {
         Map<String , Integer> fruits = new HashMap<>();
         fruits.put("apple", 20);
         System.out.println(fruits.get("apple"));
         fruits.putIfAbsent("apple", 30);
         System.out.println(fruits.get("apple"));
+        return fruits;
     }
 
     public static void main(String[] args) {
