@@ -11,9 +11,7 @@ public class TryWithResourcesTest {
 
     @Test(expected = Exception.class)
     public void classA_method_whenInvoked_throwsException() throws Exception {
-        try (TryWithResources.ClassA instance = new TryWithResources.ClassA()) {
-            instance.method();
-        }
+        try (TryWithResources.ClassA instance = new TryWithResources.ClassA()) { instance.method(); }
     }
 
     @Test(expected = Exception.class)
