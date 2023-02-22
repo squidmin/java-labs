@@ -1,4 +1,4 @@
-package binaryliterals;
+package binary;
 
 import org.junit.Test;
 

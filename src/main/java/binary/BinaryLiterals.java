@@ -1,4 +1,4 @@
-package binaryliterals;
+package binary;
 
 public class BinaryLiterals {
 
