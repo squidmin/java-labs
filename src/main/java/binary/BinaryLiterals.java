@@ -27,7 +27,7 @@ public class BinaryLiterals {
         return Integer.valueOf(binaryNumber.reverse().toString());
     }
 
-    // Addition of binary numbers
+    // Addition of binary numbers.
     public static Integer addBinaryNumber(Integer firstNum, Integer secondNum) {
         StringBuilder output = new StringBuilder();
         int carry = 0;
@@ -40,23 +40,23 @@ public class BinaryLiterals {
             firstNum = firstNum / 10;
             secondNum = secondNum / 10;
         }
-        if (carry != 0) output.append(carry);
+        if (carry != 0) { output.append(carry); }
         return Integer.valueOf(output.reverse().toString());
     }
 
-    // Get one's complement of a binary number
+    // Get one's complement of a binary number.
     public static Integer getOnesComplement(Integer num) {
         StringBuilder onesComplement = new StringBuilder();
         while (num > 0) {
             int lastDigit = num % 10;
-            if (lastDigit == 0) onesComplement.append(1);
-            else onesComplement.append(0);
+            if (lastDigit == 0) { onesComplement.append(1); }
+            else { onesComplement.append(0); }
             num = num / 10;
         }
         return Integer.valueOf(onesComplement.reverse().toString());
     }
 
-    // Subtract binary numbers
+    // Subtract binary numbers.
     public static Integer subtractBinaryNumber(Integer firstNum, Integer secondNum) {
         int onesComplement = getOnesComplement(secondNum);
         StringBuilder output = new StringBuilder();
@@ -70,8 +70,8 @@ public class BinaryLiterals {
             onesComplement = onesComplement / 10;
         }
         String additionOfFirstNumAndOnesComplement = output.reverse().toString();
-        if (carry == 1) return addBinaryNumber(Integer.valueOf(additionOfFirstNumAndOnesComplement), carry);
-        else return getOnesComplement(Integer.valueOf(additionOfFirstNumAndOnesComplement));
+        if (carry == 1) { return addBinaryNumber(Integer.valueOf(additionOfFirstNumAndOnesComplement), carry); }
+        else { return getOnesComplement(Integer.valueOf(additionOfFirstNumAndOnesComplement)); }
     }
 
     public static void main(String[] args) {
