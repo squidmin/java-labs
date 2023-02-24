@@ -11,15 +11,15 @@ public class BitTraversalRecursive {
         System.out.println("Decimal: " + n);
     }
 
-    static void reduce(int n) {
+    static void traverse(int n) {
         if (n > 0) {
             echoNumber(n);
-            reduce(n >> 1);
+            traverse(n >> 1);
         }
     }
 
     public static void main(String[] args) {
-        reduce(11);
+        traverse(11);
     }
 
 }
