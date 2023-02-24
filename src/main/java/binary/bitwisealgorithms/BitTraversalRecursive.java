@@ -11,7 +11,7 @@ public class BitTraversalRecursive {
         System.out.println("Decimal: " + n);
     }
 
-    static void traverse(int n) {
+    private static void traverse(int n) {
         if (n > 0) {
             echoNumber(n);
             traverse(n >> 1);

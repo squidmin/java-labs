@@ -106,22 +106,20 @@ import java.util.Map;
 
 public class MapUpgrades {
     public static void main(String[] args) {
-        Map<String, Integer> fruits = new HashMap<>();
-        fruits.put("apple", 20);
-    
-        // We need to add 20 bananas in map.
-        // Below line will throw NullPointerException if banana is already not present in the map.
-        
-        // fruits.put("banana", fruits.get("banana") + 20); 
-    
-        // This is the correct way to update map value before Java 8.
-        if (fruits.containsKey("banana")) {
-            fruits.put("banana", fruits.get("banana") + 20);
-        } else {
-            fruits.put("banana", 20);
-        }
+        Map<String, Integer> items = new HashMap<>();
+        items.put("perfume", 20);
 
-        System.out.println(fruits);
+        /*
+         * Add 20 items to the map.
+         * Below line will throw NullPointerException if key doesn't exist in the map.
+         */
+        // items.put("genius", items.get("genius") + 20);
+
+        // This is the correct way to update a map value *before Java 8*.
+        if (items.containsKey("genius")) { items.put("genius", items.get("genius") + 20); }
+        else { items.put("genius", 20); }
+
+        System.out.println(items);
     }
 }
 ```
@@ -129,7 +127,7 @@ public class MapUpgrades {
 #### Output
 
 ```
-{banana=20, apple=20}
+{genius=20, perfume=20}
 ```
 
 Below is the same example using the `getOrDefault()` method. Now we don't need the `if`/`else` checks to update a value in the `Map`.
@@ -141,8 +139,8 @@ import java.util.Map;
 public class MapUpgrades {
     public static void main(String[] args) {
         Map<String, Integer> fruits = new HashMap<>();
-        fruits.put("apple", 20);
-        fruits.put("banana", fruits.getOrDefault("banana", 0) + 20);
+        fruits.put("perfume", 20);
+        fruits.put("genius", fruits.getOrDefault("genius", 0) + 20);
         System.out.println(fruits);
     }
 }
@@ -151,7 +149,7 @@ public class MapUpgrades {
 #### Output
 
 ```
-{banana=20, apple=20}
+{genius=20, perfume=20}
 ```
 
 ### 2. `putIfAbsent()`
@@ -165,12 +163,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapUpgrades {
-    public static void main(String[] args){
-        Map<String , Integer> fruits = new HashMap<>();
-        fruits.put("apple", 20);
-        System.out.println(fruits.get("apple"));
-        fruits.putIfAbsent("apple", 30);
-        System.out.println(fruits.get("apple"));
+    public static void main(String[] args) {
+        Map<String , Integer> items = new HashMap<>();
+        items.put("perfume", 20);
+        System.out.println(items.get("perfume"));
+        items.putIfAbsent("perfume", 30);  // No effect.
+        System.out.println(items.get("perfume"));
     }
 }
 ```

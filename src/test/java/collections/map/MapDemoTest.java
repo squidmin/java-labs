@@ -1,5 +1,6 @@
-package collections;
+package collections.map;
 
+import collections.map.MapDemo;
 import org.junit.Assert;
 import org.junit.Test;
 

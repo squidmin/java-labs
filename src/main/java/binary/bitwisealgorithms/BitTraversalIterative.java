@@ -11,7 +11,7 @@ public class BitTraversalIterative {
         System.out.println("Decimal: " + n);
     }
 
-    static void traverse(int n) {
+    private static void traverse(int n) {
         while (n > 0) {
             echoNumber(n);
             n >>= 1;
