@@ -15,7 +15,11 @@ public class BinaryLiterals {
         return -1;
     }
 
-    // Get one's complement of a binary number.
+    /**
+     * Get one's complement of a binary number.
+     * Note: The ones' complement of a binary number is the value obtained by inverting all the bits in the binary
+     * representation of the number (swapping 0s and 1s).
+     */
     public static Integer getOnesComplement(Integer num) {
         return -1;
     }
