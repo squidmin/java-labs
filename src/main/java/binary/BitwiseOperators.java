@@ -9,14 +9,14 @@ public class BitwiseOperators {
         return String.format("%4s", Integer.toBinaryString(num)).replace(' ', '0');
     }
 
-    private static void echoArguments(int num1, int num2) {
+    private static void echoBinaryOperands(int num1, int num2) {
         System.out.println(formatBinary(num1));
         System.out.println(formatBinary(num2));
     }
 
     private static void echoBinaryOp(String operation, BiFunction<Integer, Integer, Integer> fn) {
         int num1 = 5, num2 = 3;
-        echoArguments(num1, num2);
+        echoBinaryOperands(num1, num2);
         System.out.println(operation + ":");
         Integer fnResult = fn.apply(num1, num2);
         System.out.println(formatBinary(fnResult));
