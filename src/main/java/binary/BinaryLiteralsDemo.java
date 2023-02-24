@@ -1,6 +1,6 @@
 package binary;
 
-public class BinaryLiterals {
+public class BinaryLiteralsDemo {
 
     public static Integer convertBinaryToDecimal(Integer binaryNumber) {
         int decimalNumber = 0, base = 1;

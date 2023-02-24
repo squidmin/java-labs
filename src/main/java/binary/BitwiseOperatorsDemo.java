@@ -3,7 +3,7 @@ package binary;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class BitwiseOperators {
+public class BitwiseOperatorsDemo {
 
     private static String formatBinary(int num) {
         return String.format("%4s", Integer.toBinaryString(num)).replace(' ', '0');

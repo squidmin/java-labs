@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class BinaryLiteralsTest {
+public class BinaryLiteralsDemoTest {
 
     /**
      * Basic binary literal demos
@@ -47,19 +47,19 @@ public class BinaryLiteralsTest {
 
     @Test
     public void convertBinaryToDecimal_givenBinaryNumber_returnDecimalNumber() {
-        Integer result = BinaryLiterals.convertBinaryToDecimal(Integer.valueOf("010101"));
+        Integer result = BinaryLiteralsDemo.convertBinaryToDecimal(Integer.valueOf("010101"));
         assertEquals(Integer.valueOf(21), result);
     }
 
     @Test
     public void convertDecimalToBinary_givenDecimalNumber_returnBinaryNumber() {
-        Integer result = BinaryLiterals.convertDecimalToBinary(15);
+        Integer result = BinaryLiteralsDemo.convertDecimalToBinary(15);
         assertEquals(Integer.valueOf(1111), result);
     }
 
     @Test
     public void subtractBinaryNumber_givenValidArguments_returnExpectedResult() {
-        Integer result = BinaryLiterals.subtractBinaryNumber(0b1110, 0b0101);  // 16 - 5
+        Integer result = BinaryLiteralsDemo.subtractBinaryNumber(0b1110, 0b0101);  // 16 - 5
         assertEquals(Integer.valueOf(11), result);
     }
 

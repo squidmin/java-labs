@@ -1,28 +1,28 @@
 package instances;
 
-public class ClassBasedSingleton {
+public class ClassBasedSingletonDemo {
 
-    private static ClassBasedSingleton INSTANCE;
+    private static ClassBasedSingletonDemo INSTANCE;
     private String info = "Ok I pull up. (Initial class info)";
 
-    private ClassBasedSingleton() {}  // Private constructor.
+    private ClassBasedSingletonDemo() {}  // Private constructor.
 
-    public synchronized static ClassBasedSingleton getInstance() {
-        if (INSTANCE == null) { INSTANCE = new ClassBasedSingleton(); }
+    public synchronized static ClassBasedSingletonDemo getInstance() {
+        if (INSTANCE == null) { INSTANCE = new ClassBasedSingletonDemo(); }
         return INSTANCE;
     }
 
     // Getters and setters
 
     public static void main(String[] args) {
-        ClassBasedSingleton.INSTANCE = ClassBasedSingleton.getInstance();
-        System.out.println(ClassBasedSingleton.INSTANCE);
+        ClassBasedSingletonDemo.INSTANCE = ClassBasedSingletonDemo.getInstance();
+        System.out.println(ClassBasedSingletonDemo.INSTANCE);
         /*
          * As long as `getInstance()` is called (rather than the constructor), only one instance is created.
          * This approach to creating a Singleton doesn't guarantee thread safety, unless the `synchronized` keyword is
          *   used to guarantee the atomicity of the operation.
          */
-        ClassBasedSingleton instance = ClassBasedSingleton.getInstance();
+        ClassBasedSingletonDemo instance = ClassBasedSingletonDemo.getInstance();
         System.out.println(instance);  // Prints the same address.
     }
 

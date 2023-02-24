@@ -1,6 +1,6 @@
 package practice.binary;
 
-public class BinaryLiterals {
+public class BinaryLiteralsDemo {
 
     public static Integer convertBinaryToDecimal(Integer binaryNumber) {
         return -1;

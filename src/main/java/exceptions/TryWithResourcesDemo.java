@@ -1,6 +1,6 @@
 package exceptions;
 
-public class TryWithResources {
+public class TryWithResourcesDemo {
 
     static class ClassA implements AutoCloseable {
         public ClassA() {

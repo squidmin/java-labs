@@ -1,9 +1,9 @@
-package streamapi;
+package practice.streamapi;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StreamDemo_ConstructorReferences {
+public class ConstructorReferencesDemo {
 
     static class Employee {
         String name;
@@ -41,14 +41,10 @@ public class StreamDemo_ConstructorReferences {
         list.add("dated");
 
         // Code without constructor reference
-        list.stream()
-            .map(name -> new Employee(name))
-            .forEach(System.out::println);
+
 
         // Code with constructor reference
-        list.stream()
-            .map(Employee::new)
-            .forEach(System.out::println);
+
     }
 
 }

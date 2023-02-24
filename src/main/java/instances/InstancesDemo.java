@@ -14,7 +14,7 @@ class Child extends Parent {
     }
 }
 
-public class Instances extends Parent {
+public class InstancesDemo extends Parent {
 
     // This instance variable is visible for any child class.
     public String field_1;
@@ -26,7 +26,7 @@ public class Instances extends Parent {
     protected int field_3;
 
     // The name variable is assigned in the constructor.
-    public Instances(String field_1) {
+    public InstancesDemo(String field_1) {
         this.field_1 = field_1;
     }
 
@@ -42,13 +42,13 @@ public class Instances extends Parent {
     }
 
     public static void main(String[] args) {
-        Instances instance = new Instances("lol");
+        InstancesDemo instance = new InstancesDemo("lol");
         instance.setField_2(1000);
         instance.printFields();
 
         // Polymorphism
         Parent parentInstance_1 = new Child();
-        Parent parentInstance_2 = new Instances("field_1");
+        Parent parentInstance_2 = new InstancesDemo("field_1");
         parentInstance_1.method();  // Calls method() of Child class.
         parentInstance_2.method();  // Calls method() of Parent class.
     }

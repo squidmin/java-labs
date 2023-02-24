@@ -2,21 +2,21 @@ package exceptions;
 
 import org.junit.Test;
 
-public class TryWithResourcesTest {
+public class TryWithResourcesDemoTest {
 
     @Test(expected = Exception.class)
     public void classA_close_whenInvoked_throwsException() throws Exception {
-        try (TryWithResources.ClassA instance = new TryWithResources.ClassA()) {}
+        try (TryWithResourcesDemo.ClassA instance = new TryWithResourcesDemo.ClassA()) {}
     }
 
     @Test(expected = Exception.class)
     public void classA_method_whenInvoked_throwsException() throws Exception {
-        try (TryWithResources.ClassA instance = new TryWithResources.ClassA()) { instance.method(); }
+        try (TryWithResourcesDemo.ClassA instance = new TryWithResourcesDemo.ClassA()) { instance.method(); }
     }
 
     @Test(expected = Exception.class)
     public void classB_method_whenInvoked_throwsException() throws Exception {
-        try (TryWithResources.ClassB instance = new TryWithResources.ClassB()) { instance.method(); }
+        try (TryWithResourcesDemo.ClassB instance = new TryWithResourcesDemo.ClassB()) { instance.method(); }
     }
 
 }
