@@ -23,7 +23,7 @@
 <details>
 <summary>Inserting multiple elements from another Collection at a particular index</summary>
 
-`list.addAll(int 3, Collection c);`
+`list.addAll(int index, Collection c);`
 
 </details>
 
@@ -196,7 +196,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ArrayListPractice {
+public class ArrayListDemo {
 	public static void main(String[] args) {
 		List<Integer> list = new ArrayList<>();
 		list.add(10);
