@@ -336,7 +336,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayListDemo {
-	public static void doSomeWork(List<> list) {
+	public static void doSomeWork(List list) {
 		list.add("India");
 	}
 
