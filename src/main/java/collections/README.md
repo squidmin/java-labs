@@ -1,3 +1,17 @@
+### Collections
+
+![img.png](img/03.png)
+
+<details>
+<summary>Difference between Collection and Collections</summary>
+
+The differences between a **Collection** and **Collections** are as follows:
+1. A **Collection** is an interface, whereas **Collections** is a class.
+2. A **Collection** interface provides the standard functionality of a data structure to **List**, **Set**, and **Queue**.
+   However, the **Collections** class provides the utility methods that can be used to search, sort, and synchronize collection elements.
+
+</details>
+
 <details>
 <summary>forEachRemaining() in Iterator</summary>
 
@@ -83,7 +97,7 @@ The next section discusses improvements in the `Map` API.
 
 
 <details>
-<summary>Map API Improvements: Fetch Operations</summary>
+<summary>Map API Java 8 Improvements: Fetch Operations</summary>
 
 Explains the new methods added in the `Map` API for fetch operations.
 
@@ -278,7 +292,7 @@ The next section discusses more improvements done to the `Map` interface.
 
 
 <details>
-<summary>Map API Improvements: Replace Operations</summary>
+<summary>Map API Java 8 Improvements: Replace Operations</summary>
 
 Explains the new methods for value replacement that have been added to `Map` API.
 

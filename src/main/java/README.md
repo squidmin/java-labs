@@ -5,7 +5,7 @@
 3. Exceptions
 4. Binary literals & operations
 5. Lambdas
-6. Stream API6.
+6. Stream API
 7. Collections
 8. Concurrency
 9. Time API
