@@ -529,6 +529,223 @@ ArrayList is in descending order: [97, 83, 37, 36, 15, 11]
 <details>
 <summary>Introduction</summary>
 
+The `Collections.sort()` method sorts the given `List` in ascending order.
+How does the `sort()` method decide which element is smaller and which one is larger?
 
+Each numeric wrapper class (`Integer`, `Double`, or `Long`), the `String` class, and the `Date` class implements an interface called `Comparable`.
+This interface contains a `compareTo(T o)` method which is used by sorting methods to srot the `Collection`.
+This method returns a negative integer, zero, or a positive integer if the `this` object is less than, equal to, or greater than the object passed as an argument.
+
+<blockquote>
+If we use the <code>Collections.sort(List<T> list)</code> method to sort an <code>ArrayList</code>, then the class whose objects are stored in the <code>ArrayList</code> must implement the <code>Comparable</code> interface.
+If the <code>ArrayList</code> stores an <code>Integer</code>, a <code>Long</code>, or a <code>String</code>, then we don't need to worry as these classes already implement the <code>Comparable</code> interface.
+But if the <code>ArrayList</code> stores a custom class object, then that class must implement the <code>Comparable</code> interface.
+</blockquote>
+
+In the below example, we have a custom class called `Employee`.
+We have stored some `Employee` objects in an `ArrayList`, and we need to sort it.
+The below example will not compile as the `Employee` class does not implement the `Comparable` interface.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+class Employee {
+    String name;
+    int age;
+    public Employee(String name, int age) {
+        super();
+        this.name = name;
+        this.age = age;
+    }
+}
+
+public class ArrayListComparableDemo {
+    public static void main(String[] args) {
+        List<Employee> list = new ArrayList<>();
+        list.add(new Employee("Jane", 29));
+        list.add(new Employee("Alex", 54));
+        
+        Collections.sort(list);
+        System.out.println("ArrayList in ascending order: " + list);
+    }
+}
+```
+
+In the below example, the `Employee` class implements the `Comparable` interface.
+The code will run successfully and will sort the `Employee` objects in ascending order of their age.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+class Employee implements Comparable<Employee> {
+    String name;
+    int age;
+    public Employee(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    @Override
+    public int compareTo(Employee employee) {
+        /* 
+         * Sort the employees based on age in ascending order.
+         * Returns a negative integer, zero, or a positive integer according to whether the age of this Employee
+         *   is less than, equal to, or greater than the specified object.
+         */
+        return this.age = employee.age;
+    }
+}
+
+public class ArrayListComparableDemo {
+    public static void main(String[] args) {
+        List<Employee> list = new ArrayList<>();
+        list.add(new Employee("Jane", 29));
+        list.add(new Employee("Alex", 54));
+        list.add(new Employee("Matt", 19));
+        list.add(new Employee("Roy", 72));
+
+        Collections.sort(list);
+        for (Employee emp : list) {
+            System.out.println("Employee Name: " + emp.name + ", Employee Age: " + emp.age);
+        }
+    }
+}
+```
+
+**Output**
+
+```
+Employee Name: Jane, Employee Age: 29
+Employee Name: Alex, Employee Age: 29
+Employee Name: Matt, Employee Age: 29
+Employee Name: Roy, Employee Age: 29
+```
+
+</details>
+
+
+<details>
+<summary>How to write an implementation of the compareTo() method</summary>
+
+Let's say you have a custom class, and you need to write the implementation of the `compareTo()` method.
+
+The first step will be to select the fields within that class where you need to sort the objects.
+For example, if you have a `Vehicle` class, you might want to sort vehicles based on the year in which they were sold.
+
+Once you have decided the field whre the sorting will be done, then the second step will be to write the implementation of the `compareTo()` method.
+The `compareTo(T o)` method takes only one object as an input.
+The comparison is made with the calling object.
+Let's say we have two `Vehicle` class objects.
+
+```
+Vehicle v_1 = new Vehicle();
+Vehicle v_2 = new Vehicle();
+```
+
+Then `v_1.compareTo(v2)` should return:
+
+1. **-1** if the production year of `v_1` is less than the production year of `v_2`.
+2. **1** if the production year of `v_1` is greater than the production year of `v_2`.
+3. **0** if the production year of `v_1` is equal to the production year of `v_2`.
+
+If we need to sort the `Vehicle` class on the basis of the year it was made, the logic will look as below:
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+class Vehicle implements Comparable<Vehicle> {
+    String brand;
+    Integer makeYear;
+    public Vehicle(String brand, Integer makeYear) {
+        this.brand = brand;
+        this.makeYear = makeYear;
+    }
+    @Override
+    public int compareTo(Vehicle o) {
+        /*
+         * The compareTo() method of the Integer class can also be used:
+         *   return this.makeYear.compareTo(o.makeYear);
+         */
+        return this.makeYear - o.makeYear;
+    }
+}
+
+public class ArrayListComparableDemo {
+    public static void main(String[] args) {
+        List<Vehicle> list = new ArrayList<>();
+        list.add(new Vehicle("Volkswagen", 2010));
+        list.add(new Vehicle("Audi", 2009));
+        list.add(new Vehicle("Ford", 2001));
+        list.add(new Vehicle("BMW", 2015));
+
+        Collections.sort(list);
+        for (Vehicle vehicle1 : list) {
+            System.out.println("Vehicle Brand: " + vehicle1.brand + ", Vehicle Make: " + vehicle1.makeYear);
+        }
+    }
+}
+```
+
+**Output**
+
+```
+Vehicle Brand: Ford, Vehicle Make: 2001
+Vehicle Brand: Audi, Vehicle Make: 2009
+Vehicle Brand: Volkswagen, Vehicle Make: 2010
+Vehicle Brand: BMW, Vehicle Make: 2015
+```
+
+If we need to sort the `Vehicle` class on the basis of the brand name, the logic will be as below:
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+class Vehicle implements Comparable<Vehicle> {
+    String brand;
+    Integer makeYear;
+    public Vehicle(String brand, Integer makeYear) {
+        this.brand = brand;
+        this.makeYear = makeYear;
+    }
+    @Override
+    public int compareTo(Vehicle o) {
+        /*
+         * Using the compareTo() method of the String class.
+         */
+        return this.brand.compareTo(o.brand);
+    }
+}
+
+public class ArrayListComparableDemo {
+    public static void main(String[] args) {
+        List<Vehicle> list = new ArrayList<>();
+        list.add(new Vehicle("Volkswagen", 2010));
+        list.add(new Vehicle("Audi", 2009));
+        list.add(new Vehicle("Ford", 2001));
+        list.add(new Vehicle("BMW", 2015));
+
+        Collections.sort(list);
+        for (Vehicle vehicle1 : list) {
+            System.out.println("Vehicle Brand: " + vehicle1.brand + ", Vehicle Make: " + vehicle1.makeYear);
+        }
+    }
+}
+```
+
+**Output**
+
+```
+Vehicle Brand: Audi, Vehicle Make: 2009
+Vehicle Brand: BMW, Vehicle Make: 2015
+Vehicle Brand: Ford, Vehicle Make: 2001
+Vehicle Brand: Volkswagen, Vehicle Make: 2010
+```
 
 </details>
