@@ -358,7 +358,176 @@ public class ArrayListDemo {
 #### Sorting
 
 <details>
+<summary>Explanation</summary>
+
+In Java 8, the `sort(Comparator<? super E> c)` method was added to the `List` interface.
+If we look at the implementation of the `Collections.sort()` method, then we will find that it internally calls the `sort()` method of the `List` interface.
+The code is shown below:
+
+```
+public static <T extends Comparable<? super T>> void sort(List<T> list) {
+    list.sort(null);
+}
+```
+
+Let's see how the `sort()` method if the `List` interface sorts a list.
+When the `sort()` method is called, an array containing all elements in this list is created and sorted.
+After sorting the array, the list is iterated and each element is reset from the corresponding position in the array.
+
+The elements are first copied to an array and then sorted because it takes less time to sort a _linked list_ using this approach.
+
+</details>
+
+
+<details>
 <summary>Sorting in ascending order</summary>
+
+The `Collections` class contains a `sort(List<T> list)` method, which is used to sort an `ArrayList`.
+This method takes an `ArrayList` as input and sorts it in ascending order.
+
+In the `sort(List<T> list)` method, `T` represents the type of object that is stored in the `ArrayList`.
+The `Collections.sort(List<T> list)` method takes an `ArrayList` of type `T` object as input.
+`T` must implement the `Comparable` interface; otherwise, the code will not compile.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ArrayListSortAscendingDemo {
+    
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        list.add(36);
+        list.add(15);
+        list.add(11);
+        list.add(83);
+        list.add(37);
+        list.add(97);
+        
+        Collections.sort(list);
+        System.out.println("ArrayList is in ascending order: " + list);
+    }
+    
+}
+```
+
+**Output**:
+
+```
+ArrayList is in ascending order: [11, 15, 36, 37, 83, 97]
+```
+
+There is another way to sort an `ArrayList` using **streams**, which is a feature added in Java 8.
+
+Once a stream is created, then we can use the `sorted()` method of the **Stream** class, which returns the stream of objects in sorted order.
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class ArrayListStreamSortAscendingDemo {
+
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        list.add(36);
+        list.add(15);
+        list.add(11);
+        list.add(83);
+        list.add(37);
+        list.add(97);
+
+        List<Integer> sortedList = list.stream().sorted().collect(Collectors.toList());
+        System.out.println("ArrayList is in ascending order: " + list);
+    }
+
+}
+```
+
+**Output**:
+
+```
+ArrayList is in ascending order: [11, 15, 36, 37, 83, 97]
+```
+
+</details>
+
+
+<details>
+<summary>Sorting in descending order</summary>
+
+There is another overloaded version of the `sort()` method, i.e., `sort(List<T> list, Comparator<? super T> c)`, which takes a `List` and `Comparator` object as input.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ArrayListSortDescendingDemo {
+    
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        list.add(36);
+        list.add(15);
+        list.add(11);
+        list.add(83);
+        list.add(37);
+        list.add(97);
+        
+        Collections.sort(list, Collections.reverseOrder());
+        System.out.println("ArrayList is in descending order: " + list);
+    }
+    
+}
+```
+
+**Output**:
+
+```
+ArrayList is in descending order: [97, 83, 37, 36, 15, 11]
+```
+
+The `ArrayList` can be sorted in reverse order using streams by passing `Comparator.reverseOrder()` to the `sorted()` method.
+
+```java
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class ArrayListStreamSortDescendingDemo {
+
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        list.add(36);
+        list.add(15);
+        list.add(11);
+        list.add(83);
+        list.add(37);
+        list.add(97);
+
+        list.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        System.out.println("ArrayList is in descending order: " + list);
+    }
+
+}
+```
+
+**Output**:
+
+```
+ArrayList is in descending order: [97, 83, 37, 36, 15, 11]
+```
+
+</details>
+
+<br />
+
+#### Understanding the `Comparable` interface
+
+<details>
+<summary>Introduction</summary>
 
 
 
