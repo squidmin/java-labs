@@ -749,3 +749,209 @@ Vehicle Brand: Volkswagen, Vehicle Make: 2010
 ```
 
 </details>
+
+<br />
+
+#### Understanding the `Comparator` interface
+
+<details>
+<summary>Main drawback of Comparator</summary>
+
+One of the major drawbacks of using a `Comparable` interface is that the comparing logic becomes fixed.
+For instance, if we have a `Vehicle` class, then it can be sorted either on the basis of the brand or the production year depending on the implementation of the `compareTo()` method.
+
+</details>
+
+<details>
+<summary>Pros / cons of Comparator vs. Comparable</summary>
+
+If we need some flexibility in sorting, we should use the `Comparator` interface instead of the `Comparable` interface.
+The `Comparator` interface has a method
+
+`compare(T o1, T o2)`
+
+which takes two objects, `o1` and `o2` as parameters. It returns
+
+- **-1** if `o1 < o2`
+- **1** if `o1 > o2`
+- **0** if `o1 == o2`
+
+If we need to use the `Comparator` interface, then we can't use the `Collections.sort(List<T> t)` method as `T` should implement the `Comparable` interface.
+There is another overloaded method
+
+`sort(List<T> list, Comparator<? super T> c)`
+
+that takes the list as well as a `Comparator` object as input.
+It then sorts the list based on the logic provided in the `Comparator` implementation.
+
+</details>
+
+<details>
+<summary>Creating a customer Comparator</summary>
+
+The below code shows how to create a custom `Comparator`.
+We will create two custom comparators: one for sorting by brand and one for sorting by year.
+
+#### `BrandComparator.java`
+
+```java
+import java.util.Comparator;
+
+class BrandComparator implements Comparator<Vehicle> {
+    @Override
+    public int compare(Vehicle o1, Vehicle o2) {
+        return o1.brand.compareTo(o2.brand);
+    }
+}
+```
+
+#### `MakeYearComparator.java`
+
+```java
+import java.util.Comparator;
+
+class MakeYearComparator implements Comparator<Vehicle> {
+    @Override
+    public int compare(Vehicle o1, Vehicle o2) {
+        return o1.makeYear.compareTo(o2.makeYear);
+    }
+}
+```
+
+#### `Vehicle.java`
+
+```java
+class Vehicle {
+    String brand;
+    Integer makeYear;
+    public Vehicle(String brand, Integer makeYear) {
+        super();
+        this.brand = brand;
+        this.makeYear = makeYear;
+    }
+}
+```
+
+In the below example, we have used both the Comparators to sort on the basis of brand and production year.
+
+#### `ArrayListComparatorDemo.java`
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ArrayListComparatorDemo1 {
+	public static void main(String[] args) {
+		List<Vehicle> list = new ArrayList<>();
+		list.add(new Vehicle("Volkswagen", 2010));
+		list.add(new Vehicle("Audi", 2009));
+		list.add(new Vehicle("Ford", 2001));
+		list.add(new Vehicle("BMW", 2015));
+
+        System.out.println("Sorting by brand name.");
+		Collections.sort(list, new BrandComparator());
+		for (Vehicle vehicle : list) {
+			System.out.println("Vehicle Brand: " + vehicle.brand + ", Vehicle Make: " + vehicle.makeYear);
+		}
+		
+		System.out.println("Sorting by make year.");
+		Collections.sort(list, new MakeYearComparator());
+		for (Vehicle vehicle : list) {
+			System.out.println("Vehicle Brand: " + vehicle.brand + ", Vehicle Make: " + vehicle.makeYear);
+		}
+	}
+}
+```
+
+We can also use an anonymous class in the sort method instead of creating a separate class that implements Comparator. This is shown in the below example.
+
+#### `Vehicle.java`
+
+```java
+class Vehicle {
+    String brand;
+    Integer makeYear;
+    public Vehicle(String brand, Integer makeYear) {
+        super();
+        this.brand = brand;
+        this.makeYear = makeYear;
+    }
+}
+```
+
+#### `ArrayListComparatorDemo2.java`
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class ArrayListComparatorDemo2 {
+    
+    public static void main(String[] args) {
+        List<Vehicle> list = new ArrayList<>();
+        list.add(new Vehicle("Volkswagen", 2010));
+        list.add(new Vehicle("Audi", 2009));
+        list.add(new Vehicle("Ford", 2001));
+        list.add(new Vehicle("BMW", 2015));
+        System.out.println("Sorting by brand name");
+        Collections.sort(list, new Comparator<Vehicle>() {
+            
+            @Override
+            public int compare(Vehicle o1, Vehicle o2) {
+                return o1.brand.compareTo(o2.brand);
+            }
+        });
+
+        for (Vehicle vehicle : list) {
+            System.out.println("Vehicle Brand: " + vehicle.brand + ", Vehicle Make: " + vehicle.makeYear);
+        }
+
+        System.out.println("Sorting by make year");
+        Collections.sort(list, new Comparator<Vehicle>() {
+            
+            @Override
+            public int compare(Vehicle o1, Vehicle o2) {
+                return o1.makeYear.compareTo(o2.makeYear);
+            }
+        });
+        
+        for (Vehicle vehicle : list) {
+            System.out.println("Vehicle Brand: " + vehicle.brand + ", Vehicle Make: " + vehicle.makeYear);
+        }
+    }
+    
+}
+```
+
+The above code can be further simplified if we use a lambda expression instead of anonymous classes.
+
+#### `ArrayListComparatorDemo3.java`
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ArrayListComparatorDemo3 {
+    
+    public static void main(String[] args) {
+        List<Vehicle> list = new ArrayList<>();
+        list.add(new Vehicle("Volkswagen", 2010));
+        list.add(new Vehicle("Audi", 2009));
+        list.add(new Vehicle("Ford", 2001));
+        list.add(new Vehicle("BMW", 2015));
+        System.out.println("Sorting by brand name");
+        Collections.sort(list, (o1, o2) -> o1.brand.compareTo(o2.brand));
+
+        for (Vehicle vehicle : list) {
+            System.out.println("Vehicle Brand: " + vehicle.brand + ", Vehicle Make: " + vehicle.makeYear);
+        }
+    }
+    
+}
+```
+
+</details>
