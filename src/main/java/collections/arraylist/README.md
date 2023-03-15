@@ -787,7 +787,7 @@ It then sorts the list based on the logic provided in the `Comparator` implement
 </details>
 
 <details>
-<summary>Creating a customer Comparator</summary>
+<summary>Creating a custom Comparator</summary>
 
 The below code shows how to create a custom `Comparator`.
 We will create two custom comparators: one for sorting by brand and one for sorting by year.
@@ -949,6 +949,100 @@ public class ArrayListComparatorDemo3 {
         for (Vehicle vehicle : list) {
             System.out.println("Vehicle Brand: " + vehicle.brand + ", Vehicle Make: " + vehicle.makeYear);
         }
+    }
+    
+}
+```
+
+</details>
+
+<br />
+
+#### ArrayList exercise
+
+Solve the following exercises, given an `ArrayList` that contains `Employee` objects.
+
+<details>
+<summary>Problem 1: Find employees aged over 50</summary>
+
+Print the names of all employees whose agw is more than 50.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+public class ArrayListExercise {
+
+    class Employee implements Comparable<Employee> {
+        String name;
+        int age;
+        String country;
+        public Employee(String name, int age, String country) {
+            this.name = name;
+            this.age = age;
+            this.country = country;
+        }
+        @Override
+        public int compareTo(Employee employee) { return this.age = employee.age; }
+    }
+    
+    public static void main(String[] args) {
+        List<Employee> list = new ArrayList<>();
+        list.add(new Employee("Alex", 23, "USA"));
+        list.add(new Employee("Dave", 34, "India"));
+        list.add(new Employee("Carl", 21, "USA"));
+        list.add(new Employee("Joe", 56, "Russia"));
+        list.add(new Employee("Amit", 64, "China"));
+        list.add(new Employee("Ryan", 19, "Brazil"));
+        
+        list.stream().filter(e -> e.age > 50).forEach(System.out::println);
+    }
+    
+}
+```
+
+</details>
+
+
+<details>
+<summary>Problem 2: Find employees from the USA</summary>
+
+Remove all the Employees from the List who reside in the USA.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+public class ArrayListExercise {
+    
+    static class Employee implements Comparable<Employee> {
+        String name;
+        int age;
+        String country;
+        public Employee(String name, int age, String country) {
+            this.name = name;
+            this.age = age;
+            this.country = country;
+        }
+        @Override
+        public int compareTo(Employee employee) { return this.age = employee.age; }
+    }
+    
+    public static void main(String[] args) {
+        List<Employee> list = new ArrayList<>();
+        list.add(new Employee("Alex", 23, "USA"));
+        list.add(new Employee("Dave", 34, "India"));
+        list.add(new Employee("Carl", 21, "USA"));
+        list.add(new Employee("Joe", 56, "Russia"));
+        list.add(new Employee("Amit", 64, "China"));
+        list.add(new Employee("Ryan", 19, "Brazil"));
+        
+        list.removeIf(e -> e.country.equalsIgnoreCase("USA"));
+        System.out.println(list);
     }
     
 }
