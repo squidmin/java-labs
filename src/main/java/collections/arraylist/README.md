@@ -997,7 +997,7 @@ public class ArrayListExercise {
         list.add(new Employee("Amit", 64, "China"));
         list.add(new Employee("Ryan", 19, "Brazil"));
         
-        list.stream().filter(e -> e.age > 50).forEach(System.out::println);
+        list.stream().filter(e -> e.age > 50).map(e -> e.name).forEach(System.out::println);
     }
     
 }

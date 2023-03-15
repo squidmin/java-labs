@@ -34,7 +34,7 @@ public class ArrayListExercises {
         /* Print the names of all employees whose age is over 50. */
         System.out.println("Print the names of all employees whose age is over 50.");
         System.out.println("-".repeat(30));
-        list.stream().filter(e -> e.age > 50).forEach(e -> System.out.println(e.name));
+        list.stream().filter(e -> e.age > 50).map(e -> e.name).forEach(System.out::println);
 
         System.out.println();
 
