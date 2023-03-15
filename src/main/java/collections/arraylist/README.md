@@ -1049,6 +1049,14 @@ public class ArrayListExercise {
         list.removeIf(e -> e.country.equalsIgnoreCase("USA"));
         System.out.println("List after removal:");
         list.forEach(e -> System.out.println(e.name));
+
+        /* .iterator() can also be used to remove the elements. */
+//        Iterator<Employee> itr = list.iterator();
+//        while(itr.hasNext()) {
+//            if(itr.next().country.equals("USA")) {
+//                itr.remove();
+//            }
+//        }
     }
     
 }
@@ -1098,6 +1106,9 @@ public class ArrayListExercise {
         list.sort(Comparator.naturalOrder());
         System.out.println("List after sorting:");
         list.forEach(System.out::println);
+
+        /* Instead of implementing Comparator, Collections.sort() can be called, passing a list and a BiFunction to compare elements. */
+//        Collections.sort(list, (e1, e2) -> e1.country.compareTo(e2.country));
     }
     
 }

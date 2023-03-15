@@ -2,6 +2,7 @@ package collections.arraylist;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 public class ArrayListExercises {
@@ -46,6 +47,14 @@ public class ArrayListExercises {
         list.removeIf(e -> e.country.equalsIgnoreCase("USA"));
         System.out.println("List after removal:");
         list.forEach(e -> System.out.println(e.name));
+
+        /* .iterator() can also be used to remove the elements. */
+//        Iterator<Employee> itr = list.iterator();
+//        while(itr.hasNext()) {
+//            if(itr.next().country.equals("USA")) {
+//                itr.remove();
+//            }
+//        }
 
         System.out.println();
 
