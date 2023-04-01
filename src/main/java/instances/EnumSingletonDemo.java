@@ -2,7 +2,7 @@ package instances;
 
 public enum EnumSingletonDemo {
 
-    INSTANCE("Ok I pull up. (Initial class info)");
+    INSTANCE("(Initial class info)");
 
     private String info;
 

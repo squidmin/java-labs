@@ -3,7 +3,6 @@ package instances;
 public class ClassBasedSingletonDemo {
 
     private static ClassBasedSingletonDemo INSTANCE;
-    private String info = "Ok I pull up. (Initial class info)";
 
     private ClassBasedSingletonDemo() {}  // Private constructor.
 
