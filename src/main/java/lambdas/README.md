@@ -7,21 +7,25 @@ The following topics are covered:
 
 ### What is a lambda expression?
 
-Java is an object-oriented language. By introducing lambdas in Java 8, the authors of Java tried to add elements of functional programming in Java. Now you might be wondering what the difference between object-oriented programming and functional programming is?
+Java is an object-oriented language. By introducing lambdas in Java 8, the authors of Java tried to add elements of functional programming in Java.
+What are the differences between _object-oriented programming_ and _functional programming_?
 
-In object-oriented programming, objects and classes are the main entities. If we create a function then it should exist within a class. A function has no meaning outside the scope of the class object.
+In _object-oriented programming_, objects and classes are the main entities.
+If a function is created, then it should exist within a class.
+A function has no meaning outside the scope of the object that invokes it.
 
-In functional programming, functions can exist outside the scope of an object. We can assign them to a reference variable and we can also pass them to other methods as a parameter.
+In _functional programming_, functions can exist outside the scope of their owning object.
+They can be assigned to a reference variable, and they can also be passed as parameters to other methods.
 
-A lambda expression is just an *anonymous function*, i.e., a function with **no name** and that is **not bound to an identifier**. We can pass it to other methods as parameters, therefore, using the power of functional programming in Java.
+A _lambda expression_ is just an *anonymous function*, i.e., a function with **no name** and that is **not bound to an identifier**.
+A lambda expression can be passed to other methods as a parameter, which is just one example of the power of functional programming in Java.
 
 ### How to write a lambda expression
 
-It might be difficult to understand what lambda is and how to write a lambda without looking at an example. So, let’s look at an example first, and then we will revisit what we just read.
+The below example shows a functional interface called `AFunctionalInterface`.
+There are two classes `ClassA` and `ClassB` that implement this interface.
 
-In the below example, we have a functional interface called `AFunctionalInterface`. There are two classes `ClassA` and `ClassB` that implement this interface.
-
-#### AFunctionalInterface
+### `AFunctionalInterface.java`
 
 ```java
 @FunctionalInterface
@@ -30,7 +34,7 @@ public interface AFunctionalInterface {
 }
 ```
 
-#### ClassA
+### `ClassA.java`
 
 ```java
 public class ClassA implements AFunctionalInterface {
@@ -42,7 +46,7 @@ public class ClassA implements AFunctionalInterface {
 }
 ```
 
-#### ClassB
+### `ClassB.java`
 
 ```java
 public class ClassB implements AFunctionalInterface {
@@ -54,11 +58,14 @@ public class ClassB implements AFunctionalInterface {
 }
 ```
 
-Here, we have another class called `ClassC`. This class has a method called `wish(AFunctionalInterface functionalInterface)` which takes `AFunctionalInterface` as a parameter, and based on the type of object passed, prints the output of the `execute()` method.
+The below code example shows the implementation of another class called `ClassC`.
+This class has a method called `wish(AFunctionalInterface functionalInterface)` which takes `AFunctionalInterface` as a parameter, and based on the type of object passed, prints the output of the `execute()` method.
 
-#### ClassC
+### `ClassC.java`
 
 ```java
+package lambdas;
+
 public class ClassC {
     public static void wish(AFunctionalInterface functionalInterface) {
         functionalInterface.execute();
@@ -74,28 +81,31 @@ public class ClassC {
 }
 ```
 
-When we run the `ClassC` class, we get the below output:
+**Output**
 
 ```
 Namaste
 Hi
 ```
 
-This is a classic object-oriented programming example. Now, what if we want our `ClassC` class to greet in all the languages available?
+This is a classic object-oriented programming example.
+Now, what if requirements changed to have the `ClassC` class greet in all available languages?
 
-Do we need to create a class for each concrete entity, e.g., `ClassD`, `ClassE`, `ClassF`, etc?
+Should a class be created for each concrete entity, e.g., `ClassD`, `ClassE`, `ClassF`, etc?
 
-Isn't it possible that we don't create any class and just send a function to the `wish(AFunctionalInterface functionalInterface)` method?
+Isn't it possible to create no additional classes and just send a function to the `wish(AFunctionalInterface functionalInterface)` method?
 
-Our `wish(AFunctionalInterface functionalInterface)` method will directly execute the function that is provided to it and print the output.
+The `wish(AFunctionalInterface functionalInterface)` method will directly execute the function that is provided to it and print the output.
 
-This is possible through anonymous classes. We will quickly see how this can be done through an anonymous class, and then jump straight back into lambdas.
+This is possible through anonymous classes.
+We'll quickly see how this can be done through an anonymous class, and then jump straight back into lambdas.
 
-Note that the `@FunctionalInterface` annotation allows the Java compiler to trigger an error in response to any attempt to break the predefined structure of a functional interface. It's also a handy tool to make an application architecture easier to understand for other developers.  
+Note that the `@FunctionalInterface` annotation allows the Java compiler to trigger an error in response to any attempt to break the predefined structure of a functional interface.
+It's also a handy tool to make an application architecture easier to understand for other developers.  
 
-In the below example, we will change the `ClassC` class to use an anonymous class.
+In the below example, the `ClassC` class is changed to use an anonymous class.
 
-#### AFunctionalInterface
+### `AFunctionalInterface.java`
 
 ```java
 @FunctionalInterface
@@ -104,7 +114,7 @@ public interface AFunctionalInterface {
 }
 ```
 
-#### ClassC
+### `ClassC.java`
 
 ```java
 public class ClassC {
@@ -126,11 +136,17 @@ public class ClassC {
 }
 ```
 
-In the above example, we don’t need to create a class for each language. We can use an anonymous class, and that does the trick for us in the example above. However, don’t you think that this code is still cumbersome? Although the class is anonymous, we are still creating a class.
+In the above example, a class doesn't need to be created for each language.
+An anonymous class can be used, and suffices for our purposes in the example above.
+But the code is still somewhat cumbersome.
+Although the class is anonymous, a class is still being created.
 
-To make our code less cumbersome, let’s remove all the unnecessary code step-by-step and create our first lambda expression.
+To improve this code, all the unnecessary parts can be removed step-by-step to create a lambda expression.
 
-**Step 1**: The compiler knows that the `wish(AFunctionalInterface functionalInterface)` method takes in a parameter of type `AFunctionalInterface`. So, we don’t need to specifically create an anonymous class of type `AFunctionalInterface`.
+**Step 1**: The compiler knows that the `wish(AFunctionalInterface functionalInterface)` method takes in a parameter of type `AFunctionalInterface`.
+So, an anonymous class of type `AFunctionalInterface` doesn't need to be created explicitly.
+
+### `ClassC.java`
 
 ```java
 public class ClassC {
@@ -146,10 +162,14 @@ public class ClassC {
             }
         );
     }
+    
 }
 ```
 
-**Step 2**: We know that the `AFunctionalInterface` interface has only one method. So, we don’t need to provide the method name. We are only concerned with the method body.
+**Step 2**: It's understood that the `AFunctionalInterface` interface has only one method.
+So, the method name doesn't need to be provided - just the method body.
+
+### `ClassC.java`
 
 ```java
 public class ClassC {
@@ -168,7 +188,11 @@ public class ClassC {
 }
 ```
 
-**Step 3**: The compiler can understand that the body does not return anything. So, mentioning the return type is redundant. We can also remove the `public` declaration.
+**Step 3**: The compiler can understand that the body does not return anything.
+So, mentioning the return type is redundant.
+The `public` declaration can also be removed.
+
+### `ClassC.java`
 
 ```java
 public class ClassC {
@@ -187,11 +211,13 @@ public class ClassC {
 }
 ```
 
-Please note that we add a `->` between the empty brackets and the method body. This is how a lambda expression is declared.
+Note that a `->` is added between the empty brackets and the method body.
+This is part of the syntax for declaring a lambda expression.
 
-There still is one more improvement we can make. Since the method body contains only a single line, the curly braces are also unnecessary.
+There still is one more improvement that can be made.
+Since the method body contains only a single line, the curly braces are unnecessary.
 
-#### AFunctionalInterface
+#### `AFunctionalInterface.java`
 
 ```java
 @FunctionalInterface
@@ -200,7 +226,7 @@ public interface AFunctionalInterface {
 }
 ```
 
-#### ClassC
+#### `ClassC.java`
 
 ```java
 public class ClassC {
@@ -217,25 +243,32 @@ public class ClassC {
 
 This is how simple it is to write a lambda expression.
 
-To recap, when we write a lambda expression, we are basically sending a function as a method parameter, and it is directly getting executed.
+To recap, when writing a lambda expression, a function is passed as a method parameter, and it is directly executed.
 
 ### Don't treat lambda expressions as inner classes
 
-Note that lambda expressions are not compiled to anonymous inner classes. Instead, lambdas get wrapped inside new classes generated during runtime.
+Note that lambda expressions are not compiled to anonymous inner classes.
+Instead, lambdas get wrapped inside new classes generated during runtime.
 
 In earlier examples, an inner class was essentially substituted by a lambda expression, but the concepts of inner class and lambda expression are different in an important way: **scope**.
 
-When an inner class is used, it creates a new scope. We can hide local variables from the enclosing scope by instantiating new local variables with the same names. We can also use the keyword `this` inside our inner class as a reference to its instance.
+When an inner class is used, it creates a new scope.
+Local variables can be hidden from the enclosing scope by instantiating new local variables with the same names.
+The keyword `this` can also be utilized inside an inner class as a reference to its instance.
 
-Lambda expressions, however, work with enclosing scope. We can’t hide variables from the enclosing scope inside the lambda’s body. In this case, the keyword `this` is a reference to an enclosing instance.
+Lambda expressions, however, work with enclosing scope.
+Variables can't be hidden from the enclosing scope inside the lambda's body.
+In this case, the keyword `this` is a reference to an enclosing instance.
 
 For example, in the class `ScopeExperiment`, we have an instance variable `value`:
 
-```java
+```
 private String value = "Enclosing scope value";
 ```
 
 Then in some method of this class, place the following code and execute this method:
+
+### `ScopeExperiment.java`
 
 ```java
 public class ScopeExperiment {
@@ -276,7 +309,8 @@ public class ScopeExperiment {
 Results: resultIC = Inner class value, resultLambda = Enclosing scope value
 ```
 
-By calling `this.value` in `fooIC`, we can access a local variable from its instance. In the case of the lambda, the `this.value` call accesses the instance-level variable `value`, which is defined in the `ScopeExperiment` class, but not to the variable `value` defined inside the lambda's body.
+By calling `this.value` in `fooIC`, we can access a local variable from its instance.
+In the case of the lambda, the `this.value` call accesses the instance-level variable `value`, which is defined in the `ScopeExperiment` class, but not to the variable `value` defined inside the lambda's body.
 
 ### Keep lambda expressions short and self-explanatory
 
@@ -298,17 +332,20 @@ The following topics are covered:
 - Comparator example using anonymous classes
 - Comparator example using a lambda expression
 
-If you’ve been working with Java for some time, then you’ve probably encountered a scenario where you need to sort the elements in a collection.
+If you've been working with Java for some time, then you've probably encountered a scenario where you need to sort the elements in a collection.
 
-If your collection contains a *wrapper class object*, then the sorting is very easy. Since all the wrapper classes implement the `Comparable` interface, you can directly use `Collections.sort()` to sort your collection.
+If your collection contains a *wrapper class object*, then the sorting is very easy.
+Since all the wrapper classes implement the `Comparable` interface, you can directly use `Collections.sort()` to sort your collection.
 
-However, if your collection contains a custom class object then you need to provide the logic to sort your object. In this lesson, we will look at an example in which we will sort a list of `Person` class objects using a **comparator**. Then, we will write a program to do the same task using **lambdas**.
+However, if your collection contains a custom class object then you need to provide the logic to sort your object.
+In this lesson, we will look at an example in which we will sort a list of `Person` class objects using a **comparator**.
+Then, we will write a program to do the same task using **lambdas**.
 
 ### Comparator example using anonymous classes
 
 First, we will create a `Person` class.
 
-#### Person
+### `Person.java`
 
 ```java
 public class Person {
@@ -337,11 +374,12 @@ public class Person {
 }
 ```
 
-Now, we have a `PersonService` class. It has a `getPersons(List<Person> persons)` method. It takes a **list of person object** as input and returns a **list of person object** in sorted order.
+Now, we have a `PersonService` class. It has a `getPersons(List<Person> persons)` method.
+It takes a **list of person object** as input and returns a **list of person object** in sorted order.
 
 In this method, we are creating an anonymous comparator, which sorts the `Person` objects on the basis of name.
 
-#### PersonService
+### `PersonService.java`
 
 ```java
 import java.util.Collections;
@@ -365,7 +403,7 @@ public class PersonService {
 
 Finally, we have a `PersonMain` class that runs our logic.
 
-#### PersonMain
+### `PersonMain.java`
 
 ```java
 import java.util.ArrayList;
@@ -392,11 +430,14 @@ public class PersonMain {
 }
 ```
 
-If you look at the `Comparator` interface, you notice that it is a functional interface. It has only one abstract method called `compare()`. This makes it a perfect candidate to be used in lambdas.
+If you look at the `Comparator` interface, you notice that it is a functional interface.
+It has only one abstract method called `compare()`.
+This makes it a perfect candidate to be used in lambdas.
 
 ### Comparator example using a lambda expression
 
-Now, let’s see how we can write the same logic using a lambda expression. When writing lambdas, we only need to consider the input parameters and the method body.
+Now, let's see how we can write the same logic using a lambda expression.
+When writing lambdas, we only need to consider the input parameters and the method body.
 
 Below is the signature of the `compare()` method.
 
@@ -420,7 +461,7 @@ So, this is the lambda expression for sorting the `Person` objects based on name
 
 You can see how easy and concise it is to write code with lambdas instead of using anonymous classes.
 
-#### Person
+### `Person.java`
 
 ```java
 public class Person {
@@ -449,7 +490,7 @@ public class Person {
 }
 ```
 
-#### PersonService
+### `PersonService.java`
 
 ```java
 import java.util.Collections;
@@ -466,7 +507,7 @@ public class PersonService {
 }
 ```
 
-#### PersonMain
+### `PersonMain.java`
 
 ```java
 import java.util.ArrayList;
@@ -498,7 +539,8 @@ public class PersonMain {
 <details>
 <summary>Predicate Functional Interface</summary>
 
-Introduces the `Predicate` functional interface. We will discuss where a `Predicate` interface can be used and how to use it.
+Introduces the `Predicate` functional interface.
+We will discuss where a `Predicate` interface can be used and how to use it.
 
 The following topics are covered:
 - Introduction to the `Predicate` interface
@@ -510,9 +552,12 @@ The following topics are covered:
 
 ### Introduction to the `Predicate` interface
 
-Java 8 provides some in-built functional interfaces in the `java.util.function` package. These interfaces are required so that, while writing lambda expressions, we don't need to worry about creating a functional interface.
+Java 8 provides some in-built functional interfaces in the `java.util.function` package.
+These interfaces are required so that, while writing lambda expressions, we don't need to worry about creating a functional interface.
 
-There are 43 predefined interfaces in Java 8. Remembering all of them is a bit difficult, so we will divide them into categories and look at each category. The first category that we are looking at in this lesson is `Predicate`.
+There are 43 predefined interfaces in Java 8.
+Remembering all of them is a bit difficult, so we will divide them into categories and look at each category.
+The first category that we are looking at in this lesson is `Predicate`.
 
 Below are the interfaces in this category:
 
@@ -524,7 +569,8 @@ Below are the interfaces in this category:
 | `LongPredicate`         | Accepts one long-value argument                                                    | `boolean test(long value)`   |
 | `BiPredicate<T, U>`     | Accepts two arguments (reference types)                                            | `boolean test(T t, U u)`     |
 
-The `Predicate<T>` interface has an abstract method `boolean test(T t)`. Basically, a predicate is a function that evaluates the given input and returns `true` or `false`.
+The `Predicate<T>` interface has an abstract method `boolean test(T t)`.
+Basically, a predicate is a function that evaluates the given input and returns `true` or `false`.
 
 Below is the list of methods available in the `Predicate<T>` interface.
 
@@ -532,7 +578,11 @@ Below is the list of methods available in the `Predicate<T>` interface.
 
 As we can see, there is only one abstract method and a few default and static methods.
 
-Let's look at an example. We have a `PredicateDemo` class, which has a method `isPersonEligibleForVoting()`. This method takes in a `Person` object and a `Predicate` as a parameter. The `Predicate` is evaluated to check if the given `Person` is eligible for voting or not.
+Let's look at an example. We have a `PredicateDemo` class, which has a method `isPersonEligibleForVoting()`.
+This method takes in a `Person` object and a `Predicate` as a parameter.
+The `Predicate` is evaluated to check if the given `Person` is eligible for voting or not.
+
+### `PredicateDemo.java`
 
 ```java
 import java.util.function.Predicate;
@@ -561,15 +611,19 @@ class Person {
 }
 ```
 
-In the above example, we use a `Predicate<T>`. This interface has some other default and static methods that are used for the purpose of chaining. We will discuss these methods and look at one example for each of them.
+In the above example, we use a `Predicate<T>`. This interface has some other default and static methods that are used for the purpose of chaining.
+We will discuss these methods and look at one example for each of them.
 
 ### a) `and(Predicate other)`
 
 This method returns a composed predicate that represents a short-circuiting logical AND of this predicate and another.
 
-In the below example, we need to check if a person is eligible for club membership. The criteria is that the person’s age should be more than 18 and less than 60.
+In the below example, we need to check if a person is eligible for club membership.
+The criteria is that the person's age should be more than 18 and less than 60.
 
 We have created two predicates and then combined them into a single predicate using the `and()` method.
+
+### `PredicateDemo.java`
 
 ```java
 import java.util.function.Predicate;
@@ -615,9 +669,12 @@ Person is eligible for membership: true
 
 This method returns a composed predicate that represents a short-circuiting logical OR of this predicate and another.
 
-In the below example we need to check if a person is eligible for retirement. The criteria is that either the person’s age should be more than 60 or the year of service should be more than 30.
+In the below example we need to check if a person is eligible for retirement.
+The criteria is that either the person’s age should be more than 60 or the year of service should be more than 30.
 
 We will create two predicates and then combined them into a single predicate using the `or()` method.
+
+### `PredicateDemo.java`
 
 ```java
 import java.util.function.Predicate;
@@ -628,7 +685,7 @@ public class PredicateDemo {
     }
     
     public static void main(String[] args) {
-        Person person = new Person("Alex", 23);
+        Person person = new Person("Alex", 23, 10);
         // Created a predicate. It returns true if age is greater than 60.
         Predicate<Person> greaterThanSixty = (p) -> p.age > 60;
         // Created a predicate. It returns true if year of service is greater than 30.
@@ -645,7 +702,7 @@ class Person {
     int age;
     int yearsOfService;
 
-    Person(String name, int age) {
+    Person(String name, int age, int yearsOfService) {
         this.name = name;
         this.age = age;
         this.yearsOfService = yearsOfService;
@@ -663,9 +720,14 @@ Person is eligible for membership: false
 
 This method returns a predicate that represents the logical negation of the predicate it is called on.
 
-Suppose we have a Predicate defined, but in some areas, we need to negate that predicate. In that case, we can use `negate()`.
+Suppose we have a Predicate defined, but in some areas, we need to negate that predicate.
+In that case, we can use `negate()`.
 
-In the below example, we have a predicate that checks if a number is greater than 10. However, we need to check if a number is less than 10. Now instead of writing a new predicate, we can negate the predicate we already have.
+In the below example, we have a predicate that checks if a number is greater than 10.
+However, we need to check if a number is less than 10.
+Now instead of writing a new predicate, we can negate the predicate we already have.
+
+### `PredicateDemo.java`
 
 ```java
 import java.util.function.Predicate;
@@ -691,7 +753,8 @@ Is number less than ten: false
 
 ### d) `isEqual(Object targetRef)`
 
-This method returns a predicate that tests if two arguments are equal according to `Objects.equals(Object, Object)`. This is not a chaining method.
+This method returns a predicate that tests if two arguments are equal according to `Objects.equals(Object, Object)`.
+This is not a chaining method.
 
 ```java
 import java.util.function.Predicate;
@@ -716,15 +779,24 @@ false
 
 ### Introduction to the `BiPredicate` interface
 
-The `Predicate<T>` takes only one parameter and returns the result. Now suppose we have a requirement where we need to send two parameters (i.e., `Person` object and min age to vote) and then return the result. Here, we can use `BiPredicate<T, T>`.
+The `Predicate<T>` takes only one parameter and returns the result.
+Now suppose we have a requirement where we need to send two parameters (i.e., `Person` object and min age to vote) and then return the result.
+Here, we can use `BiPredicate<T, T>`.
 
-The `BiPredicate<T, T>` has a functional method `test(Object, Object)`. It takes in two parameters and returns a `boolean` value. Below is the list of methods in the `BiPredicate<T, T>` interface.
+The `BiPredicate<T, T>` has a functional method `test(Object, Object)`.
+It takes in two parameters and returns a `boolean` value.
+Below is the list of methods in the `BiPredicate<T, T>` interface.
 
 ![img.png](img/02.png)
 
-If you notice in the above example, we are hard coding the voting age in our lambda, e.g., `p -> p.getAge() > 18`. The voting age, i.e., 18, is hardcoded here. If we want to take this age as input, we can use a `BiPredicate` instead of `Predicate`.
+If you notice in the above example, we are hard coding the voting age in our lambda, e.g., `p -> p.getAge() > 18`.
+The voting age, i.e., 18, is hardcoded here.
+If we want to take this age as input, we can use a `BiPredicate` instead of `Predicate`.
 
-In the example shown below, `isPersonEligibleForVoting()` takes in three parameters. `Person` object, `age`, and `BiPredicate`.
+In the example shown below, `isPersonEligibleForVoting()` takes in three parameters.
+`Person` object, `age`, and `BiPredicate`.
+
+### `PredicateTest.java`
 
 ```java
 import java.util.function.BiPredicate;
@@ -757,7 +829,8 @@ class Person {
 }
 ```
 
-Similarly, we can use other predicates like `IntPredicate`, `LongPredicate`, and `DoublePredicate`. The only difference is that these predicates take an input of a particular type, i.e., `int`, `double`, or `long`.
+Similarly, we can use other predicates like `IntPredicate`, `LongPredicate`, and `DoublePredicate`.
+The only difference is that these predicates take an input of a particular type, i.e., `int`, `double`, or `long`.
 
 You should now have a clear understanding of using the `Predicate` functional interface in your lambdas.
 
@@ -772,9 +845,10 @@ The following topics are covered:
 - `IntSupplier`
 - `DoubleSupplier`
 
-`Supplier` is an interface that does not take in any argument but produces a value when the `get()` function is invoked. Suppliers are useful when we don't need to apply any value and obtain a result at the same time.
+`Supplier` is an interface that does not take in any argument but produces a value when the `get()` function is invoked.
+Suppliers are useful when we don't need to apply any value and obtain a result at the same time.
 
-Below are some of the functional interfaces, which can be categorized as a supplier.
+Below are some functional interfaces available, which can be categorized as a supplier.
 
 | Interface name    | Description                                       | Abstract method          |
 |-------------------|---------------------------------------------------|--------------------------|
@@ -786,25 +860,30 @@ Below are some of the functional interfaces, which can be categorized as a suppl
 
 ### `Supplier<T>`
 
-The `Supplier<T>` interface supplies a result of type `T`. In the previous lesson, we were passing a person object and a predicate to our `isPersonEligibleForVoting()` method.
+The `Supplier<T>` interface supplies a result of type `T`.
+In the previous lesson, we were passing a person object and a predicate to our `isPersonEligibleForVoting()` method.
 
-In this example, we will provide a `Supplier<Person>` instead of the Person object. The `isPersonEligibleForVoting()` method will, itself, fetch the `Person` object from the supplier. Here is the code for this.
+In this example, we will provide a `Supplier<Person>` instead of the Person object.
+The `isPersonEligibleForVoting()` method will, itself, fetch the `Person` object from the supplier.
+Here is the code for this.
+
+### `SupplierTest.java`
 
 ```java
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class SupplierTest {
-  static boolean isPersonEligibleForVoting(Supplier<Person> supplier, Predicate<Person> predicate) {
-    return predicate.test(supplier.get());
-  }
+    static boolean isPersonEligibleForVoting(Supplier<Person> supplier, Predicate<Person> predicate) {
+        return predicate.test(supplier.get());
+    }
 
-  public static void main(String args[]) {
-    Supplier<Person> supplier = () -> new Person("Alex", 23);
-    Predicate<Person> predicate = (p) -> p.age > 18;
-    boolean eligible = isPersonEligibleForVoting(supplier, predicate);
-    System.out.println("Person is eligible for voting: " + eligible);
-  }
+    public static void main(String[] args) {
+        Supplier<Person> supplier = () -> new Person("Alex", 23);
+        Predicate<Person> predicate = (p) -> p.age > 18;
+        boolean eligible = isPersonEligibleForVoting(supplier, predicate);
+        System.out.println("Person is eligible for voting: " + eligible);
+    }
 }
 
 class Person {
@@ -824,11 +903,15 @@ class Person {
 Person is eligible for voting: true
 ```
 
-The `Supplier<T>` interface does not contain any default or static methods. Here are some of the primitive specializations of the supplier interface.
+The `Supplier<T>` interface does not contain any default or static methods.
+Here are some of the primitive specializations of the supplier interface.
 
 ### `IntSupplier`
 
-The `IntSupplier` interface has a method `getAsInt()`, which applies the given operation on its argument and returns an int value. It is similar to using an object of type `Supplier<Integer>`.
+The `IntSupplier` interface has a method `getAsInt()`, which applies the given operation on its argument and returns an int value.
+It is similar to using an object of type `Supplier<Integer>`.
+
+### `SupplierDemo.java`
 
 ```java
 import java.util.function.IntSupplier;
@@ -849,7 +932,10 @@ public class SupplierDemo {
 
 ### `DoubleSupplier`
 
-The `DoubleSupplier` interface has a method `getAsDouble()`, which applies the given operation on its argument and returns a `double` value. It is similar to using an object of type `Supplier<Double>`.
+The `DoubleSupplier` interface has a method `getAsDouble()`, which applies the given operation on its argument and returns a `double` value.
+It is similar to using an object of type `Supplier<Double>`.
+
+### `SupplierDemo.java`
 
 ```java
 import java.util.function.DoubleSupplier;
@@ -899,13 +985,15 @@ Below are some of the functional interfaces which can be categorized as `Consume
 
 This interface takes a parameter of type `T` and does not return anything.
 
-A consumer can be used in all contexts where an object needs to be consumed,i.e. taken as input, and some operation is performed on the object without returning any result.
+A consumer can be used in all contexts where an object needs to be consumed; i.e., taken as input, and some operation is performed on the object without returning any result.
 
 Below is the list of methods in the `Consumer` interface. `Consumer<T>` has an abstract method `accept()` and a default method called `andThen()`, which is used for chaining.
 
 ![img.png](img/03.png)
 
 In the below example, we will create a `Consumer` which prints a value.
+
+### `ConsumerDemo.java`
 
 ```java
 import java.util.function.Consumer;
@@ -928,13 +1016,17 @@ Hello World.
 Integer value = 5
 ```
 
-The `andThen()` method, which is a default method in the `Consumer` interface, is used for chaining. Here is the syntax of this method:
+The `andThen()` method, which is a default method in the `Consumer` interface, is used for chaining.
+Here is the syntax of this method:
 
 ```
 Consumer<T> andThen(Consumer<? super T> after)
 ```
 
-The `andThen()` method returns a composed `Consumer` that performs this operation followed by the `after` operation (see above parameter list). In the below example, we will create two consumers, and we will chain them together using the `andThen()` method.
+The `andThen()` method returns a composed `Consumer` that performs this operation followed by the `after` operation (see above parameter list).
+In the below example, we will create two consumers, and we will chain them together using the `andThen()` method.
+
+### `ConsumerDemo.java`
 
 ```java
 import java.util.function.Consumer;
@@ -962,6 +1054,8 @@ This interface takes two parameters and returns nothing.
 - `U` - the type of the second argument to the operation
 
 This interface has the same methods as present in the `Consumer<T>` interface.
+
+### `BiConsumerDemo.java`
 
 ```java
 import java.util.function.BiConsumer;
@@ -1017,9 +1111,13 @@ Below is an example of each method:
 
 ### `R apply(T t)`
 
-This is the abstract method of the `Function` interface. It takes one argument of type `T` as input and returns a value of type `R`.
+This is the abstract method of the `Function` interface.
+It takes one argument of type `T` as input and returns a value of type `R`.
 
-In the below example, we will create a function called `lengthFunction`. It takes a string as input and returns the length of the string as output.
+In the below example, we will create a function called `lengthFunction`.
+It takes a string as input and returns the length of the string as output.
+
+### `FunctionInterfaceDemo.java`
 
 ```java
 import java.util.function.Function;
@@ -1042,6 +1140,8 @@ String length: 17
 ### `compose(Function<? super V, ? extends T> before)`
 
 Returns a composed function that first applies the function provided as a parameter on the input, and then applies the function on which it is called, to the result.
+
+### `FunctionDemo.java`
 
 ```java
 import java.util.function.Function;
@@ -1068,6 +1168,8 @@ compose result: 16
 ### `andThen(Function<? super R, ? extends V> after)`
 
 This method returns a composed function that first applies the function on which it is called on the input, and then applies the function provided as parameter, to the result.
+
+
 
 ```java
 import java.util.function.Function;
@@ -1129,9 +1231,11 @@ The following topics are covered:
 
 ### `UnaryOperator<T>`
 
-The `UnaryOperator<T>` interface represents a function that takes one argument of type `T` and returns a value of the same type. This is similar to the `Function` interface, which is a parent to the `UnaryOperator` interface.
+The `UnaryOperator<T>` interface represents a function that takes one argument of type `T` and returns a value of the same type.
+This is similar to the `Function` interface, which is a parent to the `UnaryOperator` interface.
 
-The `UnaryOperator` does not define any new abstract methods. Since it extends the `Function` interface from the same package, it inherits the following method from the `Function` interface:
+The `UnaryOperator` does not define any new abstract methods.
+Since it extends the `Function` interface from the same package, it inherits the following method from the `Function` interface:
 
 `T apply(T t)`
 
@@ -1144,7 +1248,8 @@ Below are the functional interfaces, which can be categorized as unary operators
 | `IntConsumer`      | Accepts a single int-value operand and produces an int-value result                                                 | `int applyAsInt(int operand)`          |
 | `LongConsumer`     | Accepts a single long-value operand and produces a long-value result                                                | `long applyAsLong(long operand)`       |
 
-In the below example, we will create a lambda of unary operator type. It will take a `Person` object as input, fill data in the object, and return the same object as the output.
+In the below example, we will create a lambda of unary operator type.
+It will take a `Person` object as input, fill data in the object, and return the same object as the output.
 
 ```java
 import java.util.function.UnaryOperator;
@@ -1193,9 +1298,12 @@ Person Name: Poroggo Person Age: 3
 
 ### `IntUnaryOperator`
 
-This is the primitive flavor of the `UnaryOperator`. It takes an `int` as an argument and returns `int` as a result. *We should always prefer using the primitive flavors of functional interfaces as boxing and unboxing are not good for performance*.
+This is the primitive flavor of the `UnaryOperator`.
+It takes an `int` as an argument and returns `int` as a result.
+*We should always prefer using the primitive flavors of functional interfaces as boxing and unboxing are not good for performance*.
 
-In the below example, we will create a lambda of `IntUnaryOperator` type. It takes a number as input and returns its square.
+In the below example, we will create a lambda of `IntUnaryOperator` type.
+It takes a number as input and returns its square.
 
 ```java
 import java.util.function.IntUnaryOperator;
@@ -1227,7 +1335,8 @@ The following topics are covered:
 
 ### `BinaryOperator<T>`
 
-`BinaryOperator<T>` is a functional interface that inherits from `BiFunction<T, T, T>` interface. The `BinaryOperator<T>` interface takes only one parameter as compared to `BiFunction<T, T, T>`, which takes three parameters (two operands' type and one result type).
+`BinaryOperator<T>` is a functional interface that inherits from `BiFunction<T, T, T>` interface.
+The `BinaryOperator<T>` interface takes only one parameter as compared to `BiFunction<T, T, T>`, which takes three parameters (two operands' type and one result type).
 
 Both the input objects and the result are of the same type in `BinaryOperator<T>`.
 
@@ -1310,11 +1419,17 @@ If a lambda expression captures a local variable then the variable should be eit
 
 ### What is effectively final?
 
-**Effectively final** is a new concept that was introduced in Java 8. A non-final, local variable whose value is never changed after initialization is known as **effectively final**.
+**Effectively final** is a new concept that was introduced in Java 8.
+A non-final, local variable whose value is never changed after initialization is known as **effectively final**.
 
-Before Java 8, we cannot use a non-final, local variable in an anonymous class. If you need to access a local variable in an anonymous class, then it should be declared as final. This restriction is relaxed in Java 8. Now, the compiler, itself can check if the value of a variable is not changed after the assignment. Then, it is **effectively final**.
+Before Java 8, we cannot use a non-final, local variable in an anonymous class.
+If you need to access a local variable in an anonymous class, then it should be declared as final.
+This restriction is relaxed in Java 8. Now, the compiler, itself can check if the value of a variable is not changed after the assignment.
+Then, it is **effectively final**.
 
-Let's look at an example of a capturing lambda. In the below example, our lambda is capturing a local variable called `i`. The value of this variable is initialized once and never changed, so it is **effectively final**.
+Let's look at an example of a capturing lambda.
+In the below example, our lambda is capturing a local variable called `i`.
+The value of this variable is initialized once and never changed, so it is **effectively final**.
 
 ```java
 import java.util.function.UnaryOperator;
@@ -1383,7 +1498,9 @@ public class CapturingLambdaDemo {
 
 Now, let's discuss why the local variable should be *final* or *effectively final* if it is used in a lambda expression.
 
-When a local variable is used in a lambda expression, the lambda makes a copy of that variable. This occurs because the scope of a lambda expression consists of the duration of time in which the method exists in the genericClasses. If the lambda does not make a copy of the variable, then the variable is lost after the method is removed from the genericClasses.
+When a local variable is used in a lambda expression, the lambda makes a copy of that variable.
+This occurs because the scope of a lambda expression consists of the duration of time in which the method exists in the genericClasses.
+If the lambda does not make a copy of the variable, then the variable is lost after the method is removed from the genericClasses.
 
 Now, if the variable is not final or effectively final, it is possible that the value of the variable is changed after using it in the lambda as shown below.
 
@@ -1419,7 +1536,9 @@ CapturingLambdaDemo.java:16: error: local variables referenced from a lambda exp
 
 One of the main purposes of lambdas is use in parallel computing, which means that they're really helpful when it comes to thread-safety.
 
-The "effectively final" paradigm helps a lot with thread-safety, but not in every case. Lambdas can't change a value of an object from enclosing scope. But in the case of mutable object variables, a state could be changed inside lambda expressions.
+The "effectively final" paradigm helps a lot with thread-safety, but not in every case.
+Lambdas can't change a value of an object from enclosing scope.
+But in the case of mutable object variables, a state could be changed inside lambda expressions.
 
 Consider the following code:
 
@@ -1429,7 +1548,7 @@ Runnable r = () -> total[0]++;
 r.run();
 ```
 
-This code is legal, as the `total` variable remains “effectively final,” but the object it references **will not have the same state after execution of the lambda**.
+This code is legal, as the `total` variable remains "effectively final," but the object it references **will not have the same state after execution of the lambda**.
 
 After reading this, you should have a clear idea of what **effectively final** variables are and why local variables in lambdas should be **effectively final**.
 
