@@ -1,5 +1,7 @@
 # Linked list
 
+## Basics
+
 The following topics are covered:
 
 - Internal implementation of `LinkedList`
@@ -66,7 +68,7 @@ Similarly, the `prev` field of the node at index `i + 1` is set to node `i - 1`.
 
 
 <details>
-<summary>Time complexities for linked list operations</summary>
+<summary>LinkedList operations and time complexities</summary>
 
 ## Time complexities for `LinkedList` operations
 
@@ -155,6 +157,242 @@ e.g.,
 ```
 LinkedList<Integer> list = new LinkedList<>();
 list.addAll(index, existingCollection);
+```
+
+### `ElementInsertionDemo.java`
+
+```java
+package collections.linkedlist;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class ElementInsertionDemo {
+
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        linkedList.add(3);
+        linkedList.add(1);
+        linkedList.addLast(5);
+        System.out.println(linkedList);
+
+        System.out.println("-".repeat(30));
+
+        linkedList.addFirst(0);
+        System.out.println(linkedList);
+
+        System.out.println("-".repeat(30));
+
+        linkedList.add(2, 20);
+        System.out.println(linkedList);
+
+        System.out.println("-".repeat(30));
+
+        List<Integer> list = new ArrayList<>();
+        list.add(101);
+        list.add(102);
+        list.add(103);
+
+        linkedList.addAll(3, list);
+        System.out.println(linkedList);
+    }
+
+}
+```
+
+</details>
+
+
+## Fetching and Removing
+
+**Topics**:
+
+- Fetching an element from a LinkedList
+  - Fetching the first element
+  - Fetching the last element
+  - Fetching an element at a particular index
+- Removing an element from a LinkedList
+  - Removing the first element
+  - Removing the last element
+  - Removing an element at a particular index
+  - Removing a particular element
+- Sorting a linked list
+
+<details>
+<summary>Fetching an element from a LinkedList</summary>
+
+#### Fetching the first element
+
+Use the `getFirst()` method to fetch the first element in the list.
+If the `LinkedList` is empty, then `NoSuchElementException` is thrown.
+
+#### Fetching the last element
+
+Use the `getLast()` method to fetch the last element in the list.
+If the `LinkedList` is empty, then `NoSuchElementException` is thrown.
+
+#### Fetching an element at a particular index
+
+Fetch an element at a particular index using the `getIndex()` method.
+
+The index should be more than zero and less than the size of the `LinkedList`; otherwise, `IndexOutOfBoundsException` is thrown.
+
+### `LinkedListFetchDemo.java`
+
+```java
+package collections.linkedlist;
+
+import java.util.LinkedList;
+
+public class LinkedListFetchDemo {
+
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        linkedList.add(1);
+        linkedList.add(2);
+        linkedList.add(3);
+        linkedList.add(4);
+        linkedList.add(5);
+
+        System.out.println(linkedList.getFirst());  // 1
+        System.out.println(linkedList.getLast());  // 5
+        System.out.println(linkedList.get(2));  // 3
+    }
+
+}
+```
+
+**Output**
+
+```
+1
+5
+3
+```
+
+</details>
+
+
+<details>
+<summary>Removing an element from a LinkedList</summary>
+
+#### Removing the first element
+
+Use the `removeFirst()` method to remove the first element in the list.
+If the `LinkedList` is empty, then `NoSuchElementException` is thrown.
+
+#### Removing the last element
+
+Use the `removeLast()` method to remove the last element in the list.
+If the `LinkedList` is empty, then `NoSuchElementException` is thrown.
+
+#### Removing an element at a particular index
+
+Remove an element at a particular index by using the `remove(int index)` method.
+
+The index should be more than zero and less than the size of the `LinkedList`; otherwise, `IndexOutOfBoundsException` is thrown.
+
+#### Removing a particular element
+
+Use the `remove(Object o)` method to remove a particular element from the `LinkedList`.
+If there is more than one occurrence of a particular element, then the first occurrence is removed.
+
+To remove the last occurrence of an element, use the `removeLastOccurrence()` method.
+
+### `LinkedListRemoveDemo.java`
+
+```java
+package collections.linkedlist;
+
+import java.util.LinkedList;
+
+public class LinkedListRemoveDemo {
+
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedList = new LinkedList<>();
+    
+        linkedList.add(1);
+        linkedList.add(2);
+        linkedList.add(3);
+        linkedList.add(4);
+        linkedList.add(2);
+        linkedList.add(4);
+        linkedList.add(5);
+    
+        System.out.println("LinkedList before removing any element: " + linkedList);
+    
+        linkedList.remove();  // Remove the first element.
+        System.out.println("LinkedList after removing the first element: " + linkedList);
+    
+        linkedList.removeLast();  // Remove the last element.
+        System.out.println("LinkedList after removing the last element: " + linkedList);
+    
+        linkedList.remove(Integer.valueOf(2));  // Remove the first occurrence of 2.
+        System.out.println("LinkedList after removing the first occurrence of 2: " + linkedList);
+    
+        linkedList.removeLastOccurrence(4);
+        System.out.println("LinkedList after removing the last occurrence of 4: " + linkedList);
+    }
+
+}
+```
+
+**Output**
+
+```
+LinkedList before removing any element: [1, 2, 3, 4, 2, 4, 5]
+LinkedList after removing the first element: [2, 3, 4, 2, 4, 5]
+LinkedList after removing the last element: [2, 3, 4, 2, 4]
+LinkedList after removing the first occurrence of 2: [3, 4, 2, 4]
+LinkedList after removing the last occurrence of 4: [3, 4, 2]
+```
+
+</details>
+
+
+<details>
+<summary>Sorting a linked list</summary>
+
+To sort a `LinkedList`, use the `sort()` method of the `Collections` class as shown in the example below.
+
+### `LinkedListSortDemo.java`
+
+```java
+package collections.linkedlist;
+
+import java.util.Collections;
+import java.util.LinkedList;
+
+public class LinkedListDemo {
+
+	public static void main(String[] args) {
+		LinkedList<Integer> linkedList = new LinkedList<>();
+		
+		linkedList.add(20);
+		linkedList.add(2);
+		linkedList.add(12);
+		linkedList.add(40);
+		linkedList.add(76);
+		linkedList.add(41);
+		linkedList.add(53);
+		
+		Collections.sort(linkedList);  // Sort the list.
+		
+		System.out.println(linkedList);
+	}
+    
+}
+```
+
+**Output**
+
+```
+List before sorting:
+[20, 2, 12, 40, 76, 41, 53]
+
+List after sorting:
+[2, 12, 20, 40, 41, 53, 76]
 ```
 
 </details>
