@@ -1,8 +1,8 @@
-### ArrayLists
+## ArrayLists
 
 <br />
 
-#### Inserting and retrieving elements 
+### Inserting and retrieving elements 
 
 <details>
 <summary>Inserting a single element at a given index</summary>
@@ -29,7 +29,7 @@
 
 <br />
 
-#### Operations
+### Operations
 
 <details>
 <summary>Removing all the elements within a range</summary>
@@ -135,7 +135,7 @@ public class ArrayListDemo {
 
 <br />
 
-#### Iteration
+### Iteration
 
 <details>
 <summary>Using for loop</summary>
@@ -355,7 +355,7 @@ public class ArrayListDemo {
 
 <br />
 
-#### Sorting
+### Sorting
 
 <details>
 <summary>Explanation</summary>
@@ -524,7 +524,7 @@ ArrayList is in descending order: [97, 83, 37, 36, 15, 11]
 
 <br />
 
-#### Understanding the `Comparable` interface
+### Understanding the `Comparable` interface
 
 <details>
 <summary>Introduction</summary>
@@ -752,7 +752,7 @@ Vehicle Brand: Volkswagen, Vehicle Make: 2010
 
 <br />
 
-#### Understanding the `Comparator` interface
+### Understanding the `Comparator` interface
 
 <details>
 <summary>Main drawback of Comparator</summary>
@@ -958,7 +958,7 @@ public class ArrayListComparatorDemo3 {
 
 <br />
 
-#### ArrayList exercise
+### ArrayList exercise
 
 Solve the following exercises, given an `ArrayList` that contains `Employee` objects.
 
@@ -1115,3 +1115,6 @@ public class ArrayListExercise {
 ```
 
 </details>
+
+
+<br />
