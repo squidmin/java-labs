@@ -194,6 +194,123 @@ Please note that when <code>CopyOnWriteArrayList</code> creates an iterator, the
 <details>
 <summary>CopyOnWriteArrayList: Iteration</summary>
 
+How to iterate over a `CopyOnWriteArrayList`.
 
+- Iteration using `forEach()`
+- Iteration using `iterator()`
+
+### Iteration using `forEach()`
+
+We can use the `forEach(Consumer<? super E> action)` method to iterate over a `CopyOnWriteArrayList`.
+The method was added in Java 8 and takes a lambda expression of type `Consumer` as the parameter.
+
+```java
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class CopyOnWriteArrayListDemo {
+    
+    public static void main(String[] args) {
+        List<String> list = new CopyOnWriteArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Orange");
+    }
+    
+}
+```
+
+### Iteration using `iterator()`
+
+The `iterator()` method returns as iterator that provides a snapshot of the state of the list when the iterator was constructed.
+No synchronization is needed while traversing the iterator because the iteration is being done on a snapshot.
+
+If after creating an iterator, an element is added to the `ArrayList`, then `ConcurrentModificationException` is thrown.
+This is not the case with `CopyOnWriteArrayList` because the addition of elements takes place on the copy and not the actual array.
+But the iterator will be able to access only the elements which were present at the time of the creation of the iterator.
+Let's understand this further through an example.
+
+```java
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class CopyOnWriteArrayListDemo {
+    
+    public static void main(String[] args) {
+        List<String> list = new CopyOnWriteArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Orange");
+        
+        // Create an iterator
+        Iterator<String> itr = list.iterator();
+        // Add elements after creating the iterator. ConcurrentModificationException will not be thrown.
+        list.add("Papaya");
+        
+        // Iterating the list via the iterator that was created earlier. "Papaya" will not be present.
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+
+        System.out.println("Again getting the iterator");
+        // Again getting the iterator. This time "Papaya" will be present.
+        itr = list.iterator();
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+    }
+    
+}
+```
+
+There is one interesting thing about this iterator that makes it different from other iterator implementations such as `ArrayList` or `LinkedList`.
+The iterator returned by the `iterator()` method of the `CopyOnWriteArrayList` class does not support the remove method.
+If we want to delete an element from the `ArrayList` while iterating, then we should use the iterator's `remove()` method.
+This isn't the case for a `CopyOnWriteArrayList`.
+
+In `CopyOnWriteArrayList` we can directly remove the element from the list while iterating and `ConcurrentModificationException` will not be thrown as shown in the below example.
+
+> The reason for this is that we are iterating over a snapshot of the `List` but when we remove an element, it is removed from the copy of the `List`.
+> So no `ConcurrentModificationException` is thrown.
+
+```java
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class CopyOnWriteArrayListDemo {
+    
+    public static void main(String[] args) {
+        List<String> list = new CopyOnWriteArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Orange");
+        
+        // Create an iterator
+        Iterator<String> itr = list.iterator();
+        
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+            list.remove("Orange");
+        }
+        System.out.println("Again creating the iterator");
+        // Create an iterator
+        itr = list.iterator();
+        
+        while (itr.hasNext()) {
+            System.out.println(itr.next());
+        }
+    }
+    
+}
+```
+
+---
+
+**Why does the iterator of `CopyOnWriteArrayList` lack a `remove()` method?**
+1. It is not needed, since in a `CopyOnWriteArrayList` we can directly remove the element from the `List` without an exception being thrown.
+2. If there was a `remove()` method in the `iterator()` then it will not be very useful. It will only remove the element from the snapshot that was created for iteration.
+   The actual array that holds the data will not be changed.
 
 </details>
