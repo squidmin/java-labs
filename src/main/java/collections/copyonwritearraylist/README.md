@@ -264,8 +264,8 @@ public class CopyOnWriteArrayListDemo {
 }
 ```
 
-There is one interesting thing about this iterator that makes it different from other iterator implementations such as `ArrayList` or `LinkedList`.
-The iterator returned by the `iterator()` method of the `CopyOnWriteArrayList` class does not support the remove method.
+There is one interesting thing about this iterator that makes it different from other iterator implementations such as those of `ArrayList` or `LinkedList`.
+The iterator returned by the `iterator()` method of the `CopyOnWriteArrayList` class does not support the `remove()` method.
 If we want to delete an element from the `ArrayList` while iterating, then we should use the iterator's `remove()` method.
 This isn't the case for a `CopyOnWriteArrayList`.
 
