@@ -1,4 +1,7 @@
-# `HashSet`: Creation and insertion
+# `HashSet`
+
+<details>
+<summary>HashSet: Creation and insertion</summary>
 
 `HashSet` creation and insertion.
 
@@ -13,6 +16,7 @@ The following topics are covered:
 
 `HashSet` is the class in the `java.util` package which implements the `Set` interface.
 Some of the features of `HashSet` are:
+
 1. `HashSet` does not allow duplicate elements
 2. `HashSet` allows only one null element
 3. The elements are inserted in random order in a `HashSet`
@@ -76,3 +80,165 @@ public class HashSetDemo {
     
 }
 ```
+
+</details>
+
+
+<details>
+<summary>HashSet: Operations</summary>
+
+Some operations that can be done on a `HashSet`.
+
+Topics:
+- Removing an element from a `HashSet`
+  - Using the `remove(Object o)` method
+  - Using the `clear()` method
+  - Checking if the `HashSet` is empty
+
+### Removing an element from a `HashSet`
+
+Below are ways that an element can be removed from a `HashSet`.
+
+#### Using the `remove(Object o)` method
+
+We can use the `remove(Object o)` method to remove an element from a `HashSet`.
+This method takes an object that needs to be removed as a parameter.
+If the element is removed, then this method returns `true`.
+If the element is not present, then it returns `false`.
+
+#### Using the `clear()` method
+
+We can use the `clear()` method to remove all the elements from a `HashSet`.
+
+```java
+import java.util.HashSet;
+import java.util.Set;
+
+public class HashSetDemo {
+
+    public static void main(String[] args) {
+        Set<Integer> set = new HashSet<>();
+
+        set.add(23);
+        set.add(34);
+        set.add(45);
+
+        set.remove(23);
+
+        System.out.println("HashSet after removing one element: " + set);
+        set.clear();
+        System.out.println("HashSet after removing all elements: " + set);
+    }
+
+}
+```
+
+#### Checking if the `HashSet` is empty
+
+We can check if the `HashSet` is empty using the `isEmpty()` method.
+This method returns
+
+- `true` if the `Set` doesn't contain any elements; or
+- `false` if the `Set` contains at least one element.
+
+```java
+import java.util.HashSet;
+import java.util.Set;
+
+public class HashSetDemo {
+    
+    public static void main(String[] args) {
+        Set<Integer> set = new HashSet<>();
+        
+        set.add(23);
+        set.add(34);
+        set.add(45);
+
+        System.out.println(set.isEmpty());
+    }
+    
+}
+```
+
+</details>
+
+
+<details>
+<summary>HashSet: Iteration and sorting</summary>
+
+## Iterating a HashSet
+
+Below are the different methods to iterate over a `HashSet`.
+
+### Using `for` loop
+
+A `HashSet` can be easily iterated using an enhanced `for` loop as shown below:
+
+```java
+import java.util.HashSet;
+import java.util.Set;
+
+public class HashSetDemo {
+    public static void main(String[] args) {
+        Set<Integer> set = new HashSet<>();
+        set.add(23);
+        set.add(34);
+        set.add(56);
+        for (int i : set) {
+            System.out.println();
+        }
+    }
+}
+```
+
+### Using `forEach()` method
+
+We can use the `forEach(Consumer<? super T> action)` method defined in the `Iterable` class.
+This method was introduced in Java 8.
+It accepts an action that needs to be performed for each element as a parameter.
+
+```java
+import java.util.HashSet;
+import java.util.Set;
+
+public class HashSetDemo {
+    public static void main(String[] args) {
+        Set<Integer> set = new HashSet<>();
+        set.add(23);
+        set.add(34);
+        set.add(56);
+        set.forEach(System.out::println);
+    }
+}
+```
+
+### Sorting a `HashSet`
+
+Since a `HashSet` stores the elements in random order, it is not possible to store the elements in a `HashSet` in sorted order.
+If we want to sort the elements of a `HashSet`, then we should convert it into some other `Collection` such as a `List`, `TreeSet`, or `LinkedHashSet`.
+
+Here we will see how we can convert a `HashSet` to an `ArrayList`, and then we can use the elements from the `List`.
+We can create an `ArrayList` by sending another collection to its constructor.
+We can sort this `ArrayList` using the `sort()` method of the `Collections` class.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class HashSetDemo {
+    public static void main(String[] args) {
+        Set<Integer> set = new HashSet<>();
+        set.add(23);
+        set.add(34);
+        set.add(56);
+        List<Integer> list = new ArrayList<>(set);
+        Collections.sort(list);
+        list.forEach(System.out::println);
+    }
+}
+```
+
+</details>
