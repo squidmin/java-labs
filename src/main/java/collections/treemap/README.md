@@ -77,7 +77,7 @@ public class TreeMapDemo {
         System.out.println("Elements are stored in random order: " + hashMap);
         
         // Creating a TreeMap using existing HashMap. This will store the elements in ascending order.
-        TreeMap<String, Integer> treeMap1 = new HashMap<>(hashMap);
+        TreeMap<String, Integer> treeMap1 = new TreeMap<>(hashMap);
         System.out.println("Elements are stored in ascending order:" + treeMap1);
         
         // Creating a TreeMap using existing TreeMap. This will store the elements in the same order as it was in the passed Map.
