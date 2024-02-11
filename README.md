@@ -3,12 +3,10 @@
 **Java** programming language learning labs.
 
 Created using:
-- **IntelliJ IDEA 2022.2 (Community Edition)**
-- **openjdk 11.0.17**
-
+- **IntelliJ IDEA 2023.1 (Ultimate Edition)**
+- **openjdk 17.0.8**
 
 ---
-
 
 ### Java CLI
 

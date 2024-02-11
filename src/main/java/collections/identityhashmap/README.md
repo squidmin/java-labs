@@ -5,11 +5,10 @@
 - Difference between `HashMap` and `IdentityHashMap`
 
 `IdentityHashMap` is another type of `Map` that implements the `Map`, `Serializablw`, and `Cloneable` interfaces and extends the `AbstractMap` class.
-The main feature of this map is that while storing elements, the equality of the keys is checked on the basis of reference instead of the equals method.
-What this means is that if we have two keys, `key1` and `key2`, then `key1` will be considered equal to `key2` if `key1 == key2`.
-In other words, if both keys reference the same object.
+The main feature of this map is that while storing elements, the equality of the keys is checked on the basis of reference instead of the `equals()` method.
+What this means is that if we have two keys, `key1` and `key2`, then `key1` will be considered equal if both keys reference the same object.
 
-This means that `IdentityHashMap` intentionally violates `Map`'s general contract which mandates the use of the equals method when comparing objects.
+This means that `IdentityHashMap` intentionally violates `Map`'s general contract which mandates the use of the `equals()` method when comparing objects.
 This class is designed for use only in rare cases wherein reference-equality semantics are required.
 
 Some of the features of `IdentityHashMap` are:
@@ -98,6 +97,41 @@ public class IdentityHashMapDemo {
         System.out.println();
         System.out.println("The employee objects in IdentityHashMap are:");
         System.out.println(identityHashMap);
+    }
+}
+```
+
+#### `Employee.java`
+
+```java
+public class Employee {
+    int empId;
+    String empName;
+    
+    public Employee(int empId, String empName) {
+        super();
+        this.empId = empId;
+        this.empName = empName;
+    }
+    
+    @Override
+   public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + empId;
+        result = prime * result + ((empName == null) ? 0 : empName.hashCode());
+        return result;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        Employee other = (Employee) obj;
+        if (empId != other.empId) { return false; }
+        if (empName == null) {
+            return other.empName==null;
+        } else {
+            return empName.equals(other.empName);
+        }
     }
 }
 ```
