@@ -1,9 +1,9 @@
 package practice.collectionsclass;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public class FindMinimumElementInACollection {
+public class SynchronizedListPerformance2 {
 
     public static void main(String[] args) {
 

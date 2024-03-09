@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AtomicOperations {
+
     private final List<Integer> list = new ArrayList<>();
     private final AtomicInteger size = new AtomicInteger(0);
 
@@ -72,6 +73,5 @@ public class AtomicOperations {
         totalTime = endTime - startTime;
         System.out.println("Total time using AtomicCollection: " + totalTime + " ms");
     }
+
 }
-
-
