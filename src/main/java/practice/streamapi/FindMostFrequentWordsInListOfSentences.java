@@ -7,10 +7,6 @@ import java.util.stream.Collectors;
 
 public class FindMostFrequentWordsInListOfSentences {
 
-    public static List<String> mostFrequentWords(List<String> sentences) {
-        return null;
-    }
-
     public static void main(String[] args) {
         List<String> sentences = List.of(
             "Java is a programming language",
@@ -19,8 +15,8 @@ public class FindMostFrequentWordsInListOfSentences {
             "Java and Python are popular languages"
         );
 
-        List<String> frequentWords = mostFrequentWords(sentences);
-        System.out.println("Most frequent words: " + frequentWords);
+//        List<String> frequentWords = mostFrequentWords(sentences);
+//        System.out.println("Most frequent words: " + frequentWords);
     }
 
 }
