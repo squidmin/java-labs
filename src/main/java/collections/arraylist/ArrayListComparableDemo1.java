@@ -18,7 +18,7 @@ class Employee implements Comparable<Employee> {
          * Returns a negative integer, zero, or a positive integer according to whether the age of this Employee
          *   is less than, equal to, or greater than the specified object.
          */
-        return this.age = employee.age;
+        return this.age - employee.age;
     }
 }
 

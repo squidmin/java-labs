@@ -1,13 +1,13 @@
 ## ArrayLists
 
-<br />
-
 ### Inserting and retrieving elements 
 
 <details>
 <summary>Inserting a single element at a given index</summary>
 
-`list.add(int index, E element);`
+```
+list.add(int index, E element);
+```
 
 </details>
 
@@ -15,7 +15,9 @@
 <details>
 <summary>Inserting multiple elements from another Collection</summary>
 
-`list.addAll(Collection c);`
+```
+list.addAll(Collection c);
+```
 
 </details>
 
@@ -23,21 +25,23 @@
 <details>
 <summary>Inserting multiple elements from another Collection at a particular index</summary>
 
-`list.addAll(int index, Collection c);`
+```
+list.addAll(int index, Collection c);
+```
 
 </details>
 
-<br />
 
 ### Operations
 
 <details>
 <summary>Removing all the elements within a range</summary>
 
-This method is not defined in the `List` class.
-So, it can be used only when the reference type is also `ArrayList` and not `List`.
+This method is not defined in the `List` class, so it can be used only when the reference type is also `ArrayList` (not `List`).
 
-`list.removeRange(int fromIndex, int toIndex);`
+```
+list.removeRange(int fromIndex, int toIndex);
+```
 
 </details>
 
@@ -45,7 +49,9 @@ So, it can be used only when the reference type is also `ArrayList` and not `Lis
 <details>
 <summary>Removing all the elements within a given Collection</summary>
 
-`list.removeAll(Collection c);`
+```
+list.removeAll(Collection c);
+```
 
 </details>
 
@@ -53,16 +59,16 @@ So, it can be used only when the reference type is also `ArrayList` and not `Lis
 <details>
 <summary>Removing all the elements from the ArrayList</summary>
 
-`list.clear();`
+```
+list.clear();
+```
 
-<blockquote>
-We saw that <code>remove(int index)</code> removes a method at the given index and <code>remove(Object o)</code> removes the given object from the <code>ArrayList</code>.
-Suppose we have an <code>ArrayList</code> that contains five elements, i.e., <code>[13, 21, 43, 2, 9]</code>.
-Now, if we do <code>list.remove(2)</code>, then which overloaded method will be called?
-Will <code>remove(int index)</code> be called or <code>remove(Object o)</code> be called?
-<code>remove(int index)</code> will be called because we are passing a primitive to the <code>remove</code> method.
-If we want to delete element **2**, we should call <code>remove(Integer.valueOf(2))</code> because elements are stored in an <code>ArrayList</code> as objects and not primitives.
-</blockquote>
+> We saw that `remove(int index)` removes a method at the given index and `remove(Object o)` removes the given object from the `ArrayList`.
+> Suppose we have an `ArrayList` that contains five elements, i.e., `[13, 21, 43, 2, 9]`.
+> Now, if we do `list.remove(2)`, then which overloaded method will be called?
+> Will `remove(int index)` be called or `remove(Object o)` be called?
+> `remove(int index)` will be called because we are passing a primitive to the `remove` method.
+> If we want to delete element **2**, we should call `remove(Integer.valueOf(2))` because elements are stored in an `ArrayList` as objects and not primitives.
 
 </details>
 
@@ -129,11 +135,12 @@ public class ArrayListDemo {
 <details>
 <summary>Updating an element in ArrayList</summary>
 
-`list.set(int index, E e);`
+```
+list.set(int index, E e);
+```
 
 </details>
 
-<br />
 
 ### Iteration
 
@@ -353,7 +360,6 @@ public class ArrayListDemo {
 
 </details>
 
-<br />
 
 ### Sorting
 
@@ -522,7 +528,6 @@ ArrayList is in descending order: [97, 83, 37, 36, 15, 11]
 
 </details>
 
-<br />
 
 ### Understanding the `Comparable` interface
 
@@ -536,11 +541,9 @@ Each numeric wrapper class (`Integer`, `Double`, or `Long`), the `String` class,
 This interface contains a `compareTo(T o)` method which is used by sorting methods to srot the `Collection`.
 This method returns a negative integer, zero, or a positive integer if the `this` object is less than, equal to, or greater than the object passed as an argument.
 
-<blockquote>
-If we use the <code>Collections.sort(List<T> list)</code> method to sort an <code>ArrayList</code>, then the class whose objects are stored in the <code>ArrayList</code> must implement the <code>Comparable</code> interface.
-If the <code>ArrayList</code> stores an <code>Integer</code>, a <code>Long</code>, or a <code>String</code>, then we don't need to worry as these classes already implement the <code>Comparable</code> interface.
-But if the <code>ArrayList</code> stores a custom class object, then that class must implement the <code>Comparable</code> interface.
-</blockquote>
+> If we use the `Collections.sort(List<T> list)` method to sort an `ArrayList`, then the class whose objects are stored in the `ArrayList` must implement the `Comparable` interface.
+> If the `ArrayList` stores an `Integer`, a `Long`, or a `String`, then we don't need to worry as these classes already implement the `Comparable` interface.
+> But if the `ArrayList` stores a custom class object, then that class must implement the `Comparable` interface.
 
 In the below example, we have a custom class called `Employee`.
 We have stored some `Employee` objects in an `ArrayList`, and we need to sort it.
@@ -750,7 +753,6 @@ Vehicle Brand: Volkswagen, Vehicle Make: 2010
 
 </details>
 
-<br />
 
 ### Understanding the `Comparator` interface
 
@@ -768,7 +770,9 @@ For instance, if we have a `Vehicle` class, then it can be sorted either on the 
 If we need some flexibility in sorting, we should use the `Comparator` interface instead of the `Comparable` interface.
 The `Comparator` interface has a method
 
-`compare(T o1, T o2)`
+```
+compare(T o1, T o2)
+```
 
 which takes two objects, `o1` and `o2` as parameters. It returns
 
@@ -779,7 +783,9 @@ which takes two objects, `o1` and `o2` as parameters. It returns
 If we need to use the `Comparator` interface, then we can't use the `Collections.sort(List<T> t)` method as `T` should implement the `Comparable` interface.
 There is another overloaded method
 
-`sort(List<T> list, Comparator<? super T> c)`
+```
+sort(List<T> list, Comparator<? super T> c)
+```
 
 that takes the list as well as a `Comparator` object as input.
 It then sorts the list based on the logic provided in the `Comparator` implementation.
@@ -864,7 +870,8 @@ public class ArrayListComparatorDemo1 {
 }
 ```
 
-We can also use an anonymous class in the sort method instead of creating a separate class that implements Comparator. This is shown in the below example.
+We can also use an anonymous class in the sort method instead of creating a separate class that implements `Comparator`.
+This is shown in the below example:
 
 #### `Vehicle.java`
 
@@ -956,9 +963,69 @@ public class ArrayListComparatorDemo3 {
 
 </details>
 
-<br />
+---
 
-### ArrayList exercise
+## Java `ArrayList` Questions
+
+### Questions
+
+1. **Basic Understanding**  
+   What is an `ArrayList` in Java?
+
+2. **Methods and Usage**  
+   How do you add an element to an `ArrayList`?
+
+3. **Index Operations**  
+   How do you retrieve an element at a specific index in an `ArrayList`?
+
+4. **Modification**  
+   How can you remove an element from an `ArrayList`? Provide two ways.
+
+5. **Size and Capacity**  
+   How do you find the number of elements in an `ArrayList`?
+
+6. **Type Safety**  
+   Why is it recommended to use Generics with `ArrayList`?
+
+7. **Iteration**  
+   Describe how to iterate over the elements of an `ArrayList` using a loop.
+
+8. **Comparison**  
+   Compare `ArrayList` with `LinkedList`. What are the main differences?
+
+9. **Conversion**  
+   How can you convert an array to an `ArrayList`?
+
+10. **Exceptions**  
+    What exception is thrown if you try to access an index out of the bounds of an `ArrayList`?
+
+### Answers
+
+1. An `ArrayList` is a resizable array, part of the Java Collections Framework. It allows for dynamic resizing and provides methods to manipulate the size and contents of the list.
+
+2. Use the `add(E e)` method.
+
+3. Use the `get(int index)` method.
+
+4. You can remove an element by its object using `remove(Object o)` or by its index using `remove(int index)`.
+
+5. Use the `size()` method.
+
+6. Generics provide type safety by ensuring that only a specific type of object can be added to the `ArrayList`, preventing runtime errors.
+
+7. You can use a for-loop or an iterator. Example with a for-loop: `for (int i = 0; i < list.size(); i++) { System.out.println(list.get(i)); }`.
+
+8. `ArrayList` is based on a resizable array, good for fast random access. `LinkedList` is based on a doubly-linked list, better for frequent insertions and deletions.
+
+9. Use `Arrays.asList(T... a)` for a fixed-size list backed by the array, or new `ArrayList<>(Arrays.asList(array))` for a resizable list.
+
+10. `IndexOutOfBoundsException` is thrown.
+
+This document covers basic to intermediate aspects of using `ArrayList` in Java. You can adjust the difficulty of the questions or add more based on your specific needs.
+
+---
+
+## Exercise
 
 Solve the following exercises, given an `ArrayList` that contains `Employee` objects.
 
@@ -1115,6 +1182,3 @@ public class ArrayListExercise {
 ```
 
 </details>
-
-
-<br />
