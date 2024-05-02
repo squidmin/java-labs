@@ -1,4 +1,4 @@
-package practice.collectionsclass;
+package practice.collections.collectionsclass;
 
 public class AtomicOperations {
 

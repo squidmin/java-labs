@@ -1,10 +1,9 @@
-package practice.collectionsclass;
+package practice.collections.collectionsclass;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CreateUnmodifiableList {
+public class FindMaximumElementInCollection {
 
     public static void main(String[] args) {
 

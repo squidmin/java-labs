@@ -1,9 +1,10 @@
-package practice.collectionsclass;
+package practice.collections.collectionsclass;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
-public class ShuffleArrayListElements {
+public class CreateUnmodifiableList {
 
     public static void main(String[] args) {
 

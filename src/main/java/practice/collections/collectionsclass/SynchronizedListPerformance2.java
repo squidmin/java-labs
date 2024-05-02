@@ -1,4 +1,4 @@
-package practice.collectionsclass;
+package practice.collections.collectionsclass;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
