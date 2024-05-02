@@ -20,4 +20,20 @@ Java 11, officially released in September 2018, introduced several important fea
 
 10. **Deprecate the Nashorn JavaScript Engine (JEP 335)**: The Nashorn JavaScript engine, introduced in Java 8, was deprecated in Java 11, signaling its eventual removal from future Java versions.
 
+11. **Java Flight Recorder**: Java Flight Recorder (JFR) is a profiling tool built into the JVM. It was commercial and required a license in earlier versions, but starting from Java 11, it is available as an open-source feature. JFP is used for collecting diagnostics and profiling data from a running Java application.
+
+12. **Improved Aarch64 Support**: Enhancements in the ARM architecture support, particularly for AArch64 (ARM64), which means better performance and stability on ARM platforms.
+
+13. **Low-Overhead Heap Profiling**: Introduction of a low-overhead heap profiling framework, part of JEP 331, which provides a way for applications to understand memory usage and potential leaks with minimal performance impact.
+
+14. **New Garbage Collectors**: In addition to the experimental introduction of ZGC, another garbage collector called Shenandoah was integrated as an experimental feature. Shenandoah aims to reduce GC pause times by doing most of the garbage collection work concurrently with the running Java threads.
+
+15. **Unicode 11**: Java 11 updates Unicode support to Unicode 11, which provides new characters, scripts, and emojis over Unicode 10 that was used in Java 10.
+
+16. **Security Enhancements**: Improvements to the security libraries including, but not limited to, enhancements in TLS (Transport Layer Security) to support TLS 1.3, and removal of several deprecated features like the `com.sun.security.enableCRLDP` and `com.sun.security.enableAIAcaIssuers` system properties.
+
+17. **Deprecations and Removals**: Several APIs and tools were deprecated or removed in Java 11. For example, the Java EE modules that were deprecated in Java 9 are now completely removed. Tools like `jhat` (Java Heap Analysis Tool) were also removed.
+
+18. **New System Property to Control JIT Compiler's Use**: A new system property, `jdk.disableLastUasgeTracking`, was introduced to control whether the Just-In-Time (JIT) compiler tracks the last usage of classes and methods.
+
 These enhancements and additions make Java 11 a significant release in terms of both performance improvements and modern language features.
