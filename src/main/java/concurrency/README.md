@@ -56,7 +56,7 @@ public Future<String> getSquareAsynchronously(int num) throws InterruptedExcepti
 
     Executors.newCachedThreadPool().submit(() -> {
         Thread.sleep(500);
-        // The complete() call will complete this CompetableFuture. 
+        // The complete() call will complete this CompletableFuture. 
         completableFuture.complete(num * num);
         return null;
     });
