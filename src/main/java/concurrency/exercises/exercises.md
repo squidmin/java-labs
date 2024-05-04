@@ -51,4 +51,11 @@ Use `ExecutorService` to run the task and `Future` to get the result back.
 **Task**: Implement a thread-safe counter using `AtomicInteger`.
 Multiple threads should increment the counter, and the final value should reflect the total increments correctly.
 
+## Exercise 8: Sum Up
 
+**Objective**: Optimize performance of summing up integers.
+
+**Task**: Compute the sum of all the integers from 0 to `Integer.MAX_VALUE`.
+  Use two threads to split the range into two parts and have one thread sum for each range.
+  Afterwards, add the two half sums to get the combined sum.
+  Measure the time taken to complete the computation and print it.
