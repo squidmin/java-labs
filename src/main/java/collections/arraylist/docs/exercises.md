@@ -1,6 +1,6 @@
 # `ArrayList` exercises
 
-## Java Exercise 1: Implement Comparable for Sorting Custom Objects
+## Exercise 1: Implement Comparable for Sorting Custom Objects
 
 **Objective**: Learn how to use the `Comparable` interface to sort custom objects in Java.
 
@@ -22,7 +22,7 @@ Each `Student` object has two properties:
 
 ---
 
-## Java Exercise 2: Custom Sorting with Multiple Conditions
+## Exercise 2: Custom Sorting with Multiple Conditions
 
 **Objective**: Expand your understanding of the `Comparable` interface by implementing custom sorting logic that uses multiple conditions.
 
@@ -44,31 +44,71 @@ If two books were published in the same year, secondary sorting should be based 
 
 ---
 
-## Java Exercise 3: Understanding the Importance of Consistency with equals
+## Exercise 3: Basic ArrayList Operations
 
-**Objective**: Understand the importance of consistency between the `compareTo` method of the `Comparable` interface and the `equals` method from the `Object` class.
-
-**Background**: It is strongly recommended (though not strictly required) that `(x.compareTo(y)==0) == (x.equals(y))`.
-Failure to adhere to this condition may cause unpredictable behavior when such objects are used in Java collections.
+**Objective**: Learn basic operations of the `ArrayList`, such as adding, removing, and accessing elements.
 
 **Task**:
 
-Create a class `Product` that implements the `Comparable` interface.
-A `Product` object has two properties:
-- `String productId`
-- `double price`
+- Create an `ArrayList` of integers.
+- Add several integers to the list.
+- Remove specific integers from the list using index and object removal methods.
+- Access various elements in the list and print them.
 
-The `compareTo` method should sort products based on their price in ascending order.
+**Expected Output**: Demonstrate the current state of the list after each operation, showing successful addition, removal, and access of elements.
 
-- Override the `equals` method in the `Product` class to ensure it is consistent with the `compareTo` method (i.e., two `Product` objects are equal if their `productId` is the same).
-- In your `main` method, create a `TreeSet` of `Product` objects and attempt to add duplicate products based on the `productId` to understand how the `equals` method is used in collection operations.
-- Iterate over the `TreeSet` and print out the details of each product to observe the effect of a consistent `equals` method.
+---
 
-> **Why `TreeSet` instead of `HashSet`?**
-> 
-> The `HashSet` does not maintain elements in sorted order; it's a collection designed for fast access and uniqueness checks without regard to the order of elements.
-> The sorting behavior you're expecting (i.e., seeing `Product` instances in a particular order based on their `productId` or `price`) won't be achieved with a `HashSet`.
-> 
-> `TreeSet` is a sorted collection that uses the natural ordering of its elements (defined by the `Comparable` implementation) or a `Comparator` provided at set creation time.
+## Exercise 4: Implementing a Dynamic Array
 
-**Expected Output**: The `TreeSet` should eliminate duplicate products based on the `productId`, demonstrating the importance of having a consistent `equals` method with `compareTo`.
+**Objective**: Understand how to use `ArrayList` to simulate a dynamic array that can expand based on runtime decisions.
+
+**Task**:
+
+- Create an `ArrayList` to store strings.
+- Simulate receiving an unknown number of string inputs from a user until "stop" is entered.
+- Store each input in the `ArrayList` and then print the entire list once "stop" is entered.
+
+**Expected Output**: Output all user inputs stored in the `ArrayList` after the user stops entering data.
+
+---
+
+## Exercise 5: Merging and Deduplicating ArrayLists
+
+**Objective**: Learn to merge two `ArrayLists` and remove duplicate items effectively.
+
+**Task**:
+
+- Create two `ArrayLists` of strings, each initialized with some predefined values, including some duplicates across the lists.
+- Merge the two lists into a new list that contains only unique elements, preserving the order.
+- Use a `HashSet` or `LinkedHashSet` to help with deduplication if necessary.
+
+**Expected Output**: A single merged `ArrayList` without duplicates, printed to the console.
+
+---
+
+## Exercise 6: `ArrayList` as a Stack
+
+**Objective**: Emulate stack behavior using an `ArrayList` to understand how it can be adapted for different data structure behaviors.
+
+**Task**:
+
+- Use an `ArrayList` to implement a basic stack with operations: push, pop, and peek.
+- Ensure your implementation handles underflow (popping from an empty stack) gracefully.
+- Push a series of integers onto the stack, then pop several items, and peek at the top item, printing the results at each step.
+
+**Expected Output**: Show the contents of the stack after each operation and the result of peeking or popping items.
+
+---
+
+## Exercise 7: Random Access vs. Iterative Access in `ArrayList`
+
+**Objective**: Compare the performance of random access and sequential iterative access in an `ArrayList`.
+
+**Task**:
+
+- Fill an `ArrayList` with a large number of integers.
+- Measure and compare the time taken to access all elements randomly versus accessing them sequentially.
+- Use `System.nanoTime()` to measure elapsed time for each operation.
+
+**Expected Output**: Print the time taken for random access and sequential access, highlighting the differences.

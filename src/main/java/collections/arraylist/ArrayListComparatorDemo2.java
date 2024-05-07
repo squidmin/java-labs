@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.List;
 
 class Vehicle4 {
-
     String brand;
     Integer makeYear;
 
@@ -27,7 +26,6 @@ public class ArrayListComparatorDemo2 {
         list.add(new Vehicle4("BMW", 2015));
         System.out.println("Sorting by brand name");
         Collections.sort(list, new Comparator<Vehicle4>() {
-
             @Override
             public int compare(Vehicle4 o1, Vehicle4 o2) {
                 return o1.brand.compareTo(o2.brand);
@@ -40,7 +38,6 @@ public class ArrayListComparatorDemo2 {
 
         System.out.println("Sorting by make year");
         Collections.sort(list, new Comparator<Vehicle4>() {
-
             @Override
             public int compare(Vehicle4 o1, Vehicle4 o2) {
                 return o1.makeYear.compareTo(o2.makeYear);

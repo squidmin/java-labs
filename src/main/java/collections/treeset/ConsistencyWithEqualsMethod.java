@@ -1,10 +1,13 @@
-package collections.arraylist;
+package collections.treeset;
+
+import lombok.Getter;
 
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Product implements Comparable<Product> {
+@Getter
+class Product implements Comparable<Product> {
 
     private final String productId;
     private final double price;
@@ -21,8 +24,8 @@ public class Product implements Comparable<Product> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) { return true; }
+        if (obj == null || getClass() != obj.getClass()) { return false; }
         Product product = (Product) obj;
         return Objects.equals(this.productId, product.productId);
     }
@@ -32,9 +35,14 @@ public class Product implements Comparable<Product> {
         return Objects.hash(this.productId, this.price);
     }
 
+}
+
+public class ConsistencyWithEqualsMethod {
+
     public static void main(String[] args) {
         Product x = new Product("1234", 123.45);
         Product y = new Product("1234", 123.45);
+        if ((x.compareTo(y) == 0) != (x.equals(y))) { throw new AssertionError("Condition should evaluate to true"); }
         System.out.println((x.compareTo(y) == 0) == (x.equals(y)));
 
         TreeSet<Product> products = new TreeSet<>(Set.of(
@@ -43,7 +51,7 @@ public class Product implements Comparable<Product> {
             new Product("2136", 123.45),
             new Product("2136", 321.45)
         ));
-        products.forEach(product -> System.out.println("Product ID: " + product.productId + "; Price: " + product.price));
+        products.forEach(product -> System.out.println("Product ID: " + product.getProductId() + "; Price: " + product.getPrice()));
     }
 
 }

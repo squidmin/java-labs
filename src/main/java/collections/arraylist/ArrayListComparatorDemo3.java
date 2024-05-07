@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 class Vehicle5 {
-
     String brand;
     Integer makeYear;
 
