@@ -181,7 +181,7 @@ public class ArrayListDemo {
 
 		Iterator<Integer> itr = list.iterator();
 
-		while(itr.hasNext()) {
+		while (itr.hasNext()) {
 			System.out.println(itr.next());
 		}
 
@@ -350,7 +350,7 @@ public class ArrayListDemo {
 	public static void main(String[] args) {
 		List list = new ArrayList<>();
 		list.add(10);
-		list.add(20);
+		list.add("20");
 		doSomeWork(list);
 
 		Integer i = (Integer) list.get(2);
@@ -376,7 +376,7 @@ public static <T extends Comparable<? super T>> void sort(List<T> list) {
 }
 ```
 
-Let's see how the `sort()` method if the `List` interface sorts a list.
+Let's see how the `sort()` method of the `List` interface sorts a list.
 When the `sort()` method is called, an array containing all elements in this list is created and sorted.
 After sorting the array, the list is iterated and each element is reset from the corresponding position in the array.
 
@@ -538,7 +538,7 @@ The `Collections.sort()` method sorts the given `List` in ascending order.
 How does the `sort()` method decide which element is smaller and which one is larger?
 
 Each numeric wrapper class (`Integer`, `Double`, or `Long`), the `String` class, and the `Date` class implements an interface called `Comparable`.
-This interface contains a `compareTo(T o)` method which is used by sorting methods to srot the `Collection`.
+This interface contains a `compareTo(T o)` method which is used by sorting methods to sort the `Collection`.
 This method returns a negative integer, zero, or a positive integer if the `this` object is less than, equal to, or greater than the object passed as an argument.
 
 > If we use the `Collections.sort(List<T> list)` method to sort an `ArrayList`, then the class whose objects are stored in the `ArrayList` must implement the `Comparable` interface.
@@ -570,7 +570,7 @@ public class ArrayListComparableDemo {
         list.add(new Employee("Jane", 29));
         list.add(new Employee("Alex", 54));
         
-        Collections.sort(list);
+        Collections.sort(list); // Will not compile
         System.out.println("ArrayList in ascending order: " + list);
     }
 }

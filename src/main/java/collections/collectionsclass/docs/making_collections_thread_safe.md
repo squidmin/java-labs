@@ -7,12 +7,12 @@ How collections can be made thread-safe.
 - Making an `ArrayList` thread-safe
 
 Most of the collections such as `ArrayList`, `LinkedList`, `HashSet`, `HashMap`, etc., are not thread-safe.
-If two parallel threads modify any of these collections in parallel, the user can get stale data or `ConcurrentModificationException`.
+If two concurrent threads modify any of these collections, the user can get stale data or `ConcurrentModificationException`.
 
 We can use thread-safe alternatives such as `CopyOnWriteArrayList`, `ConcurrentHashMap`, etc., but what if we don't want to use these alternatives?
 What if we have already created an `ArrayList`, and now we want to make it thread-safe?
 
-The `Collections` class provides us with the following methods that can be used to make our existing collection thread-safe.
+The `Collections` class provides the following methods that can be used to make an existing collection thread-safe:
 
 1. `synchronizeCollection(Collection<T> c)`
 2. `synchronizedList(List<T> list)`
@@ -23,14 +23,14 @@ The `Collections` class provides us with the following methods that can be used 
 
 ## Making an `ArrayList` thread-safe
 
-To make an `ArrayList` thread-safe we can use the `synchronizedList()` method.
+To make an `ArrayList` thread-safe, use the `synchronizedList()` method.
 Let's see how this method works internally.
 The `Collections` class contains a static inner class called `SynchronizedList`.
 The `synchronizedList()` method is called when the object of this class is returned.
-If you look at the implementation of this class below, then you can see that all the methods have been synchronized.
+If you look at the implementation of this class below, you can see that all the methods have been synchronized.
 
 Since all the methods are synchronized, this makes it very slow.
-So, we should always try to use the thread-safe implementations instead of making a collection thread-safe using this method.
+Always try to use the thread-safe implementations (e.g., `CopyOnWriteArrayList`, `ConcurrentHashMap`, etc.) instead of making a collection thread-safe using the `Collections.synchronized()` method call.
 
 ```java
 static class SynchronizedList<E> extends SynchornizedCollection<E> implements List<E> {
